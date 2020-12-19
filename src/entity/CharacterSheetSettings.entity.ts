@@ -2,7 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne} from "type
 import {CharacterData} from "./CharacterData.entity";
 
 @Entity()
-export class CharacterSettings {
+export class CharacterSheetSettings {
   @PrimaryGeneratedColumn()
   id!: number;
 

@@ -1,6 +1,6 @@
 import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 
-export class CharacterFeaturesAndTraitsDto {
+export class CharacterFeatureAndTraitDto {
   @ApiProperty({ type: Number })
   id: number;
 

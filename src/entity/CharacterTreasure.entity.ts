@@ -1,6 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, JoinColumn, OneToOne, OneToMany} from "typeorm";
 import {CharacterTreasureMoney} from './CharacterTreasureMoney.entity';
-import {CharacterTreasureItem} from "./CharacterTreasureItems.entity";
+import {CharacterTreasureItem} from "./CharacterTreasureItem.entity";
 import {CharacterData} from "./CharacterData.entity";
 
 @Entity()

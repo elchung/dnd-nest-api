@@ -1,6 +1,6 @@
 import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 
-export class CharacterTreasureItemsDto {
+export class CharacterTreasureItemDto {
   @ApiProperty({ type: Number })
   id: number;
 

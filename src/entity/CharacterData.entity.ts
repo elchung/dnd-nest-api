@@ -1,6 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne, OneToMany} from "typeorm";
 import {CharacterHitDice} from "./CharacterHitDice.entity";
-import {CharacterSettings} from "./CharacterSheetSettings.entity";
+import {CharacterSheetSettings} from "./CharacterSheetSettings.entity";
 import {CharacterAbilityScores} from "./CharacterAbilityScores.entity";
 import {CharacterDeathSaves} from "./CharacterDeathSaves.entity";
 import {CharacterKnownSpells} from "./CharacterKnownSpells.entity";
@@ -106,6 +106,6 @@ export class CharacterData {
   @OneToOne(type => CharacterTreasure, treasure => treasure.character, { cascade: true, eager: true })
   treasure?: CharacterTreasure;
 
-  @OneToOne(type => CharacterSettings, settings => settings.character, { cascade: true, eager: true })
-  settings!: CharacterSettings;
+  @OneToOne(type => CharacterSheetSettings, settings => settings.character, { cascade: true, eager: true })
+  settings!: CharacterSheetSettings;
 }

@@ -4,7 +4,7 @@ import {CharacterKnownSpellsDto} from "./CharacterKnownSpells.dto";
 import {CharacterSheetSettingsDto} from "./CharacterSheetSettings.dto";
 import {CharacterSpellSlotsDto} from "./CharacterSpellSlots.dto";
 import {CharacterTreasureDto} from "./CharacterTreasure.dto";
-import {CharacterFeaturesAndTraitsDto} from "./CharacterFeaturesAndTraits.dto";
+import {CharacterFeatureAndTraitDto} from "./CharacterFeatureAndTraitDto";
 import {CharacterAbilityScoresDto} from "./CharacterAbilityScores.dto";
 import {CharacterDeathSavesDto} from "./CharacterDeathSaves.dto";
 
@@ -96,8 +96,8 @@ export class CharacterDataDto {
   @ApiProperty({ type: CharacterSpellSlotsDto })
   spellSlots: CharacterSpellSlotsDto
 
-  @ApiPropertyOptional({ type: [CharacterFeaturesAndTraitsDto] })
-  featuresAndTraits: CharacterFeaturesAndTraitsDto[];
+  @ApiPropertyOptional({ type: [CharacterFeatureAndTraitDto] })
+  featuresAndTraits: CharacterFeatureAndTraitDto[];
 
   @ApiPropertyOptional({ type: CharacterTreasureDto })
   treasure: CharacterTreasureDto;

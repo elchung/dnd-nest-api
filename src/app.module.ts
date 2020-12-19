@@ -1,9 +1,7 @@
 import * as dotenv from 'dotenv';
 import { Module } from '@nestjs/common';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CharacterModule } from './character/character.module';
-import {CharacterController} from "./character/character.controller";
+import { CharacterModule } from "./module/character.module";
 
 if (process.env.NODE_ENV !== 'production') dotenv.config({ path: __dirname+'/../../.env' });
 if (!process.env.DB_USER_NAME ||
@@ -27,10 +25,9 @@ if (!process.env.DB_USER_NAME ||
       entities: [__dirname + "/db/entity/*{.ts,.js}"],
       synchronize: true,
       logging: true,
+      autoLoadEntities: true,
     }),
-    CharacterModule
+    CharacterModule,
   ],
-  controllers: [CharacterController],
-  providers: [AppService],
 })
 export class AppModule {}
