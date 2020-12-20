@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import { CharacterDataDto } from "../dto/CharacterData.dto";
-import { Repository } from "typeorm";
+import { Repository, getConnection } from "typeorm";
 import { CharacterDeathSavesDto } from "../dto/CharacterDeathSaves.dto";
 import { CharacterKnownSpellsDto } from "../dto/CharacterKnownSpells.dto";
 import { CharacterAbilityScoresDto } from "../dto/CharacterAbilityScores.dto";
@@ -12,6 +12,7 @@ import { CharacterTreasureItemDto } from "../dto/CharacterTreasureItemDto";
 import { CharacterSheetSettingsDto } from "../dto/CharacterSheetSettings.dto";
 import { CharacterHitDiceDto } from "../dto/CharacterHitDice.dto";
 import { CharacterSpellSlotsAtLevelDto } from "../dto/CharacterSpellSlotsAtLevel.dto";
+
 import { CharacterData } from "../entity/CharacterData.entity";
 import { CharacterAbilityScores } from "../entity/CharacterAbilityScores.entity";
 import { CharacterDeathSaves } from "../entity/CharacterDeathSaves.entity";
@@ -24,6 +25,9 @@ import { CharacterSpellSlotsAtLevel } from "../entity/CharacterSpellSlotsAtLevel
 import { CharacterTreasure } from "../entity/CharacterTreasure.entity";
 import { CharacterTreasureItem } from "../entity/CharacterTreasureItem.entity";
 import { CharacterTreasureMoney } from "../entity/CharacterTreasureMoney.entity";
+import {CharacterMapper} from "../mapper/character.mapper";
+
+const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 
 @Injectable()
 export class CharacterService {
@@ -63,6 +67,8 @@ export class CharacterService {
 
     @InjectRepository(CharacterTreasureMoney)
     private moneyRepository: Repository<CharacterTreasureMoney>,
+
+    private characterMapper = new CharacterMapper(),
   ) {}
 
   async getCharacterById(characterId: string): Promise<any> {
@@ -79,14 +85,13 @@ export class CharacterService {
     });
   }
 
-  async createCharacter(characterDataDto: CharacterDataDto): Promise<any> {
-    const newCharacter = await this.characterDataRepository.createQueryBuilder()
-      .insert()
-      .into(CharacterData)
-      .values({
+  async createCharacter(characterDto: CharacterDataDto): Promise<any> {
+    const characterEntity =  this.characterMapper.characterDataDtoToEntity(characterDto);
+    this.characterDataRepository.save(characterEntity);
 
-      })
-      .execute()
+
+    return await this.characterDataRepository.save(characterEntity);
+
   }
 
   async updateCharacterById(characterId: string, newCharacter: CharacterDataDto): Promise<any> {

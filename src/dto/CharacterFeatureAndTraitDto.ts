@@ -8,8 +8,8 @@ export class CharacterFeatureAndTraitDto {
   index: number;
 
   @ApiPropertyOptional({ type: String })
-  title: number;
+  title: string;
 
   @ApiPropertyOptional({ type: String })
-  body: number;
+  body: string;
 }
