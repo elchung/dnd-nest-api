@@ -79,6 +79,14 @@ export class CharacterService {
     return await this.characterDataRepository.find({ where: { username: username }});
   }
 
+  async deleteCharacterById(characterId: string): Promise<any> {
+    await this.characterDataRepository
+      .createQueryBuilder()
+      .delete()
+      .where("id = :characterId", { characterId: characterId })
+      .execute()
+  }
+
   async createCharacter(characterDto: CharacterDataDto): Promise<any> {
     const characterEntity =  this.characterMapper.characterDataDtoToEntity(characterDto);
     console.log(characterEntity);
@@ -199,18 +207,15 @@ export class CharacterService {
     return res.raw[0];
   }
 
-  //todo this doesn't work
   async updateSpellSlotsAtLevel(characterId: string, level: string, newSpellSlotsAtLevel: CharacterSpellSlotsAtLevelDto): Promise<any> {
-    // const res = await this.spellSlotsAtLevelRepository
-    //   .createQueryBuilder("spellSlots")
-    //   .update(CharacterSpellSlotsAtLevel)
-    //   .set(newSpellSlotsAtLevel)
-    //   .where("characterId = :characterId", {characterId: characterId})
-    //   .andWhere("spellSlots.:level")
-    //   .returning(Object.keys(newSpellSlotsAtLevel))
-    //   .execute()
+    const spellSlotsEntity = await this.spellSlotsRepository
+      .createQueryBuilder()
+      .where("CharacterSpellSlots.characterId = :characterId", {characterId: characterId})
+      .getOne();
 
-    // return res.raw[0];
+    const newSpellSlotsAtLevelEntity = this.characterMapper.spellSlotAtLevelDtoToEntity(newSpellSlotsAtLevel)
+    spellSlotsEntity[level] = newSpellSlotsAtLevelEntity
+    this.spellSlotsRepository.save(spellSlotsEntity)
   }
 
   async updateTreasureMoney(characterId: string, updatedTreasureMoney: CharacterTreasureMoneyDto): Promise<any> {

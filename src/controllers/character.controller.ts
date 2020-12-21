@@ -36,6 +36,11 @@ export class CharacterController {
     return await this.characterService.updateCharacterById(characterId, characterDataDto);
   }
 
+  @Delete("/characters/:characterId")
+  async deleteCharacterById(@Param('characterId') characterId: string): Promise<void> {
+    return await this.characterService.deleteCharacterById(characterId);
+  }
+
   @Put("/characters/:characterId/death_saves")
   async updateCharacterDeathSaves(@Param('characterId') characterId: string, @Body() updatedDeathSaves: CharacterDeathSavesDto): Promise<CharacterDeathSavesDto> {
     return await this.characterService.updateCharacterDeathSaves(characterId, updatedDeathSaves);
