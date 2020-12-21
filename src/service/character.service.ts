@@ -27,8 +27,6 @@ import { CharacterTreasureItem } from "../entity/CharacterTreasureItem.entity";
 import { CharacterTreasureMoney } from "../entity/CharacterTreasureMoney.entity";
 import {CharacterMapper} from "../mapper/character.mapper";
 
-const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-
 @Injectable()
 export class CharacterService {
   constructor(
@@ -69,6 +67,7 @@ export class CharacterService {
     private moneyRepository: Repository<CharacterTreasureMoney>,
   ) {}
 
+  private relationalFields = ["hitDice", "abilityScores", "deathSaves", "knownSpells", "featuresAndTraits", "treasure", "settings", "spellSlots"]
   private characterMapper = new CharacterMapper();
 
   async getCharacterById(characterId: string): Promise<any> {
@@ -90,22 +89,15 @@ export class CharacterService {
   async createCharacter(characterDto: CharacterDataDto): Promise<any> {
     const characterEntity =  this.characterMapper.characterDataDtoToEntity(characterDto);
     console.log(characterEntity);
-    this.characterDataRepository.save(characterEntity);
 
     return await this.characterDataRepository.save(characterEntity);
   }
 
   //todo: test
   async updateCharacterById(characterId: string, newCharacter: CharacterDataDto): Promise<any> {
-    const character = this.getCharacterById(characterId)
-    return (await this.characterDataRepository
-      .createQueryBuilder()
-        .update(CharacterData)
-        .set(newCharacter)
-        .where("id = :characterId", {id: characterId})
-        .returning(Object.keys(CharacterDataDto))
-        .execute()
-    ).raw[0]
+    const characterEntity = await this.getCharacterById(characterId)
+    const updateCharacterDataEntity = this.characterMapper.characterDataDtoToEntity(newCharacter)
+    const updatedCharacter = this.mergeCharacterEntities(characterEntity, updateCharacterDataEntity);
   }
 
   async updateCharacterDeathSaves(characterId: string, updatedDeathSaves: CharacterDeathSavesDto): Promise<any> {
@@ -155,8 +147,7 @@ export class CharacterService {
   //TODO extremely inefficient way ot saving since I already have characterId
   async createFeatureAndTrait(characterId: string, newFeatureAndTrait: CharacterFeatureAndTraitDto): Promise<any> {
     const fatEntity = this.characterMapper.featureAndTraitDtoToEntity(newFeatureAndTrait);
-    const character = await this.getCharacterById(characterId);
-    fatEntity.character = character;
+    fatEntity.character = await this.getCharacterById(characterId);
 
     await this.featuresAndTraitsRepository.save(fatEntity);
   }
@@ -170,7 +161,7 @@ export class CharacterService {
       return fatEntity;
     })
     character.featuresAndTraits.push(...newFatEntities)
-    this.characterDataRepository.save(character);
+    await this.characterDataRepository.save(character);
   }
 
   async updateFeatureAndTrait(characterId: string, fatId: string, updatedFeatureAndTrait: CharacterFeatureAndTraitDto): Promise<any> {
@@ -194,7 +185,6 @@ export class CharacterService {
       .execute()
   }
 
-  //todo test
   async updateSpellSlots(characterId: string, newSpellSlots: CharacterSpellSlotsDto): Promise<any> {
     const res = await this.spellSlotsRepository
       .createQueryBuilder()
@@ -213,25 +203,52 @@ export class CharacterService {
       .where("CharacterSpellSlots.characterId = :characterId", {characterId: characterId})
       .getOne();
 
-    const newSpellSlotsAtLevelEntity = this.characterMapper.spellSlotAtLevelDtoToEntity(newSpellSlotsAtLevel)
-    spellSlotsEntity[level] = newSpellSlotsAtLevelEntity
-    this.spellSlotsRepository.save(spellSlotsEntity)
+    spellSlotsEntity[level] = this.characterMapper.spellSlotAtLevelDtoToEntity(newSpellSlotsAtLevel)
+    await this.spellSlotsRepository.save(spellSlotsEntity)
   }
 
   async updateTreasureMoney(characterId: string, updatedTreasureMoney: CharacterTreasureMoneyDto): Promise<any> {
-
+    const parentTreasureEntity = await this.getTreasureEntityFromCharacterId(characterId);
+    return (await this.moneyRepository
+      .createQueryBuilder()
+      .update(CharacterTreasureMoney)
+      .set(updatedTreasureMoney)
+      .where("parentTreasureId = :parentTreasureId", {parentTreasureId: parentTreasureEntity.id})
+      .returning(Object.keys(updatedTreasureMoney))
+      .execute())
+      .raw[0]
   }
 
   async updateTreasureItem(characterId: string, id: string, updatedTreasureItem: CharacterTreasureItemDto): Promise<any> {
-
+    const parentTreasureEntity = await this.getTreasureEntityFromCharacterId(characterId);
+    return (await this.itemRepository
+      .createQueryBuilder()
+      .update(CharacterTreasureItem)
+      .set(updatedTreasureItem)
+      .where("id = :id", {id: id})
+      .andWhere("parentTreasureId = :parentTreasureId", {parentTreasureId: parentTreasureEntity.id})
+      .returning(Object.keys(updatedTreasureItem))
+      .execute())
+      .raw[0]
   }
 
   async createTreasureItem(characterId: string, newTreasureItem: CharacterTreasureItemDto): Promise<any> {
+    const parentTreasureEntity = await this.getTreasureEntityFromCharacterId(characterId);
 
+    const newTreasureItemEntity = this.characterMapper.treasureItemDtoToEntity(newTreasureItem);
+    parentTreasureEntity.items.push(newTreasureItemEntity);
+    await this.treasureRepository.save(parentTreasureEntity);
   }
 
   async deleteTreasureItem(characterId: string, id: string): Promise<void> {
+    const parentTreasureEntity = await this.getTreasureEntityFromCharacterId(characterId);
 
+    await this.itemRepository
+      .createQueryBuilder()
+      .delete()
+      .where("id = :id", { id: id })
+      .andWhere("parentTreasureId = :parentTreasureId", { parentTreasureId: parentTreasureEntity.id })
+      .execute()
   }
 
   async updateCharacterSettings(characterId: string, updatedSettings: CharacterSheetSettingsDto): Promise<any> {
@@ -247,9 +264,8 @@ export class CharacterService {
 
   async createHitDice(characterId: string, newHitDice: CharacterHitDiceDto): Promise<any> {
     const hitDiceEntity = this.characterMapper.hitDieDtoToEntity(newHitDice);
-    const characterEntity = await this.getCharacterById(characterId);
 
-    hitDiceEntity.character = characterEntity;
+    hitDiceEntity.character = await this.getCharacterById(characterId);
     await this.hitDiceRepository.save(hitDiceEntity);
 
     return newHitDice
@@ -274,5 +290,25 @@ export class CharacterService {
       .returning(Object.keys(updatedHitDice))
       .execute())
       .raw[0];
+  }
+
+  private async getTreasureEntityFromCharacterId(characterId: string): Promise<CharacterTreasure> {
+    return await this.treasureRepository
+      .createQueryBuilder()
+      .where("CharacterTreasure.characterId = :characterId", {characterId: characterId})
+      .getOne()
+  }
+
+  private mergeCharacterEntities(primaryCharacter: CharacterData, updateCharacter: CharacterData): CharacterData {
+    Object.keys(updateCharacter).forEach(field => {
+      if (!this.relationalFields.includes(field)) {
+        primaryCharacter[field] = updateCharacter[field] || primaryCharacter[field]
+      } else {
+        --create nested array
+      }
+
+    })
+
+    return primaryCharacter
   }
 }
