@@ -11,39 +11,39 @@ export class CharacterSpellSlots {
   @JoinColumn()
   character!: CharacterData;
 
-  @OneToOne(type => CharacterSpellSlotsAtLevel)
+  @OneToOne(type => CharacterSpellSlotsAtLevel, { cascade: true, eager: true })
   @JoinColumn()
   one!: CharacterSpellSlotsAtLevel;
 
-  @OneToOne(type => CharacterSpellSlotsAtLevel)
+  @OneToOne(type => CharacterSpellSlotsAtLevel, { cascade: true, eager: true })
   @JoinColumn()
   two!: CharacterSpellSlotsAtLevel;
 
-  @OneToOne(type => CharacterSpellSlotsAtLevel)
+  @OneToOne(type => CharacterSpellSlotsAtLevel, { cascade: true, eager: true })
   @JoinColumn()
   three!: CharacterSpellSlotsAtLevel;
 
-  @OneToOne(type => CharacterSpellSlotsAtLevel)
+  @OneToOne(type => CharacterSpellSlotsAtLevel, { cascade: true, eager: true })
   @JoinColumn()
   four!: CharacterSpellSlotsAtLevel;
 
-  @OneToOne(type => CharacterSpellSlotsAtLevel)
+  @OneToOne(type => CharacterSpellSlotsAtLevel, { cascade: true, eager: true })
   @JoinColumn()
   five!: CharacterSpellSlotsAtLevel;
 
-  @OneToOne(type => CharacterSpellSlotsAtLevel)
+  @OneToOne(type => CharacterSpellSlotsAtLevel, { cascade: true, eager: true })
   @JoinColumn()
   six!: CharacterSpellSlotsAtLevel;
 
-  @OneToOne(type => CharacterSpellSlotsAtLevel)
+  @OneToOne(type => CharacterSpellSlotsAtLevel, { cascade: true, eager: true })
   @JoinColumn()
   seven!: CharacterSpellSlotsAtLevel;
 
-  @OneToOne(type => CharacterSpellSlotsAtLevel)
+  @OneToOne(type => CharacterSpellSlotsAtLevel, { cascade: true, eager: true })
   @JoinColumn()
   eight!: CharacterSpellSlotsAtLevel;
 
-  @OneToOne(type => CharacterSpellSlotsAtLevel)
+  @OneToOne(type => CharacterSpellSlotsAtLevel, { cascade: true, eager: true })
   @JoinColumn()
   nine!: CharacterSpellSlotsAtLevel;
 }

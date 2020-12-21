@@ -81,6 +81,7 @@ export class CharacterService {
 
   async createCharacter(characterDto: CharacterDataDto): Promise<any> {
     const characterEntity =  this.characterMapper.characterDataDtoToEntity(characterDto);
+    console.log(characterEntity);
     this.characterDataRepository.save(characterEntity);
 
     return await this.characterDataRepository.save(characterEntity);
@@ -88,6 +89,7 @@ export class CharacterService {
 
   //todo: test
   async updateCharacterById(characterId: string, newCharacter: CharacterDataDto): Promise<any> {
+    const character = this.getCharacterById(characterId)
     return (await this.characterDataRepository
       .createQueryBuilder()
         .update(CharacterData)
@@ -145,7 +147,7 @@ export class CharacterService {
   //TODO extremely inefficient way ot saving since I already have characterId
   async createFeatureAndTrait(characterId: string, newFeatureAndTrait: CharacterFeatureAndTraitDto): Promise<any> {
     const fatEntity = this.characterMapper.featureAndTraitDtoToEntity(newFeatureAndTrait);
-    const character = await this.characterDataRepository.findOne({ where: { id: characterId }});
+    const character = await this.getCharacterById(characterId);
     fatEntity.character = character;
 
     await this.featuresAndTraitsRepository.save(fatEntity);
@@ -153,9 +155,7 @@ export class CharacterService {
 
   //TODO extremely inefficient way ot saving since I already have characterId
   async createFeaturesAndTraits(characterId: string, newFeaturesAndTraits: CharacterFeatureAndTraitDto[]): Promise<any> {
-    const character = await this.characterDataRepository.findOne({
-      where: { id: characterId }
-    });
+    const character = await this.getCharacterById(characterId);
     const newFatEntities = newFeaturesAndTraits.map(fat => {
       const fatEntity = this.characterMapper.featureAndTraitDtoToEntity(fat);
       fatEntity.character = character;
@@ -165,25 +165,23 @@ export class CharacterService {
     this.characterDataRepository.save(character);
   }
 
-  //todo test
   async updateFeatureAndTrait(characterId: string, fatId: string, updatedFeatureAndTrait: CharacterFeatureAndTraitDto): Promise<any> {
-    const res = await this.featuresAndTraitsRepository
+    return (await this.featuresAndTraitsRepository
       .createQueryBuilder()
       .update(CharacterFeaturesAndTraits)
       .set(updatedFeatureAndTrait)
       .where("characterId = :characterId", {characterId: characterId})
       .andWhere("id = :fatId", {fatId: fatId})
       .returning(Object.keys(updatedFeatureAndTrait))
-      .execute()
-    return res.raw[0]
+      .execute())
+      .raw[0]
   }
 
-  //todo test
   async deleteFeatureAndTrait(characterId: string, fatId: string): Promise<void> {
     await this.featuresAndTraitsRepository
       .createQueryBuilder()
       .delete()
-      .where("id = :fatId", { id: fatId })
+      .where("id = :fatId", { fatId: fatId })
       .andWhere("characterId = :characterId", { characterId: characterId })
       .execute()
   }
@@ -231,7 +229,6 @@ export class CharacterService {
 
   }
 
-  //todo test
   async updateCharacterSettings(characterId: string, updatedSettings: CharacterSheetSettingsDto): Promise<any> {
     return (await this.settingsRepository
       .createQueryBuilder()
@@ -243,12 +240,9 @@ export class CharacterService {
       .raw[0];
   }
 
-  //todo test, need to make more streamlined so i don't have to query for character since i ahve id already
   async createHitDice(characterId: string, newHitDice: CharacterHitDiceDto): Promise<any> {
     const hitDiceEntity = this.characterMapper.hitDieDtoToEntity(newHitDice);
-    const characterEntity = await this.characterDataRepository.findOne({
-      where: { id: characterId }
-    });
+    const characterEntity = await this.getCharacterById(characterId);
 
     hitDiceEntity.character = characterEntity;
     await this.hitDiceRepository.save(hitDiceEntity);
@@ -256,7 +250,6 @@ export class CharacterService {
     return newHitDice
   }
 
-  //todo test
   async deleteHitDice(characterId: string, id: string): Promise<void> {
     await this.hitDiceRepository
       .createQueryBuilder()
@@ -266,7 +259,6 @@ export class CharacterService {
       .execute()
   }
 
-  //todo test
   async updateHitDice(characterId: string, id: string, updatedHitDice: CharacterHitDiceDto): Promise<any> {
     return (await this.hitDiceRepository
       .createQueryBuilder()

@@ -39,8 +39,8 @@ export class CharacterMapper {
 
   spellSlotAtLevelDtoToEntity(spellSlotsAtLevelDto: CharacterSpellSlotsAtLevelDto): CharacterSpellSlotsAtLevel {
     const spellSlotsAtLevel = new CharacterSpellSlotsAtLevel();
-    spellSlotsAtLevel.used = spellSlotsAtLevelDto.used;
-    spellSlotsAtLevel.max = spellSlotsAtLevelDto.max;
+    spellSlotsAtLevel.used = spellSlotsAtLevelDto?.used || 0;
+    spellSlotsAtLevel.max = spellSlotsAtLevelDto?.max || 0;
 
     return spellSlotsAtLevel;
   }
@@ -56,36 +56,36 @@ export class CharacterMapper {
 
   abilityScoresDtoToEntity(abilityScoresDto: CharacterAbilityScoresDto): CharacterAbilityScores {
     const abilityScores = new CharacterAbilityScores();
-    abilityScores.strength = abilityScoresDto.strength;
-    abilityScores.dexterity = abilityScoresDto.dexterity;
-    abilityScores.constitution = abilityScoresDto.constitution;
-    abilityScores.intelligence = abilityScoresDto.intelligence;
-    abilityScores.wisdom = abilityScoresDto.wisdom;
-    abilityScores.charisma = abilityScoresDto.charisma;
+    abilityScores.strength = abilityScoresDto?.strength;
+    abilityScores.dexterity = abilityScoresDto?.dexterity;
+    abilityScores.constitution = abilityScoresDto?.constitution;
+    abilityScores.intelligence = abilityScoresDto?.intelligence;
+    abilityScores.wisdom = abilityScoresDto?.wisdom;
+    abilityScores.charisma = abilityScoresDto?.charisma;
 
     return abilityScores;
   }
 
   deathSavesDtoToEntity(deathSavesDto: CharacterDeathSavesDto): CharacterDeathSaves {
     const deathSaves = new CharacterDeathSaves();
-    deathSaves.successes = deathSavesDto.successes;
-    deathSaves.failures = deathSavesDto.failures;
+    deathSaves.successes = deathSavesDto?.successes || 0;
+    deathSaves.failures = deathSavesDto?.failures || 0;
 
     return deathSaves;
   }
 
   knownSpellsDtoToEntity(knownSpellsDto: CharacterKnownSpellsDto): CharacterKnownSpells {
     const knownSpells = new CharacterKnownSpells();
-    knownSpells.zero = knownSpellsDto.zero;
-    knownSpells.one = knownSpellsDto.one;
-    knownSpells.two = knownSpellsDto.two;
-    knownSpells.three = knownSpellsDto.three;
-    knownSpells.four = knownSpellsDto.four;
-    knownSpells.five = knownSpellsDto.five;
-    knownSpells.six = knownSpellsDto.six;
-    knownSpells.seven = knownSpellsDto.seven;
-    knownSpells.eight = knownSpellsDto.eight;
-    knownSpells.nine = knownSpellsDto.nine;
+    knownSpells.zero = knownSpellsDto?.zero || [];
+    knownSpells.one = knownSpellsDto?.one || [];
+    knownSpells.two = knownSpellsDto?.two || [];
+    knownSpells.three = knownSpellsDto?.three || [];
+    knownSpells.four = knownSpellsDto?.four || [];
+    knownSpells.five = knownSpellsDto?.five || [];
+    knownSpells.six = knownSpellsDto?.six || [];
+    knownSpells.seven = knownSpellsDto?.seven || [];
+    knownSpells.eight = knownSpellsDto?.eight || [];
+    knownSpells.nine = knownSpellsDto?.nine || [];
 
     return knownSpells;
   }
@@ -103,7 +103,7 @@ export class CharacterMapper {
     return newFat;
   }
 
-  treasureItemsDtoToEntity(treasureItemsDto: CharacterTreasureItemDto[], parentTreasure: CharacterTreasure): CharacterTreasureItem[] {
+  treasureItemsDtoToEntity(treasureItemsDto: CharacterTreasureItemDto[]): CharacterTreasureItem[] {
     return  treasureItemsDto.map(item => this.treasureItemDtoToEntity(item))
   }
 
@@ -132,7 +132,7 @@ export class CharacterMapper {
   treasureDtoToEntity(treasureDto: CharacterTreasureDto): CharacterTreasure {
     const treasure = new CharacterTreasure();
     treasure.money = this.treasureMoneyDtoToEntity(treasureDto.money ? treasureDto.money : new CharacterTreasureMoneyDto());
-    treasure.items = treasureDto.items ? this.treasureItemsDtoToEntity(treasureDto.items, treasure) : [];
+    treasure.items = treasureDto.items ? this.treasureItemsDtoToEntity(treasureDto.items) : [];
 
     return treasure;
   }
@@ -177,6 +177,7 @@ export class CharacterMapper {
     newCharacter.featuresAndTraits = this.featuresAndTraitsDtoToEntity(characterDto.featuresAndTraits);
     newCharacter.treasure = this.treasureDtoToEntity(characterDto.treasure);
     newCharacter.settings = this.settingsDtoToEntity(characterDto.settings);
+    newCharacter.spellSlots = this.spellSlotDtoToEntity(characterDto.spellSlots);
 
     return newCharacter
   }
