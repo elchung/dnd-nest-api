@@ -11,12 +11,12 @@ export class CharacterHitDice {
   character!: CharacterData;
 
   @Column()
-  numDice?: number;
+  numDice!: number;
 
   @Column()
-  diceType?: number;
+  diceType!: number;
 
   @Column()
-  numUsed?: number;
+  numUsed!: number;
 }
 

@@ -67,79 +67,152 @@ export class CharacterService {
 
     @InjectRepository(CharacterTreasureMoney)
     private moneyRepository: Repository<CharacterTreasureMoney>,
-
-    private characterMapper = new CharacterMapper(),
   ) {}
 
+  private characterMapper = new CharacterMapper();
+
   async getCharacterById(characterId: string): Promise<any> {
-    return await this.characterDataRepository.findOne({
-      where: { id: characterId },
-      //relations: {}
-    });
+    return await this.characterDataRepository.findOne({ where: { id: characterId }});
   }
 
   async getCharactersByUsername(username: string): Promise<any> {
-    return await this.characterDataRepository.find({
-      where: { username: username },
-      //relations: {}
-    });
+    return await this.characterDataRepository.find({ where: { username: username }});
   }
 
   async createCharacter(characterDto: CharacterDataDto): Promise<any> {
     const characterEntity =  this.characterMapper.characterDataDtoToEntity(characterDto);
     this.characterDataRepository.save(characterEntity);
 
-
     return await this.characterDataRepository.save(characterEntity);
-
   }
 
+  //todo: test
   async updateCharacterById(characterId: string, newCharacter: CharacterDataDto): Promise<any> {
-    const newCharacter = await this.characterDataRepository.createQueryBuilder()
-      .update(CharacterData)
-      .set({keys to field mapping})
-      .where("id = :id", { id: characterId })
-      .execute()
+    return (await this.characterDataRepository
+      .createQueryBuilder()
+        .update(CharacterData)
+        .set(newCharacter)
+        .where("id = :characterId", {id: characterId})
+        .returning(Object.keys(CharacterDataDto))
+        .execute()
+    ).raw[0]
   }
 
-  async updateCharacterDeathSaves(characterId: string, newDeathSaves: CharacterDeathSavesDto): Promise<any> {
-
+  async updateCharacterDeathSaves(characterId: string, updatedDeathSaves: CharacterDeathSavesDto): Promise<any> {
+    return (await this.deathSaveRepository
+      .createQueryBuilder("deathSave")
+      .update(CharacterDeathSaves)
+      .set(updatedDeathSaves)
+      .where("characterId = :characterId", {characterId: characterId})
+      .returning(['successes', 'failures'])
+      .execute())
+      .raw[0];
   }
 
   async updateKnownSpells(characterId: string, newKnownSpells: CharacterKnownSpellsDto): Promise<any> {
-
+      return (await this.knownSpellsRepository
+      .createQueryBuilder("knownSpells")
+      .update(CharacterKnownSpells)
+      .set(newKnownSpells)
+      .where("characterId = :characterId", {characterId: characterId})
+      .returning(['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'])
+      .execute())
+      .raw[0]
   }
 
   async updateKnownSpellsAtLevel(characterId: string, level: string, newKnownSpellsAtLevel: string[]): Promise<any> {
-
+    return (await this.knownSpellsRepository
+      .createQueryBuilder("knownSpellsAtLevel")
+      .update(CharacterKnownSpells)
+      .set({ [level]: newKnownSpellsAtLevel })
+      .where("characterId = :characterId", {characterId: characterId})
+      .returning([level])
+      .execute())
+      .raw[0]
   }
 
   async updateAbilityScores(characterId: string, newAbilityScores: CharacterAbilityScoresDto): Promise<any> {
-
+    return (await this.abilityScoreRepository
+      .createQueryBuilder("abilityScores")
+      .update(CharacterAbilityScores)
+      .set(newAbilityScores)
+      .where("characterId = :characterId", {characterId: characterId})
+      .returning(Object.keys(newAbilityScores))
+      .execute())
+      .raw[0]
   }
 
+  //TODO extremely inefficient way ot saving since I already have characterId
   async createFeatureAndTrait(characterId: string, newFeatureAndTrait: CharacterFeatureAndTraitDto): Promise<any> {
+    const fatEntity = this.characterMapper.featureAndTraitDtoToEntity(newFeatureAndTrait);
+    const character = await this.characterDataRepository.findOne({ where: { id: characterId }});
+    fatEntity.character = character;
 
+    await this.featuresAndTraitsRepository.save(fatEntity);
   }
 
+  //TODO extremely inefficient way ot saving since I already have characterId
   async createFeaturesAndTraits(characterId: string, newFeaturesAndTraits: CharacterFeatureAndTraitDto[]): Promise<any> {
-
+    const character = await this.characterDataRepository.findOne({
+      where: { id: characterId }
+    });
+    const newFatEntities = newFeaturesAndTraits.map(fat => {
+      const fatEntity = this.characterMapper.featureAndTraitDtoToEntity(fat);
+      fatEntity.character = character;
+      return fatEntity;
+    })
+    character.featuresAndTraits.push(...newFatEntities)
+    this.characterDataRepository.save(character);
   }
 
+  //todo test
   async updateFeatureAndTrait(characterId: string, fatId: string, updatedFeatureAndTrait: CharacterFeatureAndTraitDto): Promise<any> {
-
+    const res = await this.featuresAndTraitsRepository
+      .createQueryBuilder()
+      .update(CharacterFeaturesAndTraits)
+      .set(updatedFeatureAndTrait)
+      .where("characterId = :characterId", {characterId: characterId})
+      .andWhere("id = :fatId", {fatId: fatId})
+      .returning(Object.keys(updatedFeatureAndTrait))
+      .execute()
+    return res.raw[0]
   }
 
+  //todo test
   async deleteFeatureAndTrait(characterId: string, fatId: string): Promise<void> {
-
+    await this.featuresAndTraitsRepository
+      .createQueryBuilder()
+      .delete()
+      .where("id = :fatId", { id: fatId })
+      .andWhere("characterId = :characterId", { characterId: characterId })
+      .execute()
   }
 
+  //todo test
   async updateSpellSlots(characterId: string, newSpellSlots: CharacterSpellSlotsDto): Promise<any> {
+    const res = await this.spellSlotsRepository
+      .createQueryBuilder()
+      .update(CharacterSpellSlots)
+      .set(newSpellSlots)
+      .where("characterId = :characterId", {characterId: characterId})
+      .returning(Object.keys(newSpellSlots))
+      .execute()
 
+    return res.raw[0];
   }
 
+  //todo this doesn't work
   async updateSpellSlotsAtLevel(characterId: string, level: string, newSpellSlotsAtLevel: CharacterSpellSlotsAtLevelDto): Promise<any> {
+    // const res = await this.spellSlotsAtLevelRepository
+    //   .createQueryBuilder("spellSlots")
+    //   .update(CharacterSpellSlotsAtLevel)
+    //   .set(newSpellSlotsAtLevel)
+    //   .where("characterId = :characterId", {characterId: characterId})
+    //   .andWhere("spellSlots.:level")
+    //   .returning(Object.keys(newSpellSlotsAtLevel))
+    //   .execute()
 
+    // return res.raw[0];
   }
 
   async updateTreasureMoney(characterId: string, updatedTreasureMoney: CharacterTreasureMoneyDto): Promise<any> {
@@ -158,19 +231,51 @@ export class CharacterService {
 
   }
 
+  //todo test
   async updateCharacterSettings(characterId: string, updatedSettings: CharacterSheetSettingsDto): Promise<any> {
-
+    return (await this.settingsRepository
+      .createQueryBuilder()
+      .update(CharacterSheetSettings)
+      .set(updatedSettings)
+      .where("characterId = :characterId", {characterId: characterId})
+      .returning(Object.keys(updatedSettings))
+      .execute())
+      .raw[0];
   }
 
+  //todo test, need to make more streamlined so i don't have to query for character since i ahve id already
   async createHitDice(characterId: string, newHitDice: CharacterHitDiceDto): Promise<any> {
+    const hitDiceEntity = this.characterMapper.hitDieDtoToEntity(newHitDice);
+    const characterEntity = await this.characterDataRepository.findOne({
+      where: { id: characterId }
+    });
 
+    hitDiceEntity.character = characterEntity;
+    await this.hitDiceRepository.save(hitDiceEntity);
+
+    return newHitDice
   }
 
+  //todo test
   async deleteHitDice(characterId: string, id: string): Promise<void> {
-
+    await this.hitDiceRepository
+      .createQueryBuilder()
+      .delete()
+      .where("id = :id", { id: id })
+      .andWhere("characterId = :characterId", { characterId: characterId })
+      .execute()
   }
 
+  //todo test
   async updateHitDice(characterId: string, id: string, updatedHitDice: CharacterHitDiceDto): Promise<any> {
-
+    return (await this.hitDiceRepository
+      .createQueryBuilder()
+      .update(CharacterHitDice)
+      .set(updatedHitDice)
+      .where("characterId = :characterId", {characterId: characterId})
+      .andWhere("id = :id", {id: id})
+      .returning(Object.keys(updatedHitDice))
+      .execute())
+      .raw[0];
   }
 }

@@ -12,7 +12,7 @@ export class CharacterTreasureItem {
   @Column()
   quantity!: number;
 
-  @Column()
+  @Column({ nullable: true })
   weightInLbs?: number;
 
   @Column()
@@ -21,7 +21,7 @@ export class CharacterTreasureItem {
   @Column()
   magical!: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   description?: string;
 
   @ManyToOne(type => CharacterTreasure, treasure => treasure.items)

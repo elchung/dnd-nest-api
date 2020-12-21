@@ -29,13 +29,16 @@ import {CharacterTreasureMoney} from "../entity/CharacterTreasureMoney.entity";
     CharacterSpellSlotsAtLevel,
     CharacterTreasure,
     CharacterTreasureItem,
-    CharacterTreasureMoney,
+    CharacterTreasureMoney
   ])],
+  exports: [
+    CharacterService
+  ],
   controllers: [
-    CharacterController,
+    CharacterController
   ],
   providers: [
-    CharacterService,
+    CharacterService
   ],
 })
 export class CharacterModule {}

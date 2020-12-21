@@ -10,33 +10,33 @@ export class CharacterKnownSpells {
   @JoinColumn()
   character!: CharacterData;
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   zero?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   one?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   two?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   three?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   four?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   five?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   six?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   seven?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   eight?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   nine?: string[];
 }

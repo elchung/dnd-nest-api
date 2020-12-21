@@ -13,9 +13,9 @@ export class CharacterFeaturesAndTraits {
   @Column()
   index!: number;
 
-  @Column()
+  @Column({ nullable: true })
   title?: string;
 
-  @Column()
+  @Column({ nullable: true })
   body?: string;
 }

@@ -13,37 +13,37 @@ export class CharacterDataDto {
   username: string;
 
   @ApiPropertyOptional({ type: String })
-  characterName: string;
+  characterName?: string;
 
   @ApiPropertyOptional({ type: Number })
-  level: number;
+  level?: number;
 
   @ApiPropertyOptional({ type: String })
-  class: string;
+  class?: string;
 
   @ApiPropertyOptional({ type: String })
-  background: string;
+  background?: string;
 
   @ApiPropertyOptional({ type: String })
-  race: string;
+  race?: string;
 
   @ApiPropertyOptional({ type: String })
-  spellcastingAbility: string;
+  spellcastingAbility?: string;
 
   @ApiPropertyOptional({ type: Number })
-  experience: number;
+  experience?: number;
 
   @ApiPropertyOptional({ type: Number })
-  proficiencyBonus: number;
+  proficiencyBonus?: number;
 
   @ApiPropertyOptional({ type: Number })
-  inspiration: number;
+  inspiration?: number;
 
   @ApiPropertyOptional({ type: Number })
-  armorClass: number;
+  armorClass?: number;
 
   @ApiPropertyOptional({ type: Number })
-  initiative: number;
+  initiative?: number;
 
   @ApiPropertyOptional({ type: Number })
   speed?: number;
@@ -57,28 +57,28 @@ export class CharacterDataDto {
   @ApiPropertyOptional({ type: Number })
   currentHp: number;
 
-  @ApiPropertyOptional({ type: Number })
+  @ApiPropertyOptional({ type: [Number] })
   hpHistory: number[];
 
-  @ApiPropertyOptional({ type: String })
+  @ApiPropertyOptional({ type: [String] })
   skillProficiencies: string[];
 
-  @ApiPropertyOptional({ type: String })
+  @ApiPropertyOptional({ type: [String] })
   savingThrowProficiencies: string[];
 
-  @ApiPropertyOptional({ type: String })
+  @ApiPropertyOptional({ type: [String] })
   skillExpertise: string[];
 
-  @ApiPropertyOptional({ type: String })
+  @ApiPropertyOptional({ type: [String] })
   generalProficiencies: string[];
 
-  @ApiPropertyOptional({ type: String })
+  @ApiPropertyOptional({ type: [String] })
   knownLanguages: string[];
 
-  @ApiPropertyOptional({ type: String })
+  @ApiPropertyOptional({ type: [String] })
   toolAndOtherProficiencies: string[];
 
-  @ApiPropertyOptional({ type: String })
+  @ApiPropertyOptional({ type: [String] })
   preparedSpells: string[];
 
   @ApiPropertyOptional({ type: [CharacterHitDiceDto] })
@@ -97,11 +97,11 @@ export class CharacterDataDto {
   spellSlots: CharacterSpellSlotsDto
 
   @ApiPropertyOptional({ type: [CharacterFeatureAndTraitDto] })
-  featuresAndTraits: CharacterFeatureAndTraitDto[];
+  featuresAndTraits?: CharacterFeatureAndTraitDto[];
 
   @ApiPropertyOptional({ type: CharacterTreasureDto })
-  treasure: CharacterTreasureDto;
+  treasure?: CharacterTreasureDto;
 
   @ApiPropertyOptional({ type: CharacterSheetSettingsDto })
-  settings: CharacterSheetSettingsDto;
+  settings?: CharacterSheetSettingsDto;
 }

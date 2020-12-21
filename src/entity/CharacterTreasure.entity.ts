@@ -13,8 +13,8 @@ export class CharacterTreasure {
   character!: CharacterData;
 
   @OneToOne(type => CharacterTreasureMoney, money => money.parentTreasure, { cascade: true, eager: true })
-  money?: CharacterTreasureMoney;
+  money!: CharacterTreasureMoney;
 
-  @OneToMany(type => CharacterTreasureItem, items => items.parentTreasure)
+  @OneToMany(type => CharacterTreasureItem, items => items.parentTreasure, { nullable: true })
   items?: CharacterTreasureItem[];
 }

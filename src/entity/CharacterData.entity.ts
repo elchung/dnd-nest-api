@@ -16,76 +16,76 @@ export class CharacterData {
   @Column()
   username!: string;
 
-  @Column()
+  @Column({ nullable: true })
   characterName?: string;
 
-  @Column()
+  @Column({ nullable: true })
   level?: number;
 
-  @Column()
+  @Column({ nullable: true })
   class?: string;
 
-  @Column()
+  @Column({ nullable: true })
   background?: string;
 
-  @Column()
+  @Column({ nullable: true })
   race?: string;
 
-  @Column()
+  @Column({ nullable: true })
   spellcastingAbility?: string;
 
-  @Column()
+  @Column({ nullable: true })
   experience?: number;
 
-  @Column()
+  @Column({ nullable: true })
   proficiencyBonus?: number;
 
-  @Column()
+  @Column({ nullable: true })
   inspiration?: number;
 
-  @Column()
+  @Column({ nullable: true })
   armorClass?: number;
 
-  @Column()
+  @Column({ nullable: true })
   initiative?: number;
 
-  @Column()
+  @Column({ nullable: true })
   speed?: number;
 
-  @Column()
+  @Column({ nullable: true })
   maxHp?: number;
 
-  @Column()
+  @Column({ nullable: true })
   tempHp?: number;
 
-  @Column()
+  @Column({ nullable: true })
   currentHp?: number;
 
-  @Column("int", { array: true })
+  @Column("int", { array: true, nullable: true })
   hpHistory?: number[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   skillProficiencies?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   savingThrowProficiencies?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   skillExpertise?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   generalProficiencies?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   knownLanguages?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   toolAndOtherProficiencies?: string[];
 
-  @Column("text", { array: true })
+  @Column("text", { array: true, nullable: true })
   preparedSpells?: string[];
 
-  @OneToMany(type => CharacterHitDice, hitDice => hitDice.character, { cascade: true, eager: true })
+  @OneToMany(type => CharacterHitDice, hitDice => hitDice.character, { cascade: true, eager: true, nullable: true })
   hitDice?: CharacterHitDice[];
 
   @OneToOne(type => CharacterAbilityScores, abilityScores => abilityScores.character, { cascade: true, eager: true })
@@ -100,11 +100,11 @@ export class CharacterData {
   @OneToOne(type => CharacterSpellSlots, spellSlots => spellSlots.character, { cascade: true, eager: true })
   spellSlots!: CharacterSpellSlots
 
-  @OneToMany(type => CharacterFeaturesAndTraits, featuresAndTraits => featuresAndTraits.character, { cascade: true, eager: true })
+  @OneToMany(type => CharacterFeaturesAndTraits, featuresAndTraits => featuresAndTraits.character, { cascade: true, eager: true, nullable: true })
   featuresAndTraits?: CharacterFeaturesAndTraits[];
 
   @OneToOne(type => CharacterTreasure, treasure => treasure.character, { cascade: true, eager: true })
-  treasure?: CharacterTreasure;
+  treasure!: CharacterTreasure;
 
   @OneToOne(type => CharacterSheetSettings, settings => settings.character, { cascade: true, eager: true })
   settings!: CharacterSheetSettings;

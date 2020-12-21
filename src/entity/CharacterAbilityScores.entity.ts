@@ -10,21 +10,21 @@ export class CharacterAbilityScores {
   @JoinColumn()
   character!: CharacterData;
 
-  @Column()
+  @Column({ nullable: true })
   strength?: number;
 
-  @Column()
+  @Column({ nullable: true })
   dexterity?: number;
 
-  @Column()
+  @Column({ nullable: true })
   constitution?: number;
 
-  @Column()
+  @Column({ nullable: true })
   intelligence?: number;
 
-  @Column()
+  @Column({ nullable: true })
   wisdom?: number;
 
-  @Column()
+  @Column({ nullable: true })
   charisma?: number;
 }

@@ -1,8 +1,8 @@
 import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 
 export class CharacterHitDiceDto {
-  @ApiProperty({ type: Number })
-  id: number;
+  @ApiPropertyOptional({ type: Number })
+  id?: number;
 
   @ApiPropertyOptional({ type: Number })
   numDice?: number;
