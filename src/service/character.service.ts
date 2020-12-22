@@ -301,11 +301,34 @@ export class CharacterService {
 
   private mergeCharacterEntities(primaryCharacter: CharacterData, updateCharacter: CharacterData): CharacterData {
     Object.keys(updateCharacter).forEach(field => {
-      if (!this.relationalFields.includes(field)) {
-        primaryCharacter[field] = updateCharacter[field] || primaryCharacter[field]
-      } else {
-        --create nested array
-      }
+        switch(field) {
+          case 'hitDice':
+
+            break;
+          case "abilityScores":
+
+            break;
+          case "deathSaves":
+
+            break;
+          case "knownSpells":
+
+            break;
+          case "featuresAndTraits":
+
+            break;
+          case "treasure":
+
+            break;
+          case "settings":
+
+            break;
+          case "spellSlots":
+
+            break;
+          default:
+            primaryCharacter[field] = updateCharacter[field] || primaryCharacter[field]
+        }
 
     })
 
