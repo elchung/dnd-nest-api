@@ -36,17 +36,15 @@ export class CharacterMapper {
   hitDiceDtoToEntity(
     hitDiceDto: CharacterHitDiceDto[] | null
   ): CharacterHitDice[] {
-    return hitDiceDto
-      ? hitDiceDto?.map((hd) => this.hitDieDtoToEntity(hd))
-      : [];
+    return hitDiceDto ? hitDiceDto.map((hd) => this.hitDieDtoToEntity(hd)) : [];
   }
 
   spellSlotAtLevelDtoToEntity(
     spellSlotsAtLevelDto: CharacterSpellSlotsAtLevelDto | null
   ): CharacterSpellSlotsAtLevel {
     const spellSlotsAtLevel = new CharacterSpellSlotsAtLevel();
-    spellSlotsAtLevel.used = spellSlotsAtLevelDto?.used || 0;
-    spellSlotsAtLevel.max = spellSlotsAtLevelDto?.max || 0;
+    spellSlotsAtLevel.used = spellSlotsAtLevelDto?.used;
+    spellSlotsAtLevel.max = spellSlotsAtLevelDto?.max;
 
     return spellSlotsAtLevel;
   }
@@ -66,7 +64,9 @@ export class CharacterMapper {
       "eight",
       "nine",
     ].forEach((level) => {
-      spellSlots[level] = this.spellSlotAtLevelDtoToEntity(spellSlotDto[level]);
+      spellSlots[level] = this.spellSlotAtLevelDtoToEntity(
+        spellSlotDto?.[level]
+      );
     });
     return spellSlots;
   }
@@ -157,7 +157,6 @@ export class CharacterMapper {
   treasureMoneyDtoToEntity(
     treasureMoneyDto: CharacterTreasureMoneyDto | null
   ): CharacterTreasureMoney {
-    console.log("getting treasure");
     const treasureMoney = new CharacterTreasureMoney();
     treasureMoney.gold = treasureMoneyDto?.gold;
     treasureMoney.silver = treasureMoneyDto?.silver;
@@ -171,13 +170,15 @@ export class CharacterMapper {
     treasureDto: CharacterTreasureDto | null
   ): CharacterTreasure {
     const treasure = new CharacterTreasure();
-    console.log("here", treasure.money);
     treasure.money = this.treasureMoneyDtoToEntity(
-      treasureDto?.money ? treasureDto.money : new CharacterTreasureMoneyDto()
+      treasureDto?.money != undefined
+        ? treasureDto.money
+        : new CharacterTreasureMoneyDto()
     );
-    treasure.items = treasureDto.items
-      ? this.treasureItemsDtoToEntity(treasureDto.items)
-      : [];
+    treasure.items =
+      treasureDto?.items != undefined
+        ? this.treasureItemsDtoToEntity(treasureDto.items)
+        : [];
 
     return treasure;
   }
@@ -242,26 +243,28 @@ export class CharacterMapper {
   }
 
   private mergeCharacterEntitiesHelper_oneToOne(
-    primaryCharacter: any,
-    updateCharacter: any,
-    field: string,
+    primary: any,
+    update: any,
     subfields: string[]
   ): void {
     subfields.forEach((subfield) => {
-      primaryCharacter[field][subfield] =
-        updateCharacter[field][subfield] || primaryCharacter[field][subfield];
+      console.log(update[subfield]);
+      if (update[subfield] != undefined) {
+        console.log("we in here");
+        primary[subfield] = update[subfield];
+      }
     });
   }
 
   private mergeCharacterEntitiesHelper_oneToMany(
-    primaryCharacter: any,
-    updateCharacter: any,
+    primary: any,
+    update: any,
     field: string
   ): void {
-    primaryCharacter[field] =
-      updateCharacter[field] != undefined || updateCharacter[field].length != 0
-        ? updateCharacter[field]
-        : primaryCharacter[field];
+    primary[field] =
+      update[field] != undefined || update[field].length != 0
+        ? update[field]
+        : primary[field];
   }
 
   mergeCharacterEntities(
@@ -299,19 +302,20 @@ export class CharacterMapper {
             "wisdom",
             "charisma",
           ];
+          console.log(primaryCharacter[field]);
+          console.log(updateCharacter[field]);
           this.mergeCharacterEntitiesHelper_oneToOne(
-            primaryCharacter,
-            updateCharacter,
-            field,
+            primaryCharacter[field],
+            updateCharacter[field],
             subfields
           );
+          console.log(primaryCharacter[field]);
           break;
         case "deathSaves":
           subfields = ["successes", "failures"];
           this.mergeCharacterEntitiesHelper_oneToOne(
-            primaryCharacter,
-            updateCharacter,
-            field,
+            primaryCharacter[field],
+            updateCharacter[field],
             subfields
           );
           break;
@@ -329,32 +333,29 @@ export class CharacterMapper {
             "nine",
           ];
           this.mergeCharacterEntitiesHelper_oneToOne(
-            primaryCharacter,
-            updateCharacter,
-            field,
+            primaryCharacter[field],
+            updateCharacter[field],
             subfields
           );
           break;
         case "treasure":
           subfields = ["gold", "silver", "electrum", "copper"];
           this.mergeCharacterEntitiesHelper_oneToMany(
-            primaryCharacter.treasure,
-            updateCharacter.treasure,
+            primaryCharacter[field],
+            updateCharacter[field],
             "items"
           );
           this.mergeCharacterEntitiesHelper_oneToOne(
-            primaryCharacter.treasure,
-            updateCharacter.treasure,
-            field,
+            primaryCharacter[field],
+            updateCharacter[field],
             subfields
           );
           break;
         case "settings":
           subfields = ["abilityScoreOnTop"];
           this.mergeCharacterEntitiesHelper_oneToOne(
-            primaryCharacter,
-            updateCharacter,
-            field,
+            primaryCharacter[field],
+            updateCharacter[field],
             subfields
           );
           break;
@@ -362,16 +363,17 @@ export class CharacterMapper {
           subfields = ["max", "used"];
           spellSlotFields.forEach((pf) => {
             this.mergeCharacterEntitiesHelper_oneToOne(
-              primaryCharacter[field],
-              updateCharacter[field],
-              pf,
+              primaryCharacter[field][pf],
+              updateCharacter[field][pf],
               subfields
             );
           });
           break;
         default:
           primaryCharacter[field] =
-            updateCharacter[field] || primaryCharacter[field];
+            updateCharacter[field] != undefined
+              ? updateCharacter[field]
+              : primaryCharacter[field];
       }
     });
 
