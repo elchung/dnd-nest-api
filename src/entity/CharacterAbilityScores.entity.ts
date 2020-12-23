@@ -1,12 +1,18 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn} from "typeorm";
-import {CharacterData} from "./CharacterData.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
+import { CharacterData } from "./CharacterData.entity";
 
 @Entity()
 export class CharacterAbilityScores {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToOne(type => CharacterData, character => character.abilityScores)
+  @OneToOne((type) => CharacterData, (character) => character.abilityScores)
   @JoinColumn()
   character!: CharacterData;
 

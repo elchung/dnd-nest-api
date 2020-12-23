@@ -1,24 +1,33 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn} from "typeorm";
-import {CharacterTreasure} from "./CharacterTreasure.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
+import { CharacterTreasure } from "./CharacterTreasure.entity";
 
 @Entity()
 export class CharacterTreasureMoney {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @Column({ default: 0 })
   gold!: number;
 
-  @Column()
+  @Column({ default: 0 })
   silver!: number;
 
-  @Column()
+  @Column({ default: 0 })
   electrum!: number;
 
-  @Column()
+  @Column({ default: 0 })
   copper!: number;
 
-  @OneToOne(type => CharacterTreasure, parentTreasure => parentTreasure.money)
+  @OneToOne(
+    (type) => CharacterTreasure,
+    (parentTreasure) => parentTreasure.money
+  )
   @JoinColumn()
-  parentTreasure!: CharacterTreasure
+  parentTreasure!: CharacterTreasure;
 }

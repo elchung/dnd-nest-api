@@ -1,12 +1,19 @@
-import {Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne, OneToMany} from "typeorm";
-import {CharacterHitDice} from "./CharacterHitDice.entity";
-import {CharacterSheetSettings} from "./CharacterSheetSettings.entity";
-import {CharacterAbilityScores} from "./CharacterAbilityScores.entity";
-import {CharacterDeathSaves} from "./CharacterDeathSaves.entity";
-import {CharacterKnownSpells} from "./CharacterKnownSpells.entity";
-import {CharacterSpellSlots} from "./CharacterSpellSlots.entity";
-import {CharacterFeaturesAndTraits} from "./CharacterFeaturesAndTraits.entity";
-import {CharacterTreasure} from "./CharacterTreasure.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  OneToOne,
+  OneToMany,
+} from "typeorm";
+import { CharacterHitDice } from "./CharacterHitDice.entity";
+import { CharacterSheetSettings } from "./CharacterSheetSettings.entity";
+import { CharacterAbilityScores } from "./CharacterAbilityScores.entity";
+import { CharacterDeathSaves } from "./CharacterDeathSaves.entity";
+import { CharacterKnownSpells } from "./CharacterKnownSpells.entity";
+import { CharacterSpellSlots } from "./CharacterSpellSlots.entity";
+import { CharacterFeaturesAndTraits } from "./CharacterFeaturesAndTraits.entity";
+import { CharacterTreasure } from "./CharacterTreasure.entity";
 
 @Entity()
 export class CharacterData {
@@ -34,19 +41,19 @@ export class CharacterData {
   @Column({ nullable: true })
   spellcastingAbility?: string;
 
-  @Column({ nullable: true })
+  @Column({ default: 0 })
   experience?: number;
 
-  @Column({ nullable: true })
+  @Column({ default: 0 })
   proficiencyBonus?: number;
 
-  @Column({ nullable: true })
+  @Column({ default: 0 })
   inspiration?: number;
 
   @Column({ nullable: true })
   armorClass?: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, default: 0 })
   initiative?: number;
 
   @Column({ nullable: true })
@@ -55,7 +62,7 @@ export class CharacterData {
   @Column({ nullable: true })
   maxHp?: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, default: 0 })
   tempHp?: number;
 
   @Column({ nullable: true })
@@ -85,27 +92,58 @@ export class CharacterData {
   @Column("text", { array: true, nullable: true })
   preparedSpells?: string[];
 
-  @OneToMany(type => CharacterHitDice, hitDice => hitDice.character, { cascade: true, eager: true, nullable: true })
+  @OneToMany((type) => CharacterHitDice, (hitDice) => hitDice.character, {
+    cascade: true,
+    eager: true,
+    nullable: true,
+  })
   hitDice?: CharacterHitDice[];
 
-  @OneToOne(type => CharacterAbilityScores, abilityScores => abilityScores.character, { cascade: true, eager: true })
+  @OneToOne(
+    (type) => CharacterAbilityScores,
+    (abilityScores) => abilityScores.character,
+    { cascade: true, eager: true }
+  )
   abilityScores!: CharacterAbilityScores;
 
-  @OneToOne(type => CharacterDeathSaves, deathSaves => deathSaves.character, { cascade: true, eager: true })
+  @OneToOne(
+    (type) => CharacterDeathSaves,
+    (deathSaves) => deathSaves.character,
+    { cascade: true, eager: true }
+  )
   deathSaves!: CharacterDeathSaves;
 
-  @OneToOne(type => CharacterKnownSpells, knownSpells => knownSpells.character, { cascade: true, eager: true })
+  @OneToOne(
+    (type) => CharacterKnownSpells,
+    (knownSpells) => knownSpells.character,
+    { cascade: true, eager: true }
+  )
   knownSpells!: CharacterKnownSpells;
 
-  @OneToOne(type => CharacterSpellSlots, spellSlots => spellSlots.character, { cascade: true, eager: true })
-  spellSlots!: CharacterSpellSlots
+  @OneToOne(
+    (type) => CharacterSpellSlots,
+    (spellSlots) => spellSlots.character,
+    { cascade: true, eager: true }
+  )
+  spellSlots!: CharacterSpellSlots;
 
-  @OneToMany(type => CharacterFeaturesAndTraits, featuresAndTraits => featuresAndTraits.character, { cascade: true, eager: true, nullable: true })
+  @OneToMany(
+    (type) => CharacterFeaturesAndTraits,
+    (featuresAndTraits) => featuresAndTraits.character,
+    { cascade: true, eager: true, nullable: true }
+  )
   featuresAndTraits?: CharacterFeaturesAndTraits[];
 
-  @OneToOne(type => CharacterTreasure, treasure => treasure.character, { cascade: true, eager: true })
+  @OneToOne((type) => CharacterTreasure, (treasure) => treasure.character, {
+    cascade: true,
+    eager: true,
+  })
   treasure!: CharacterTreasure;
 
-  @OneToOne(type => CharacterSheetSettings, settings => settings.character, { cascade: true, eager: true })
+  @OneToOne(
+    (type) => CharacterSheetSettings,
+    (settings) => settings.character,
+    { cascade: true, eager: true }
+  )
   settings!: CharacterSheetSettings;
 }

@@ -1,5 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
-import {CharacterTreasure} from "./CharacterTreasure.entity";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { CharacterTreasure } from "./CharacterTreasure.entity";
 
 @Entity()
 export class CharacterTreasureItem {
@@ -9,21 +9,21 @@ export class CharacterTreasureItem {
   @Column()
   name!: string;
 
-  @Column()
+  @Column({ default: 1 })
   quantity!: number;
 
   @Column({ nullable: true })
   weightInLbs?: number;
 
-  @Column()
+  @Column({ default: false })
   bookmarked!: boolean;
 
-  @Column()
+  @Column({ default: false })
   magical!: boolean;
 
   @Column({ nullable: true })
   description?: string;
 
-  @ManyToOne(type => CharacterTreasure, treasure => treasure.items)
+  @ManyToOne((type) => CharacterTreasure, (treasure) => treasure.items)
   parentTreasure!: CharacterTreasure;
 }

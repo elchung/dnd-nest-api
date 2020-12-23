@@ -1,12 +1,21 @@
-import {Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne} from "typeorm";
-import {CharacterData} from "./CharacterData.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  ManyToOne,
+} from "typeorm";
+import { CharacterData } from "./CharacterData.entity";
 
 @Entity()
 export class CharacterFeaturesAndTraits {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(type => CharacterData, character => character.featuresAndTraits)
+  @ManyToOne(
+    (type) => CharacterData,
+    (character) => character.featuresAndTraits
+  )
   @JoinColumn()
   character!: CharacterData;
 

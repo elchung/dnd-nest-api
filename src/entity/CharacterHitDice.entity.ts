@@ -1,12 +1,18 @@
-import {Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne} from "typeorm";
-import {CharacterData} from "./CharacterData.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  ManyToOne,
+} from "typeorm";
+import { CharacterData } from "./CharacterData.entity";
 
 @Entity()
 export class CharacterHitDice {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(type => CharacterData, character => character.hitDice)
+  @ManyToOne((type) => CharacterData, (character) => character.hitDice)
   @JoinColumn()
   character!: CharacterData;
 
@@ -19,4 +25,3 @@ export class CharacterHitDice {
   @Column()
   numUsed!: number;
 }
-
