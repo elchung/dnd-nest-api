@@ -1,14 +1,13 @@
-import * as dotenv from 'dotenv';
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
 import { CharacterModule } from "./module/character.module";
 
-if (process.env.NODE_ENV !== 'production') dotenv.config({ path: __dirname+'/../../.env' });
-if (!process.env.DB_USER_NAME ||
-    !process.env.DB_HOST ||
-    !process.env.DB_NAME ||
-    !process.env.DB_USER_PASSWORD ||
-    !process.env.DB_PORT
+if (
+  !process.env.DB_USER_NAME ||
+  !process.env.DB_HOST ||
+  !process.env.DB_NAME ||
+  !process.env.DB_USER_PASSWORD ||
+  !process.env.DB_PORT
 ) {
   throw new Error("Missing db variables.");
 }
