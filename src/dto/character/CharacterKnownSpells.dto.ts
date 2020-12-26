@@ -5,50 +5,50 @@ export class CharacterKnownSpellsDto {
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  zero: string[];
+  0: string[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  one: string[];
+  1: string[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  two: string[];
+  2: string[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  three: string[];
+  3: string[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  four: string[];
+  4: string[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  five: string[];
+  5: string[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  six: string[];
+  6: string[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  seven: string[];
+  7: string[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  eight: string[];
+  8: string[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  nine: string[];
+  9: string[];
 }

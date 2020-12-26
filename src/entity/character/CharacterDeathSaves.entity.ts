@@ -5,16 +5,16 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { CharacterData } from "./CharacterData.entity";
+import { CharacterDataEntity } from "./CharacterData.entity";
 
 @Entity()
-export class CharacterDeathSaves {
+export class CharacterDeathSavesEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToOne((type) => CharacterData, (character) => character.deathSaves)
+  @OneToOne((type) => CharacterDataEntity, (character) => character.deathSaves)
   @JoinColumn()
-  character!: CharacterData;
+  character!: CharacterDataEntity;
 
   @Column({ default: 0 })
   successes!: number;

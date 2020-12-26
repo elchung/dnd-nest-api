@@ -5,10 +5,10 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { CharacterTreasure } from "./CharacterTreasure.entity";
+import { CharacterTreasureEntity } from "./CharacterTreasure.entity";
 
 @Entity()
-export class CharacterTreasureMoney {
+export class CharacterTreasureMoneyEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -25,9 +25,9 @@ export class CharacterTreasureMoney {
   copper!: number;
 
   @OneToOne(
-    (type) => CharacterTreasure,
+    (type) => CharacterTreasureEntity,
     (parentTreasure) => parentTreasure.money
   )
   @JoinColumn()
-  parentTreasure!: CharacterTreasure;
+  parentTreasure!: CharacterTreasureEntity;
 }

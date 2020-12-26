@@ -7,18 +7,18 @@ import {
   Body,
   Param,
 } from "@nestjs/common";
-import { CharacterDataDto } from "../dto/CharacterData.dto";
+import { CharacterDataDto } from "../dto/character/CharacterData.dto";
 import { CharacterService } from "../service/character.service";
-import { CharacterDeathSavesDto } from "../dto/CharacterDeathSaves.dto";
-import { CharacterKnownSpellsDto } from "../dto/CharacterKnownSpells.dto";
-import { CharacterAbilityScoresDto } from "../dto/CharacterAbilityScores.dto";
-import { CharacterFeatureAndTraitDto } from "../dto/CharacterFeatureAndTraitDto";
-import { CharacterSpellSlotsDto } from "../dto/CharacterSpellSlots.dto";
-import { CharacterSpellSlotsAtLevelDto } from "../dto/CharacterSpellSlotsAtLevel.dto";
-import { CharacterTreasureMoneyDto } from "../dto/CharacterTreasureMoney.dto";
-import { CharacterTreasureItemDto } from "../dto/CharacterTreasureItemDto";
-import { CharacterSheetSettingsDto } from "../dto/CharacterSheetSettings.dto";
-import { CharacterHitDiceDto } from "../dto/CharacterHitDice.dto";
+import { CharacterDeathSavesDto } from "../dto/character/CharacterDeathSaves.dto";
+import { CharacterKnownSpellsDto } from "../dto/character/CharacterKnownSpells.dto";
+import { CharacterAbilityScoresDto } from "../dto/character/CharacterAbilityScores.dto";
+import { CharacterFeatureAndTraitDto } from "../dto/character/CharacterFeatureAndTraitDto";
+import { CharacterSpellSlotsDto } from "../dto/character/CharacterSpellSlots.dto";
+import { CharacterSpellSlotsAtLevelDto } from "../dto/character/CharacterSpellSlotsAtLevel.dto";
+import { CharacterTreasureMoneyDto } from "../dto/character/CharacterTreasureMoney.dto";
+import { CharacterTreasureItemDto } from "../dto/character/CharacterTreasureItemDto";
+import { CharacterSheetSettingsDto } from "../dto/character/CharacterSheetSettings.dto";
+import { CharacterHitDiceDto } from "../dto/character/CharacterHitDice.dto";
 import { ApiTags } from "@nestjs/swagger";
 
 @ApiTags("character")
@@ -26,28 +26,28 @@ import { ApiTags } from "@nestjs/swagger";
 export class CharacterController {
   constructor(private readonly characterService: CharacterService) {}
 
-  @Get("/characters/:characterId")
+  @Get("/:characterId")
   async getCharacterById(
     @Param("characterId") characterId: string
   ): Promise<CharacterDataDto> {
     return await this.characterService.getCharacterById(characterId);
   }
 
-  @Get("/characters/user/:username")
+  @Get("/user/:username")
   async getCharactersByUsername(
     @Param("username") username: string
   ): Promise<number[]> {
     return await this.characterService.getCharactersByUsername(username);
   }
 
-  @Post("/characters")
+  @Post("")
   async createCharacter(
     @Body() characterDataDto: CharacterDataDto
   ): Promise<CharacterDataDto> {
     return await this.characterService.createCharacter(characterDataDto);
   }
 
-  @Put("/characters/:characterId")
+  @Put("/:characterId")
   async updateCharacterById(
     @Param("characterId") characterId: string,
     @Body() characterDataDto: CharacterDataDto
@@ -58,14 +58,14 @@ export class CharacterController {
     );
   }
 
-  @Delete("/characters/:characterId")
+  @Delete("/:characterId")
   async deleteCharacterById(
     @Param("characterId") characterId: string
   ): Promise<void> {
     return await this.characterService.deleteCharacterById(characterId);
   }
 
-  @Put("/characters/:characterId/death_saves")
+  @Put("/:characterId/death_saves")
   async updateCharacterDeathSaves(
     @Param("characterId") characterId: string,
     @Body() updatedDeathSaves: CharacterDeathSavesDto
@@ -75,7 +75,7 @@ export class CharacterController {
       updatedDeathSaves
     );
   }
-  @Put("/characters/:characterId/known_spells")
+  @Put("/:characterId/known_spells")
   async updateKnownSpells(
     @Param("characterId") characterId: string,
     @Body() updatedKnownSpells: CharacterKnownSpellsDto
@@ -86,7 +86,7 @@ export class CharacterController {
     );
   }
 
-  @Put("/characters/:characterId/known_spells/:level")
+  @Put("/:characterId/known_spells/:level")
   async updateKnownSpellsAtLevel(
     @Param("characterId") characterId: string,
     @Param("level") level: string,
@@ -99,7 +99,7 @@ export class CharacterController {
     );
   }
 
-  @Put("/characters/:characterId/ability_scores")
+  @Put("/:characterId/ability_scores")
   async updateAbilityScores(
     @Param("characterId") characterId: string,
     @Body() updatedAbilityScores: CharacterAbilityScoresDto
@@ -110,7 +110,7 @@ export class CharacterController {
     );
   }
 
-  @Post("/characters/:characterId/features_and_traits")
+  @Post("/:characterId/features_and_traits")
   async createFeatureAndTrait(
     @Param("characterId") characterId: string,
     @Body() featureAndTrait: CharacterFeatureAndTraitDto
@@ -121,7 +121,7 @@ export class CharacterController {
     );
   }
 
-  @Post("/characters/:characterId/features_and_traits/bulk")
+  @Post("/:characterId/features_and_traits/bulk")
   async createFeaturesAndTraits(
     @Param("characterId") characterId: string,
     @Body() featuresAndTraits: CharacterFeatureAndTraitDto[]
@@ -132,7 +132,7 @@ export class CharacterController {
     );
   }
 
-  @Put("/characters/:characterId/features_and_traits/:fatId")
+  @Put("/:characterId/features_and_traits/:fatId")
   async updateFeatureAndTrait(
     @Param("characterId") characterId: string,
     @Param("fatId") fatId: string,
@@ -145,7 +145,7 @@ export class CharacterController {
     );
   }
 
-  @Delete("/characters/:characterId/features_and_traits/:fatId")
+  @Delete("/:characterId/features_and_traits/:fatId")
   async deleteFeatureAndTrait(
     @Param("characterId") characterId: string,
     @Param("fatId") fatId: string
@@ -156,7 +156,7 @@ export class CharacterController {
     );
   }
 
-  @Put("/characters/:characterId/spell_slots/")
+  @Put("/:characterId/spell_slots/")
   async updateSpellSlots(
     @Param("characterId") characterId: string,
     @Body() updatedSpellSlots: CharacterSpellSlotsDto
@@ -167,7 +167,7 @@ export class CharacterController {
     );
   }
 
-  @Put("/characters/:characterId/spell_slots/:level")
+  @Put("/:characterId/spell_slots/:level")
   async updateSpellSlotsAtLevel(
     @Param("characterId") characterId: string,
     @Param("level") level: string,
@@ -180,7 +180,7 @@ export class CharacterController {
     );
   }
 
-  @Put("/characters/:characterId/treasure/money")
+  @Put("/:characterId/treasure/money")
   async updateTreasureMoney(
     @Param("characterId") characterId: string,
     @Body() updatedTreasureMoney: CharacterTreasureMoneyDto
@@ -191,7 +191,7 @@ export class CharacterController {
     );
   }
 
-  @Put("/characters/:characterId/treasure/items/:id")
+  @Put("/:characterId/treasure/items/:id")
   async updateTreasureItem(
     @Param("characterId") characterId: string,
     @Param("id") id: string,
@@ -204,7 +204,7 @@ export class CharacterController {
     );
   }
 
-  @Post("/characters/:characterId/treasure/items")
+  @Post("/:characterId/treasure/items")
   async createTreasureItem(
     @Param("characterId") characterId: string,
     @Body() newTreasureItem: CharacterTreasureItemDto
@@ -215,7 +215,7 @@ export class CharacterController {
     );
   }
 
-  @Delete("/characters/:characterId/treasure/items/:id")
+  @Delete("/:characterId/treasure/items/:id")
   async deleteTreasureItem(
     @Param("characterId") characterId: string,
     @Param("id") id: string
@@ -223,7 +223,7 @@ export class CharacterController {
     return await this.characterService.deleteTreasureItem(characterId, id);
   }
 
-  @Put("/characters/:characterId/settings")
+  @Put("/:characterId/settings")
   async updateCharacterSettings(
     @Param("characterId") characterId: string,
     @Body() updatedSettings: CharacterSheetSettingsDto
@@ -234,7 +234,7 @@ export class CharacterController {
     );
   }
 
-  @Post("/characters/:characterId/hit_dice")
+  @Post("/:characterId/hit_dice")
   async createHitDice(
     @Param("characterId") characterId: string,
     @Body() newHitDice: CharacterHitDiceDto
@@ -242,7 +242,7 @@ export class CharacterController {
     return await this.characterService.createHitDice(characterId, newHitDice);
   }
 
-  @Delete("/characters/:characterId/hit_dice/:id")
+  @Delete("/:characterId/hit_dice/:id")
   async deleteHitDice(
     @Param("characterId") characterId: string,
     @Param("id") id: string
@@ -250,7 +250,7 @@ export class CharacterController {
     return await this.characterService.deleteHitDice(characterId, id);
   }
 
-  @Put("/characters/:characterId/hit_dice/:id")
+  @Put("/:characterId/hit_dice/:id")
   async updateHitDice(
     @Param("characterId") characterId: string,
     @Param("id") id: string,

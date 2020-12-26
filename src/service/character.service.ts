@@ -1,70 +1,70 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CharacterDataDto } from "../dto/CharacterData.dto";
+import { CharacterDataDto } from "../dto/character/CharacterData.dto";
 import { Repository } from "typeorm";
-import { CharacterDeathSavesDto } from "../dto/CharacterDeathSaves.dto";
-import { CharacterKnownSpellsDto } from "../dto/CharacterKnownSpells.dto";
-import { CharacterAbilityScoresDto } from "../dto/CharacterAbilityScores.dto";
-import { CharacterFeatureAndTraitDto } from "../dto/CharacterFeatureAndTraitDto";
-import { CharacterSpellSlotsDto } from "../dto/CharacterSpellSlots.dto";
-import { CharacterTreasureMoneyDto } from "../dto/CharacterTreasureMoney.dto";
-import { CharacterTreasureItemDto } from "../dto/CharacterTreasureItemDto";
-import { CharacterSheetSettingsDto } from "../dto/CharacterSheetSettings.dto";
-import { CharacterHitDiceDto } from "../dto/CharacterHitDice.dto";
-import { CharacterSpellSlotsAtLevelDto } from "../dto/CharacterSpellSlotsAtLevel.dto";
+import { CharacterDeathSavesDto } from "../dto/character/CharacterDeathSaves.dto";
+import { CharacterKnownSpellsDto } from "../dto/character/CharacterKnownSpells.dto";
+import { CharacterAbilityScoresDto } from "../dto/character/CharacterAbilityScores.dto";
+import { CharacterFeatureAndTraitDto } from "../dto/character/CharacterFeatureAndTraitDto";
+import { CharacterSpellSlotsDto } from "../dto/character/CharacterSpellSlots.dto";
+import { CharacterTreasureMoneyDto } from "../dto/character/CharacterTreasureMoney.dto";
+import { CharacterTreasureItemDto } from "../dto/character/CharacterTreasureItemDto";
+import { CharacterSheetSettingsDto } from "../dto/character/CharacterSheetSettings.dto";
+import { CharacterHitDiceDto } from "../dto/character/CharacterHitDice.dto";
+import { CharacterSpellSlotsAtLevelDto } from "../dto/character/CharacterSpellSlotsAtLevel.dto";
 
-import { CharacterData } from "../entity/CharacterData.entity";
-import { CharacterAbilityScores } from "../entity/CharacterAbilityScores.entity";
-import { CharacterDeathSaves } from "../entity/CharacterDeathSaves.entity";
-import { CharacterFeaturesAndTraits } from "../entity/CharacterFeaturesAndTraits.entity";
-import { CharacterHitDice } from "../entity/CharacterHitDice.entity";
-import { CharacterSheetSettings } from "../entity/CharacterSheetSettings.entity";
-import { CharacterKnownSpells } from "../entity/CharacterKnownSpells.entity";
-import { CharacterSpellSlots } from "../entity/CharacterSpellSlots.entity";
-import { CharacterSpellSlotsAtLevel } from "../entity/CharacterSpellSlotsAtLevel.entity";
-import { CharacterTreasure } from "../entity/CharacterTreasure.entity";
-import { CharacterTreasureItem } from "../entity/CharacterTreasureItem.entity";
-import { CharacterTreasureMoney } from "../entity/CharacterTreasureMoney.entity";
+import { CharacterDataEntity } from "../entity/character/CharacterData.entity";
+import { CharacterAbilityScoresEntity } from "../entity/character/CharacterAbilityScores.entity";
+import { CharacterDeathSavesEntity } from "../entity/character/CharacterDeathSaves.entity";
+import { CharacterFeaturesAndTraitsEntity } from "../entity/character/CharacterFeaturesAndTraits.entity";
+import { CharacterHitDiceEntity } from "../entity/character/CharacterHitDice.entity";
+import { CharacterSheetSettingsEntity } from "../entity/character/CharacterSheetSettings.entity";
+import { CharacterKnownSpellsEntity } from "../entity/character/CharacterKnownSpells.entity";
+import { CharacterSpellSlotsEntity } from "../entity/character/CharacterSpellSlots.entity";
+import { CharacterSpellSlotsAtLevelEntity } from "../entity/character/CharacterSpellSlotsAtLevel.entity";
+import { CharacterTreasureEntity } from "../entity/character/CharacterTreasure.entity";
+import { CharacterTreasureItemEntity } from "../entity/character/CharacterTreasureItem.entity";
+import { CharacterTreasureMoneyEntity } from "../entity/character/CharacterTreasureMoney.entity";
 import { CharacterMapper } from "../mapper/character.mapper";
 
 @Injectable()
 export class CharacterService {
   constructor(
-    @InjectRepository(CharacterData)
-    private characterDataRepository: Repository<CharacterData>,
+    @InjectRepository(CharacterDataEntity)
+    private characterDataRepository: Repository<CharacterDataEntity>,
 
-    @InjectRepository(CharacterAbilityScores)
-    private abilityScoreRepository: Repository<CharacterAbilityScores>,
+    @InjectRepository(CharacterAbilityScoresEntity)
+    private abilityScoreRepository: Repository<CharacterAbilityScoresEntity>,
 
-    @InjectRepository(CharacterDeathSaves)
-    private deathSaveRepository: Repository<CharacterDeathSaves>,
+    @InjectRepository(CharacterDeathSavesEntity)
+    private deathSaveRepository: Repository<CharacterDeathSavesEntity>,
 
-    @InjectRepository(CharacterFeaturesAndTraits)
-    private featuresAndTraitsRepository: Repository<CharacterFeaturesAndTraits>,
+    @InjectRepository(CharacterFeaturesAndTraitsEntity)
+    private featuresAndTraitsRepository: Repository<CharacterFeaturesAndTraitsEntity>,
 
-    @InjectRepository(CharacterHitDice)
-    private hitDiceRepository: Repository<CharacterHitDice>,
+    @InjectRepository(CharacterHitDiceEntity)
+    private hitDiceRepository: Repository<CharacterHitDiceEntity>,
 
-    @InjectRepository(CharacterKnownSpells)
-    private knownSpellsRepository: Repository<CharacterKnownSpells>,
+    @InjectRepository(CharacterKnownSpellsEntity)
+    private knownSpellsRepository: Repository<CharacterKnownSpellsEntity>,
 
-    @InjectRepository(CharacterSheetSettings)
-    private settingsRepository: Repository<CharacterSheetSettings>,
+    @InjectRepository(CharacterSheetSettingsEntity)
+    private settingsRepository: Repository<CharacterSheetSettingsEntity>,
 
-    @InjectRepository(CharacterSpellSlots)
-    private spellSlotsRepository: Repository<CharacterSpellSlots>,
+    @InjectRepository(CharacterSpellSlotsEntity)
+    private spellSlotsRepository: Repository<CharacterSpellSlotsEntity>,
 
-    @InjectRepository(CharacterSpellSlotsAtLevel)
-    private spellSlotsAtLevelRepository: Repository<CharacterSpellSlotsAtLevel>,
+    @InjectRepository(CharacterSpellSlotsAtLevelEntity)
+    private spellSlotsAtLevelRepository: Repository<CharacterSpellSlotsAtLevelEntity>,
 
-    @InjectRepository(CharacterTreasure)
-    private treasureRepository: Repository<CharacterTreasure>,
+    @InjectRepository(CharacterTreasureEntity)
+    private treasureRepository: Repository<CharacterTreasureEntity>,
 
-    @InjectRepository(CharacterTreasureItem)
-    private itemRepository: Repository<CharacterTreasureItem>,
+    @InjectRepository(CharacterTreasureItemEntity)
+    private itemRepository: Repository<CharacterTreasureItemEntity>,
 
-    @InjectRepository(CharacterTreasureMoney)
-    private moneyRepository: Repository<CharacterTreasureMoney>
+    @InjectRepository(CharacterTreasureMoneyEntity)
+    private moneyRepository: Repository<CharacterTreasureMoneyEntity>
   ) {}
 
   private characterMapper = new CharacterMapper();
@@ -121,7 +121,7 @@ export class CharacterService {
     return (
       await this.deathSaveRepository
         .createQueryBuilder("deathSave")
-        .update(CharacterDeathSaves)
+        .update(CharacterDeathSavesEntity)
         .set(updatedDeathSaves)
         .where("characterId = :characterId", { characterId: characterId })
         .returning(["successes", "failures"])
@@ -136,21 +136,10 @@ export class CharacterService {
     return (
       await this.knownSpellsRepository
         .createQueryBuilder("knownSpells")
-        .update(CharacterKnownSpells)
+        .update(CharacterKnownSpellsEntity)
         .set(newKnownSpells)
         .where("characterId = :characterId", { characterId: characterId })
-        .returning([
-          "zero",
-          "one",
-          "two",
-          "three",
-          "four",
-          "five",
-          "six",
-          "seven",
-          "eight",
-          "nine",
-        ])
+        .returning(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
         .execute()
     ).raw[0];
   }
@@ -163,7 +152,7 @@ export class CharacterService {
     return (
       await this.knownSpellsRepository
         .createQueryBuilder("knownSpellsAtLevel")
-        .update(CharacterKnownSpells)
+        .update(CharacterKnownSpellsEntity)
         .set({ [level]: newKnownSpellsAtLevel })
         .where("characterId = :characterId", { characterId: characterId })
         .returning([level])
@@ -178,7 +167,7 @@ export class CharacterService {
     return (
       await this.abilityScoreRepository
         .createQueryBuilder("abilityScores")
-        .update(CharacterAbilityScores)
+        .update(CharacterAbilityScoresEntity)
         .set(newAbilityScores)
         .where("characterId = :characterId", { characterId: characterId })
         .returning(Object.keys(newAbilityScores))
@@ -222,7 +211,7 @@ export class CharacterService {
     return (
       await this.featuresAndTraitsRepository
         .createQueryBuilder()
-        .update(CharacterFeaturesAndTraits)
+        .update(CharacterFeaturesAndTraitsEntity)
         .set(updatedFeatureAndTrait)
         .where("characterId = :characterId", { characterId: characterId })
         .andWhere("id = :fatId", { fatId: fatId })
@@ -249,7 +238,7 @@ export class CharacterService {
   ): Promise<any> {
     const res = await this.spellSlotsRepository
       .createQueryBuilder()
-      .update(CharacterSpellSlots)
+      .update(CharacterSpellSlotsEntity)
       .set(newSpellSlots)
       .where("characterId = :characterId", { characterId: characterId })
       .returning(Object.keys(newSpellSlots))
@@ -286,7 +275,7 @@ export class CharacterService {
     return (
       await this.moneyRepository
         .createQueryBuilder()
-        .update(CharacterTreasureMoney)
+        .update(CharacterTreasureMoneyEntity)
         .set(updatedTreasureMoney)
         .where("parentTreasureId = :parentTreasureId", {
           parentTreasureId: parentTreasureEntity.id,
@@ -307,7 +296,7 @@ export class CharacterService {
     return (
       await this.itemRepository
         .createQueryBuilder()
-        .update(CharacterTreasureItem)
+        .update(CharacterTreasureItemEntity)
         .set(updatedTreasureItem)
         .where("id = :id", { id: id })
         .andWhere("parentTreasureId = :parentTreasureId", {
@@ -355,7 +344,7 @@ export class CharacterService {
     return (
       await this.settingsRepository
         .createQueryBuilder()
-        .update(CharacterSheetSettings)
+        .update(CharacterSheetSettingsEntity)
         .set(updatedSettings)
         .where("characterId = :characterId", { characterId: characterId })
         .returning(Object.keys(updatedSettings))
@@ -392,7 +381,7 @@ export class CharacterService {
     return (
       await this.hitDiceRepository
         .createQueryBuilder()
-        .update(CharacterHitDice)
+        .update(CharacterHitDiceEntity)
         .set(updatedHitDice)
         .where("characterId = :characterId", { characterId: characterId })
         .andWhere("id = :id", { id: id })
@@ -403,7 +392,7 @@ export class CharacterService {
 
   private async getTreasureEntityFromCharacterId(
     characterId: string
-  ): Promise<CharacterTreasure> {
+  ): Promise<CharacterTreasureEntity> {
     return await this.treasureRepository
       .createQueryBuilder()
       .where("CharacterTreasure.characterId = :characterId", {

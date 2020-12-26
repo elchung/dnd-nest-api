@@ -6,45 +6,45 @@ export class CharacterSpellSlotsDto {
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: CharacterSpellSlotsAtLevelDto })
-  one: CharacterSpellSlotsAtLevelDto;
+  1: CharacterSpellSlotsAtLevelDto;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: CharacterSpellSlotsAtLevelDto })
-  two: CharacterSpellSlotsAtLevelDto;
+  2: CharacterSpellSlotsAtLevelDto;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: CharacterSpellSlotsAtLevelDto })
-  three: CharacterSpellSlotsAtLevelDto;
+  3: CharacterSpellSlotsAtLevelDto;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: CharacterSpellSlotsAtLevelDto })
-  four: CharacterSpellSlotsAtLevelDto;
+  4: CharacterSpellSlotsAtLevelDto;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: CharacterSpellSlotsAtLevelDto })
-  five: CharacterSpellSlotsAtLevelDto;
+  5: CharacterSpellSlotsAtLevelDto;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: CharacterSpellSlotsAtLevelDto })
-  six: CharacterSpellSlotsAtLevelDto;
+  6: CharacterSpellSlotsAtLevelDto;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: CharacterSpellSlotsAtLevelDto })
-  seven: CharacterSpellSlotsAtLevelDto;
+  7: CharacterSpellSlotsAtLevelDto;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: CharacterSpellSlotsAtLevelDto })
-  eight: CharacterSpellSlotsAtLevelDto;
+  8: CharacterSpellSlotsAtLevelDto;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: CharacterSpellSlotsAtLevelDto })
-  nine: CharacterSpellSlotsAtLevelDto;
+  9: CharacterSpellSlotsAtLevelDto;
 }

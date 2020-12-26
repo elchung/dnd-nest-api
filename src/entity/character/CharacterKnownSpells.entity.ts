@@ -1,42 +1,48 @@
-import {Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne} from "typeorm";
-import {CharacterData} from "./CharacterData.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  OneToOne,
+} from "typeorm";
+import { CharacterDataEntity } from "./CharacterData.entity";
 
 @Entity()
-export class CharacterKnownSpells {
+export class CharacterKnownSpellsEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToOne(type => CharacterData, character => character.knownSpells)
+  @OneToOne((type) => CharacterDataEntity, (character) => character.knownSpells)
   @JoinColumn()
-  character!: CharacterData;
+  character!: CharacterDataEntity;
 
   @Column("text", { array: true, nullable: true })
-  zero?: string[];
+  0?: string[];
 
   @Column("text", { array: true, nullable: true })
-  one?: string[];
+  1?: string[];
 
   @Column("text", { array: true, nullable: true })
-  two?: string[];
+  2?: string[];
 
   @Column("text", { array: true, nullable: true })
-  three?: string[];
+  3?: string[];
 
   @Column("text", { array: true, nullable: true })
-  four?: string[];
+  4?: string[];
 
   @Column("text", { array: true, nullable: true })
-  five?: string[];
+  5?: string[];
 
   @Column("text", { array: true, nullable: true })
-  six?: string[];
+  6?: string[];
 
   @Column("text", { array: true, nullable: true })
-  seven?: string[];
+  7?: string[];
 
   @Column("text", { array: true, nullable: true })
-  eight?: string[];
+  8?: string[];
 
   @Column("text", { array: true, nullable: true })
-  nine?: string[];
+  9?: string[];
 }

@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { CharacterTreasure } from "./CharacterTreasure.entity";
+import { CharacterTreasureEntity } from "./CharacterTreasure.entity";
 
 @Entity()
-export class CharacterTreasureItem {
+export class CharacterTreasureItemEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -24,6 +24,6 @@ export class CharacterTreasureItem {
   @Column({ nullable: true })
   description?: string;
 
-  @ManyToOne((type) => CharacterTreasure, (treasure) => treasure.items)
-  parentTreasure!: CharacterTreasure;
+  @ManyToOne((type) => CharacterTreasureEntity, (treasure) => treasure.items)
+  parentTreasure!: CharacterTreasureEntity;
 }

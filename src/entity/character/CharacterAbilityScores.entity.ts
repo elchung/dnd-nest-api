@@ -5,16 +5,19 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { CharacterData } from "./CharacterData.entity";
+import { CharacterDataEntity } from "./CharacterData.entity";
 
 @Entity()
-export class CharacterAbilityScores {
+export class CharacterAbilityScoresEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToOne((type) => CharacterData, (character) => character.abilityScores)
+  @OneToOne(
+    (type) => CharacterDataEntity,
+    (character) => character.abilityScores
+  )
   @JoinColumn()
-  character!: CharacterData;
+  character!: CharacterDataEntity;
 
   @Column({ nullable: true })
   strength?: number;

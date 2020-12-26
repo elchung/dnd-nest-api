@@ -5,19 +5,19 @@ import {
   JoinColumn,
   ManyToOne,
 } from "typeorm";
-import { CharacterData } from "./CharacterData.entity";
+import { CharacterDataEntity } from "./CharacterData.entity";
 
 @Entity()
-export class CharacterFeaturesAndTraits {
+export class CharacterFeaturesAndTraitsEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @ManyToOne(
-    (type) => CharacterData,
+    (type) => CharacterDataEntity,
     (character) => character.featuresAndTraits
   )
   @JoinColumn()
-  character!: CharacterData;
+  character!: CharacterDataEntity;
 
   @Column()
   index!: number;

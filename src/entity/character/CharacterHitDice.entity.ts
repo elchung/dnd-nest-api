@@ -5,16 +5,16 @@ import {
   JoinColumn,
   ManyToOne,
 } from "typeorm";
-import { CharacterData } from "./CharacterData.entity";
+import { CharacterDataEntity } from "./CharacterData.entity";
 
 @Entity()
-export class CharacterHitDice {
+export class CharacterHitDiceEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne((type) => CharacterData, (character) => character.hitDice)
+  @ManyToOne((type) => CharacterDataEntity, (character) => character.hitDice)
   @JoinColumn()
-  character!: CharacterData;
+  character!: CharacterDataEntity;
 
   @Column()
   numDice!: number;

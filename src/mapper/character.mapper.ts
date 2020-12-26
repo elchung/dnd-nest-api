@@ -1,31 +1,33 @@
-import { CharacterHitDiceDto } from "../dto/CharacterHitDice.dto";
-import { CharacterHitDice } from "../entity/CharacterHitDice.entity";
-import { CharacterData } from "../entity/CharacterData.entity";
-import { CharacterSpellSlots } from "../entity/CharacterSpellSlots.entity";
-import { CharacterSpellSlotsAtLevel } from "../entity/CharacterSpellSlotsAtLevel.entity";
-import { CharacterSpellSlotsDto } from "../dto/CharacterSpellSlots.dto";
-import { CharacterSpellSlotsAtLevelDto } from "../dto/CharacterSpellSlotsAtLevel.dto";
-import { CharacterDataDto } from "../dto/CharacterData.dto";
-import { CharacterAbilityScoresDto } from "../dto/CharacterAbilityScores.dto";
-import { CharacterAbilityScores } from "../entity/CharacterAbilityScores.entity";
-import { CharacterDeathSavesDto } from "../dto/CharacterDeathSaves.dto";
-import { CharacterDeathSaves } from "../entity/CharacterDeathSaves.entity";
-import { CharacterKnownSpellsDto } from "../dto/CharacterKnownSpells.dto";
-import { CharacterKnownSpells } from "../entity/CharacterKnownSpells.entity";
-import { CharacterFeatureAndTraitDto } from "../dto/CharacterFeatureAndTraitDto";
-import { CharacterFeaturesAndTraits } from "../entity/CharacterFeaturesAndTraits.entity";
-import { CharacterTreasureItemDto } from "../dto/CharacterTreasureItemDto";
-import { CharacterTreasureItem } from "../entity/CharacterTreasureItem.entity";
-import { CharacterTreasure } from "../entity/CharacterTreasure.entity";
-import { CharacterTreasureMoneyDto } from "../dto/CharacterTreasureMoney.dto";
-import { CharacterTreasureMoney } from "../entity/CharacterTreasureMoney.entity";
-import { CharacterTreasureDto } from "../dto/CharacterTreasure.dto";
-import { CharacterSheetSettingsDto } from "../dto/CharacterSheetSettings.dto";
-import { CharacterSheetSettings } from "../entity/CharacterSheetSettings.entity";
+import { CharacterHitDiceDto } from "../dto/character/CharacterHitDice.dto";
+import { CharacterHitDiceEntity } from "../entity/character/CharacterHitDice.entity";
+import { CharacterDataEntity } from "../entity/character/CharacterData.entity";
+import { CharacterSpellSlotsEntity } from "../entity/character/CharacterSpellSlots.entity";
+import { CharacterSpellSlotsAtLevelEntity } from "../entity/character/CharacterSpellSlotsAtLevel.entity";
+import { CharacterSpellSlotsDto } from "../dto/character/CharacterSpellSlots.dto";
+import { CharacterSpellSlotsAtLevelDto } from "../dto/character/CharacterSpellSlotsAtLevel.dto";
+import { CharacterDataDto } from "../dto/character/CharacterData.dto";
+import { CharacterAbilityScoresDto } from "../dto/character/CharacterAbilityScores.dto";
+import { CharacterAbilityScoresEntity } from "../entity/character/CharacterAbilityScores.entity";
+import { CharacterDeathSavesDto } from "../dto/character/CharacterDeathSaves.dto";
+import { CharacterDeathSavesEntity } from "../entity/character/CharacterDeathSaves.entity";
+import { CharacterKnownSpellsDto } from "../dto/character/CharacterKnownSpells.dto";
+import { CharacterKnownSpellsEntity } from "../entity/character/CharacterKnownSpells.entity";
+import { CharacterFeatureAndTraitDto } from "../dto/character/CharacterFeatureAndTraitDto";
+import { CharacterFeaturesAndTraitsEntity } from "../entity/character/CharacterFeaturesAndTraits.entity";
+import { CharacterTreasureItemDto } from "../dto/character/CharacterTreasureItemDto";
+import { CharacterTreasureItemEntity } from "../entity/character/CharacterTreasureItem.entity";
+import { CharacterTreasureEntity } from "../entity/character/CharacterTreasure.entity";
+import { CharacterTreasureMoneyDto } from "../dto/character/CharacterTreasureMoney.dto";
+import { CharacterTreasureMoneyEntity } from "../entity/character/CharacterTreasureMoney.entity";
+import { CharacterTreasureDto } from "../dto/character/CharacterTreasure.dto";
+import { CharacterSheetSettingsDto } from "../dto/character/CharacterSheetSettings.dto";
+import { CharacterSheetSettingsEntity } from "../entity/character/CharacterSheetSettings.entity";
 
 export class CharacterMapper {
-  hitDieDtoToEntity(hitDieDto: CharacterHitDiceDto | null): CharacterHitDice {
-    const newHD = new CharacterHitDice();
+  hitDieDtoToEntity(
+    hitDieDto: CharacterHitDiceDto | null
+  ): CharacterHitDiceEntity {
+    const newHD = new CharacterHitDiceEntity();
     newHD.numDice = hitDieDto.numDice;
     newHD.diceType = hitDieDto.diceType;
     newHD.numUsed = hitDieDto.numUsed;
@@ -35,14 +37,14 @@ export class CharacterMapper {
 
   hitDiceDtoToEntity(
     hitDiceDto: CharacterHitDiceDto[] | null
-  ): CharacterHitDice[] {
+  ): CharacterHitDiceEntity[] {
     return hitDiceDto ? hitDiceDto.map((hd) => this.hitDieDtoToEntity(hd)) : [];
   }
 
   spellSlotAtLevelDtoToEntity(
     spellSlotsAtLevelDto: CharacterSpellSlotsAtLevelDto | null
-  ): CharacterSpellSlotsAtLevel {
-    const spellSlotsAtLevel = new CharacterSpellSlotsAtLevel();
+  ): CharacterSpellSlotsAtLevelEntity {
+    const spellSlotsAtLevel = new CharacterSpellSlotsAtLevelEntity();
     spellSlotsAtLevel.used = spellSlotsAtLevelDto?.used;
     spellSlotsAtLevel.max = spellSlotsAtLevelDto?.max;
 
@@ -51,19 +53,9 @@ export class CharacterMapper {
 
   spellSlotDtoToEntity(
     spellSlotDto: CharacterSpellSlotsDto | null
-  ): CharacterSpellSlots {
-    const spellSlots = new CharacterSpellSlots();
-    [
-      "one",
-      "two",
-      "three",
-      "four",
-      "five",
-      "six",
-      "seven",
-      "eight",
-      "nine",
-    ].forEach((level) => {
+  ): CharacterSpellSlotsEntity {
+    const spellSlots = new CharacterSpellSlotsEntity();
+    ["1", "2", "3", "4", "5", "6", "7", "8", "9"].forEach((level) => {
       spellSlots[level] = this.spellSlotAtLevelDtoToEntity(
         spellSlotDto?.[level]
       );
@@ -73,8 +65,8 @@ export class CharacterMapper {
 
   abilityScoresDtoToEntity(
     abilityScoresDto: CharacterAbilityScoresDto | null
-  ): CharacterAbilityScores {
-    const abilityScores = new CharacterAbilityScores();
+  ): CharacterAbilityScoresEntity {
+    const abilityScores = new CharacterAbilityScoresEntity();
     abilityScores.strength = abilityScoresDto?.strength;
     abilityScores.dexterity = abilityScoresDto?.dexterity;
     abilityScores.constitution = abilityScoresDto?.constitution;
@@ -87,8 +79,8 @@ export class CharacterMapper {
 
   deathSavesDtoToEntity(
     deathSavesDto: CharacterDeathSavesDto | null
-  ): CharacterDeathSaves {
-    const deathSaves = new CharacterDeathSaves();
+  ): CharacterDeathSavesEntity {
+    const deathSaves = new CharacterDeathSavesEntity();
     deathSaves.successes = deathSavesDto?.successes;
     deathSaves.failures = deathSavesDto?.failures;
 
@@ -97,25 +89,25 @@ export class CharacterMapper {
 
   knownSpellsDtoToEntity(
     knownSpellsDto: CharacterKnownSpellsDto | null
-  ): CharacterKnownSpells {
-    const knownSpells = new CharacterKnownSpells();
-    knownSpells.zero = knownSpellsDto?.zero;
-    knownSpells.one = knownSpellsDto?.one;
-    knownSpells.two = knownSpellsDto?.two;
-    knownSpells.three = knownSpellsDto?.three;
-    knownSpells.four = knownSpellsDto?.four;
-    knownSpells.five = knownSpellsDto?.five;
-    knownSpells.six = knownSpellsDto?.six;
-    knownSpells.seven = knownSpellsDto?.seven;
-    knownSpells.eight = knownSpellsDto?.eight;
-    knownSpells.nine = knownSpellsDto?.nine;
+  ): CharacterKnownSpellsEntity {
+    const knownSpells = new CharacterKnownSpellsEntity();
+    knownSpells["0"] = knownSpellsDto?.["0"];
+    knownSpells["1"] = knownSpellsDto?.["1"];
+    knownSpells["2"] = knownSpellsDto?.["2"];
+    knownSpells["3"] = knownSpellsDto?.["3"];
+    knownSpells["4"] = knownSpellsDto?.["4"];
+    knownSpells["5"] = knownSpellsDto?.["5"];
+    knownSpells["6"] = knownSpellsDto?.["6"];
+    knownSpells["7"] = knownSpellsDto?.["7"];
+    knownSpells["8"] = knownSpellsDto?.["8"];
+    knownSpells["9"] = knownSpellsDto?.["9"];
 
     return knownSpells;
   }
 
   featuresAndTraitsDtoToEntity(
     featuresAndTraitsDto: CharacterFeatureAndTraitDto[] | null
-  ): CharacterFeaturesAndTraits[] {
+  ): CharacterFeaturesAndTraitsEntity[] {
     return featuresAndTraitsDto
       ? featuresAndTraitsDto.map((fat) => this.featureAndTraitDtoToEntity(fat))
       : [];
@@ -123,8 +115,8 @@ export class CharacterMapper {
 
   featureAndTraitDtoToEntity(
     featureAndTraitDto: CharacterFeatureAndTraitDto
-  ): CharacterFeaturesAndTraits {
-    const newFat = new CharacterFeaturesAndTraits();
+  ): CharacterFeaturesAndTraitsEntity {
+    const newFat = new CharacterFeaturesAndTraitsEntity();
     newFat.index = featureAndTraitDto.index;
     newFat.title = featureAndTraitDto.title;
     newFat.body = featureAndTraitDto.body;
@@ -134,7 +126,7 @@ export class CharacterMapper {
 
   treasureItemsDtoToEntity(
     treasureItemsDto: CharacterTreasureItemDto[] | null
-  ): CharacterTreasureItem[] {
+  ): CharacterTreasureItemEntity[] {
     return treasureItemsDto
       ? treasureItemsDto.map((item) => this.treasureItemDtoToEntity(item))
       : [];
@@ -142,8 +134,8 @@ export class CharacterMapper {
 
   treasureItemDtoToEntity(
     treasureItemDto: CharacterTreasureItemDto
-  ): CharacterTreasureItem {
-    const item = new CharacterTreasureItem();
+  ): CharacterTreasureItemEntity {
+    const item = new CharacterTreasureItemEntity();
     item.name = treasureItemDto.name;
     item.quantity = treasureItemDto.quantity;
     item.weightInLbs = treasureItemDto.weightInLbs;
@@ -156,8 +148,8 @@ export class CharacterMapper {
 
   treasureMoneyDtoToEntity(
     treasureMoneyDto: CharacterTreasureMoneyDto | null
-  ): CharacterTreasureMoney {
-    const treasureMoney = new CharacterTreasureMoney();
+  ): CharacterTreasureMoneyEntity {
+    const treasureMoney = new CharacterTreasureMoneyEntity();
     treasureMoney.gold = treasureMoneyDto?.gold;
     treasureMoney.silver = treasureMoneyDto?.silver;
     treasureMoney.electrum = treasureMoneyDto?.electrum;
@@ -168,8 +160,8 @@ export class CharacterMapper {
 
   treasureDtoToEntity(
     treasureDto: CharacterTreasureDto | null
-  ): CharacterTreasure {
-    const treasure = new CharacterTreasure();
+  ): CharacterTreasureEntity {
+    const treasure = new CharacterTreasureEntity();
     treasure.money = this.treasureMoneyDtoToEntity(
       treasureDto?.money != undefined
         ? treasureDto.money
@@ -185,15 +177,17 @@ export class CharacterMapper {
 
   settingsDtoToEntity(
     settingsDto: CharacterSheetSettingsDto | null
-  ): CharacterSheetSettings {
-    const settings = new CharacterSheetSettings();
+  ): CharacterSheetSettingsEntity {
+    const settings = new CharacterSheetSettingsEntity();
     settings.abilityScoreOnTop = settingsDto?.abilityScoreOnTop;
 
     return settings;
   }
 
-  characterDataDtoToEntity(characterDto: CharacterDataDto): CharacterData {
-    const newCharacter = new CharacterData();
+  characterDataDtoToEntity(
+    characterDto: CharacterDataDto
+  ): CharacterDataEntity {
+    const newCharacter = new CharacterDataEntity();
     newCharacter.username = characterDto.username;
     newCharacter.characterName = characterDto.characterName;
     newCharacter.level = characterDto.level;
@@ -250,7 +244,6 @@ export class CharacterMapper {
     subfields.forEach((subfield) => {
       console.log(update[subfield]);
       if (update[subfield] != undefined) {
-        console.log("we in here");
         primary[subfield] = update[subfield];
       }
     });
@@ -268,20 +261,10 @@ export class CharacterMapper {
   }
 
   mergeCharacterEntities(
-    primaryCharacter: CharacterData,
-    updateCharacter: CharacterData
-  ): CharacterData {
-    const spellSlotFields = [
-      "one",
-      "two",
-      "three",
-      "four",
-      "five",
-      "six",
-      "seven",
-      "eight",
-      "nine",
-    ];
+    primaryCharacter: CharacterDataEntity,
+    updateCharacter: CharacterDataEntity
+  ): CharacterDataEntity {
+    const spellSlotFields = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
     Object.keys(updateCharacter).forEach((field) => {
       let subfields;
       switch (field) {
@@ -320,18 +303,7 @@ export class CharacterMapper {
           );
           break;
         case "knownSpells":
-          subfields = [
-            "zero",
-            "one",
-            "two",
-            "three",
-            "four",
-            "five",
-            "six",
-            "seven",
-            "eight",
-            "nine",
-          ];
+          subfields = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
           this.mergeCharacterEntitiesHelper_oneToOne(
             primaryCharacter[field],
             updateCharacter[field],

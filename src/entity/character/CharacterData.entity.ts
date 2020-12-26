@@ -6,17 +6,17 @@ import {
   OneToOne,
   OneToMany,
 } from "typeorm";
-import { CharacterHitDice } from "./CharacterHitDice.entity";
-import { CharacterSheetSettings } from "./CharacterSheetSettings.entity";
-import { CharacterAbilityScores } from "./CharacterAbilityScores.entity";
-import { CharacterDeathSaves } from "./CharacterDeathSaves.entity";
-import { CharacterKnownSpells } from "./CharacterKnownSpells.entity";
-import { CharacterSpellSlots } from "./CharacterSpellSlots.entity";
-import { CharacterFeaturesAndTraits } from "./CharacterFeaturesAndTraits.entity";
-import { CharacterTreasure } from "./CharacterTreasure.entity";
+import { CharacterHitDiceEntity } from "./CharacterHitDice.entity";
+import { CharacterSheetSettingsEntity } from "./CharacterSheetSettings.entity";
+import { CharacterAbilityScoresEntity } from "./CharacterAbilityScores.entity";
+import { CharacterDeathSavesEntity } from "./CharacterDeathSaves.entity";
+import { CharacterKnownSpellsEntity } from "./CharacterKnownSpells.entity";
+import { CharacterSpellSlotsEntity } from "./CharacterSpellSlots.entity";
+import { CharacterFeaturesAndTraitsEntity } from "./CharacterFeaturesAndTraits.entity";
+import { CharacterTreasureEntity } from "./CharacterTreasure.entity";
 
 @Entity()
-export class CharacterData {
+export class CharacterDataEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -92,58 +92,62 @@ export class CharacterData {
   @Column("text", { array: true, nullable: true })
   preparedSpells?: string[];
 
-  @OneToMany((type) => CharacterHitDice, (hitDice) => hitDice.character, {
+  @OneToMany((type) => CharacterHitDiceEntity, (hitDice) => hitDice.character, {
     cascade: true,
     eager: true,
     nullable: true,
   })
-  hitDice?: CharacterHitDice[];
+  hitDice?: CharacterHitDiceEntity[];
 
   @OneToOne(
-    (type) => CharacterAbilityScores,
+    (type) => CharacterAbilityScoresEntity,
     (abilityScores) => abilityScores.character,
     { cascade: true, eager: true }
   )
-  abilityScores!: CharacterAbilityScores;
+  abilityScores!: CharacterAbilityScoresEntity;
 
   @OneToOne(
-    (type) => CharacterDeathSaves,
+    (type) => CharacterDeathSavesEntity,
     (deathSaves) => deathSaves.character,
     { cascade: true, eager: true }
   )
-  deathSaves!: CharacterDeathSaves;
+  deathSaves!: CharacterDeathSavesEntity;
 
   @OneToOne(
-    (type) => CharacterKnownSpells,
+    (type) => CharacterKnownSpellsEntity,
     (knownSpells) => knownSpells.character,
     { cascade: true, eager: true }
   )
-  knownSpells!: CharacterKnownSpells;
+  knownSpells!: CharacterKnownSpellsEntity;
 
   @OneToOne(
-    (type) => CharacterSpellSlots,
+    (type) => CharacterSpellSlotsEntity,
     (spellSlots) => spellSlots.character,
     { cascade: true, eager: true }
   )
-  spellSlots!: CharacterSpellSlots;
+  spellSlots!: CharacterSpellSlotsEntity;
 
   @OneToMany(
-    (type) => CharacterFeaturesAndTraits,
+    (type) => CharacterFeaturesAndTraitsEntity,
     (featuresAndTraits) => featuresAndTraits.character,
     { cascade: true, eager: true, nullable: true }
   )
-  featuresAndTraits?: CharacterFeaturesAndTraits[];
-
-  @OneToOne((type) => CharacterTreasure, (treasure) => treasure.character, {
-    cascade: true,
-    eager: true,
-  })
-  treasure!: CharacterTreasure;
+  featuresAndTraits?: CharacterFeaturesAndTraitsEntity[];
 
   @OneToOne(
-    (type) => CharacterSheetSettings,
+    (type) => CharacterTreasureEntity,
+    (treasure) => treasure.character,
+    {
+      cascade: true,
+      eager: true,
+    }
+  )
+  treasure!: CharacterTreasureEntity;
+
+  @OneToOne(
+    (type) => CharacterSheetSettingsEntity,
     (settings) => settings.character,
     { cascade: true, eager: true }
   )
-  settings!: CharacterSheetSettings;
+  settings!: CharacterSheetSettingsEntity;
 }

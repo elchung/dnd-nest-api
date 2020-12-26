@@ -1,6 +1,9 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CharacterModule } from "./module/character.module";
+import { AppService } from "./service/app.service";
+import { AppController } from "./controllers/app.controller";
+import { SpellsModule } from "./module/spells.module";
 
 if (
   !process.env.DB_USER_NAME ||
@@ -27,6 +30,10 @@ if (
       autoLoadEntities: true,
     }),
     CharacterModule,
+    SpellsModule,
   ],
+  exports: [AppService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

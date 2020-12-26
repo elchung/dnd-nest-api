@@ -5,15 +5,15 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { CharacterSpellSlots } from "./CharacterSpellSlots.entity";
+import { CharacterSpellSlotsEntity } from "./CharacterSpellSlots.entity";
 
 @Entity()
-export class CharacterSpellSlotsAtLevel {
+export class CharacterSpellSlotsAtLevelEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToOne((type) => CharacterSpellSlots)
-  characterSpellSlots!: CharacterSpellSlots;
+  @OneToOne((type) => CharacterSpellSlotsEntity)
+  characterSpellSlots!: CharacterSpellSlotsEntity;
 
   @Column({ default: 0 })
   max!: number;

@@ -5,17 +5,17 @@ import {
   JoinColumn,
   OneToOne,
 } from "typeorm";
-import { CharacterData } from "./CharacterData.entity";
+import { CharacterDataEntity } from "./CharacterData.entity";
 
 @Entity()
-export class CharacterSheetSettings {
+export class CharacterSheetSettingsEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column({ default: true })
   abilityScoreOnTop!: boolean;
 
-  @OneToOne((type) => CharacterData, (character) => character.knownSpells)
+  @OneToOne((type) => CharacterDataEntity, (character) => character.knownSpells)
   @JoinColumn()
-  character!: CharacterData;
+  character!: CharacterDataEntity;
 }
