@@ -4,6 +4,7 @@ import { CharacterModule } from "./module/character.module";
 import { AppService } from "./service/app.service";
 import { AppController } from "./controllers/app.controller";
 import { SpellsModule } from "./module/spells.module";
+import { BackfillModule } from "./module/backfill.module";
 
 if (
   !process.env.DB_USER_NAME ||
@@ -31,6 +32,7 @@ if (
     }),
     CharacterModule,
     SpellsModule,
+    BackfillModule,
   ],
   exports: [AppService],
   controllers: [AppController],

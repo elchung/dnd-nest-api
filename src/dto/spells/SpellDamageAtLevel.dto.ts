@@ -4,10 +4,6 @@ import { IsString } from "class-validator";
 export class SpellDamageAtLevelDto {
   @IsString()
   @ApiProperty({ type: String })
-  1: string;
-
-  @IsString()
-  @ApiProperty({ type: String })
   2: string;
 
   @IsString()

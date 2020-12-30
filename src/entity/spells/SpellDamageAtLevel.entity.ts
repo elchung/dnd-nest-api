@@ -19,30 +19,30 @@ export class SpellDamageAtLevelEntity {
   @JoinColumn()
   parentSpellDamage!: SpellDamageEntity;
 
-  @Column()
-  1!: string;
+  @Column({ nullable: true })
+  1?: string;
 
-  @Column()
-  2!: string;
+  @Column({ nullable: true })
+  2?: string;
 
-  @Column()
-  3!: string;
+  @Column({ nullable: true })
+  3?: string;
 
-  @Column()
-  4!: string;
+  @Column({ nullable: true })
+  4?: string;
 
-  @Column()
-  5!: string;
+  @Column({ nullable: true })
+  5?: string;
 
-  @Column()
-  6!: string;
+  @Column({ nullable: true })
+  6?: string;
 
-  @Column()
-  7!: string;
+  @Column({ nullable: true })
+  7?: string;
 
-  @Column()
-  8!: string;
+  @Column({ nullable: true })
+  8?: string;
 
-  @Column()
-  9!: string;
+  @Column({ nullable: true })
+  9?: string;
 }

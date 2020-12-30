@@ -7,19 +7,21 @@ import {
   ValidateNested,
 } from "class-validator";
 import { SpellDamageDto } from "./SpellDamage.dto";
+import { SpellDcDto } from "./SpellDc.dto";
+import { SpellAreaOfEffectDto } from "./SpellAreaOfEffect.dto";
 
 export class SpellsDto {
   @IsString()
   @ApiProperty({ type: String })
   name: string;
 
-  @IsString()
-  @ApiProperty({ type: String })
-  description: string;
+  @IsArray()
+  @ApiPropertyOptional({ type: [String] })
+  description: string[];
 
-  @IsString()
-  @ApiProperty({ type: String })
-  higherLevel: string;
+  @IsArray()
+  @ApiPropertyOptional({ type: [String] })
+  higherLevel: string[];
 
   @IsString()
   @ApiProperty({ type: String })
@@ -68,4 +70,12 @@ export class SpellsDto {
   @ValidateNested()
   @ApiProperty({ type: SpellDamageDto })
   damage: SpellDamageDto;
+
+  @ValidateNested()
+  @ApiProperty({ type: SpellDcDto })
+  dc: SpellDcDto;
+
+  @ValidateNested()
+  @ApiProperty({ type: SpellAreaOfEffectDto })
+  areaOfEffect: SpellAreaOfEffectDto;
 }

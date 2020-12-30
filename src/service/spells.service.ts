@@ -17,21 +17,21 @@ export class SpellsService {
     private spellDamageRepository: Repository<SpellDamageEntity>,
 
     @InjectRepository(SpellDamageAtLevelEntity)
-    private spellDamageAtLevelReposiotry: Repository<SpellDamageAtLevelEntity>
+    private spellDamageAtLevelRepository: Repository<SpellDamageAtLevelEntity>
   ) {}
 
   private spellMapper = new SpellsMapper();
 
-  async getAllSpells(): Promise<SpellsDto[]> {
+  async getAllSpells(): Promise<any> {
     return await this.spellsRepository.find(); //todo how to find all?
   }
 
-  async getSpells(spellNames: string[]): Promise<SpellsDto[]> {
+  async getSpells(spellNames: string[]): Promise<any> {
     const whereOptions = spellNames.map((spellName) => ({ name: spellName }));
     return await this.spellsRepository.find({ where: whereOptions });
   }
 
-  async getSpellWithName(name: string): Promise<SpellsDto> {
+  async getSpellWithName(name: string): Promise<any> {
     return await this.spellsRepository.findOne({
       where: { name: name },
     });
