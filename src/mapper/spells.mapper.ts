@@ -84,4 +84,8 @@ export class SpellsMapper {
 
     return spellDamageAtLevelEntity;
   }
+
+  spellNamesEntityToList(spellList: SpellsEntity[]): String[] {
+    return spellList.map(spell => spell.name);
+  }
 }

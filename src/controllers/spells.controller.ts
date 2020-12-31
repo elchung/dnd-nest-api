@@ -21,6 +21,11 @@ export class SpellsController {
     return await this.spellsService.getAllSpells();
   }
 
+  @Get("/names")
+  async getAllSpellNames(): Promise<String[]> {
+    return await this.spellsService.getAllSpellNames();
+  }
+
   @Get("/:name")
   async getSpellWithName(@Param("name") name: string): Promise<SpellsDto> {
     return await this.spellsService.getSpellWithName(name);
@@ -39,12 +44,11 @@ export class SpellsController {
     await this.spellsService.updateSpellWithName(name, spellDto);
   }
 
-  @Post("/:name")
+  @Post()
   async createSpellWithName(
-    @Param("name") name: string,
     @Body() spellDto: SpellsDto
   ): Promise<void> {
-    await this.spellsService.createSpellWithName(name, spellDto);
+    await this.spellsService.createSpellWithName(spellDto);
   }
 
   @Delete("/:name")
