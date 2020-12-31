@@ -4,6 +4,10 @@ import { SpellDamageAtLevelEntity } from "../entity/spells/SpellDamageAtLevel.en
 import { SpellDamageEntity } from "../entity/spells/SpellDamage.entity";
 import { SpellDamageDto } from "../dto/spells/SpellDamage.dto";
 import { SpellDamageAtLevelDto } from "../dto/spells/SpellDamageAtLevel.dto";
+import { SpellDcDto } from "../dto/spells/SpellDc.dto";
+import { SpellDcEntity } from "../entity/spells/SpellDc.entity";
+import { SpellAreaOfEffectEntity } from "../entity/spells/SpellAreaOfEffect.entity";
+import { SpellAreaOfEffectDto } from "../dto/spells/SpellAreaOfEffect.dto";
 
 export class SpellsMapper {
   spellDtoToEntity(spellDto: SpellsDto): SpellsEntity {
@@ -23,9 +27,36 @@ export class SpellsMapper {
     spellEntity.attackType = spellDto.attackType;
     spellEntity.school = spellDto.school;
     spellEntity.classes = spellDto.classes;
-    spellEntity.damage = this.spellDamageDtoToEntity(spellDto.damage);
-
+    if (spellDto.damage != null) {
+      spellEntity.damage = this.spellDamageDtoToEntity(spellDto.damage);
+    }
+    if (spellDto.areaOfEffect != null) {
+      spellEntity.areaOfEffect = this.spellAreaOfEffectDtoToEntity(
+        spellDto.areaOfEffect
+      );
+    }
+    if (spellDto.dc != null) {
+      spellEntity.dc = this.spellDcDtoToEntity(spellDto.dc);
+    }
     return spellEntity;
+  }
+
+  spellAreaOfEffectDtoToEntity(
+    aoeDto: SpellAreaOfEffectDto
+  ): SpellAreaOfEffectEntity {
+    const spellAreaOfEffectEntity = new SpellAreaOfEffectEntity();
+    spellAreaOfEffectEntity.size = aoeDto.size;
+    spellAreaOfEffectEntity.type = aoeDto.type;
+
+    return spellAreaOfEffectEntity;
+  }
+
+  spellDcDtoToEntity(dcDto: SpellDcDto | null): SpellDcEntity {
+    const spellDcEntity = new SpellDcEntity();
+    spellDcEntity.dc_success = dcDto?.dc_success;
+    spellDcEntity.dc_type = dcDto?.dc_type;
+
+    return spellDcEntity;
   }
 
   spellDamageDtoToEntity(spellDamageDto: SpellDamageDto): SpellDamageEntity {
@@ -42,7 +73,6 @@ export class SpellsMapper {
     spellDamageAtLevelDto: SpellDamageAtLevelDto
   ): SpellDamageAtLevelEntity {
     const spellDamageAtLevelEntity = new SpellDamageAtLevelEntity();
-    spellDamageAtLevelEntity["1"] = spellDamageAtLevelDto["1"];
     spellDamageAtLevelEntity["2"] = spellDamageAtLevelDto["2"];
     spellDamageAtLevelEntity["3"] = spellDamageAtLevelDto["3"];
     spellDamageAtLevelEntity["4"] = spellDamageAtLevelDto["4"];

@@ -3,10 +3,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { SpellsEntity } from "../entity/spells/Spells.entity";
 import { SpellDamageEntity } from "../entity/spells/SpellDamage.entity";
 import { SpellDamageAtLevelEntity } from "../entity/spells/SpellDamageAtLevel.entity";
-import { SpellsController } from "../controllers/spells.controller";
-import { SpellsService } from "../service/spells.service";
-import { SpellAreaOfEffectEntity } from "src/entity/spells/SpellAreaOfEffect.entity";
-import { SpellDcEntity } from "src/entity/spells/SpellDc.entity";
+import { BackfillService } from "../service/backfill.service";
+import { BackfillController } from "../controllers/backfill.controller";
 
 @Module({
   imports: [
@@ -14,12 +12,10 @@ import { SpellDcEntity } from "src/entity/spells/SpellDc.entity";
       SpellsEntity,
       SpellDamageEntity,
       SpellDamageAtLevelEntity,
-      SpellAreaOfEffectEntity,
-      SpellDcEntity,
     ]),
   ],
-  exports: [SpellsService],
-  controllers: [SpellsController],
-  providers: [SpellsService],
+  exports: [BackfillService],
+  controllers: [BackfillController],
+  providers: [BackfillService],
 })
-export class SpellsModule {}
+export class BackfillModule {}

@@ -1,10 +1,35 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
 import { SpellDamageEntity } from "./SpellDamage.entity";
+import { SpellAreaOfEffectEntity } from "./SpellAreaOfEffect.entity";
+import { SpellDcEntity } from "./SpellDc.entity";
 
 @Entity()
 export class SpellsEntity {
   @PrimaryGeneratedColumn()
   id!: number;
+
+  @OneToOne(
+    (type) => SpellAreaOfEffectEntity,
+    (spellAreaOfEffect) => spellAreaOfEffect.parentSpell,
+    {
+      cascade: true,
+      eager: true,
+      nullable: true,
+    }
+  )
+  areaOfEffect?: SpellAreaOfEffectEntity;
+
+  @Column()
+  castingTime!: string;
+
+  @Column("text", { array: true })
+  classes!: string[];
+
+  @Column({ nullable: true })
+  components?: string;
+
+  @Column()
+  concentration!: boolean;
 
   @OneToOne(
     (type) => SpellDamageEntity,
@@ -15,47 +40,46 @@ export class SpellsEntity {
       nullable: true,
     }
   )
-  damage!: SpellDamageEntity;
+  damage?: SpellDamageEntity;
+
+  @Column()
+  duration!: string;
+
+  @OneToOne(
+    (type) => SpellDcEntity,
+    (spellDcEntity) => spellDcEntity.parentSpell,
+    {
+      cascade: true,
+      eager: true,
+      nullable: true,
+    }
+  )
+  dc: SpellDcEntity;
+
+  @Column("text", { array: true, nullable: true })
+  higherLevel!: string[];
+
+  @Column("text", { array: true, nullable: true })
+  description!: string[];
 
   @Column()
   name!: string;
 
   @Column()
-  description!: string;
-
-  @Column()
-  higherLevel!: string;
-
-  @Column()
   range!: string;
 
-  @Column()
-  components!: string;
-
-  @Column()
-  materials!: string;
+  @Column({ nullable: true })
+  materials?: string;
 
   @Column()
   ritual!: boolean;
 
   @Column()
-  duration!: string;
-
-  @Column()
-  concentration!: boolean;
-
-  @Column()
-  castingTime!: string;
-
-  @Column()
   level!: number;
 
-  @Column()
+  @Column({ nullable: true })
   attackType!: string;
 
   @Column()
   school!: string;
-
-  @Column("text", { array: true })
-  classes!: string[];
 }

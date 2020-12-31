@@ -17,8 +17,8 @@ export class SpellDamageEntity {
   @JoinColumn()
   parentSpell!: SpellsEntity;
 
-  @Column()
-  type!: string;
+  @Column({ nullable: true })
+  type?: string;
 
   @OneToOne(
     (type) => SpellDamageAtLevelEntity,
@@ -29,5 +29,5 @@ export class SpellDamageEntity {
       nullable: true,
     }
   )
-  atLevel!: SpellDamageAtLevelEntity;
+  atLevel?: SpellDamageAtLevelEntity;
 }
