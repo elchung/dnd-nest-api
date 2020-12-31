@@ -16,9 +16,9 @@ export class SpellDcEntity {
   @JoinColumn()
   parentSpell!: SpellsEntity;
 
-  @Column()
-  dc_success!: string;
+  @Column({ nullable: true })
+  dc_success?: string;
 
-  @Column()
-  dc_type!: string;
+  @Column({ nullable: true })
+  dc_type?: string;
 }

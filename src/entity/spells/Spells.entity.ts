@@ -69,7 +69,7 @@ export class SpellsEntity {
   range!: string;
 
   @Column({ nullable: true })
-  materials!: string;
+  materials?: string;
 
   @Column()
   ritual!: boolean;

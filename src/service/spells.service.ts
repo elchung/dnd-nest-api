@@ -23,18 +23,29 @@ export class SpellsService {
   private spellMapper = new SpellsMapper();
 
   async getAllSpells(): Promise<any> {
-    return await this.spellsRepository.find(); //todo how to find all?
+    return await this.spellsRepository.find();
   }
 
   async getSpells(spellNames: string[]): Promise<any> {
     const whereOptions = spellNames.map((spellName) => ({ name: spellName }));
-    return await this.spellsRepository.find({ where: whereOptions });
+    let builder = await this.spellsRepository
+      .createQueryBuilder("spells")
+      .where("spells.name is not null");
+
+    spellNames.forEach((spellName) => {
+      builder = builder.orWhere("LOWER(spells.name) = LOWER(:name)", {
+        spellName,
+      });
+    })
+    
+    return await builder.getMany();
   }
 
   async getSpellWithName(name: string): Promise<any> {
-    return await this.spellsRepository.findOne({
-      where: { name: name },
-    });
+    return await this.spellsRepository
+      .createQueryBuilder("spells")
+      .where("LOWER(spells.name) = LOWER(:name)", { name })
+      .getOne();
   }
 
   async updateSpellWithName(
@@ -50,6 +61,10 @@ export class SpellsService {
   }
 
   async createSpellWithName(name: string, newSpell: SpellsDto): Promise<void> {
+    if (await this.getSpellWithName(name)) {
+      throw new Error("Spell already exists with that name");
+    }
+    
     const newSpellEntity = this.spellMapper.spellDtoToEntity(newSpell);
     await this.spellsRepository.save(newSpellEntity);
   }

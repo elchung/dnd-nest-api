@@ -5,6 +5,8 @@ import { SpellDamageEntity } from "../entity/spells/SpellDamage.entity";
 import { SpellDamageAtLevelEntity } from "../entity/spells/SpellDamageAtLevel.entity";
 import { SpellsController } from "../controllers/spells.controller";
 import { SpellsService } from "../service/spells.service";
+import { SpellAreaOfEffectEntity } from "src/entity/spells/SpellAreaOfEffect.entity";
+import { SpellDcEntity } from "src/entity/spells/SpellDc.entity";
 
 @Module({
   imports: [
@@ -12,6 +14,8 @@ import { SpellsService } from "../service/spells.service";
       SpellsEntity,
       SpellDamageEntity,
       SpellDamageAtLevelEntity,
+      SpellAreaOfEffectEntity,
+      SpellDcEntity,
     ]),
   ],
   exports: [SpellsService],

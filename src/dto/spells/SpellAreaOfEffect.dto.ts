@@ -1,12 +1,14 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNumber, IsString } from "class-validator";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { IsNumber, IsString, IsOptional } from "class-validator";
 
 export class SpellAreaOfEffectDto {
   @IsNumber()
+  @IsOptional()
   @ApiProperty({ type: Number })
-  size: number;
+  size?: number;
 
   @IsString()
-  @ApiProperty({ type: String })
-  type: string;
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  type?: string;
 }

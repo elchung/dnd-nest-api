@@ -4,6 +4,7 @@ import {
   IsBoolean,
   IsNumber,
   IsString,
+  IsOptional,
   ValidateNested,
 } from "class-validator";
 import { SpellDamageDto } from "./SpellDamage.dto";
@@ -16,10 +17,12 @@ export class SpellsDto {
   name: string;
 
   @IsArray()
+  @IsOptional()
   @ApiPropertyOptional({ type: [String] })
   description: string[];
 
   @IsArray()
+  @IsOptional()
   @ApiPropertyOptional({ type: [String] })
   higherLevel: string[];
 
@@ -32,8 +35,9 @@ export class SpellsDto {
   components: string;
 
   @IsString()
-  @ApiProperty({ type: String })
-  materials: string;
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  materials?: string;
 
   @IsBoolean()
   @ApiProperty({ type: Boolean })
@@ -56,26 +60,30 @@ export class SpellsDto {
   level: number;
 
   @IsString()
-  @ApiProperty({ type: String })
-  attackType: string;
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  attackType?: string;
 
   @IsString()
   @ApiProperty({ type: String })
   school: string;
 
   @IsArray()
-  @ApiPropertyOptional({ type: [String] })
-  classes: string[];
+  @ApiProperty({ type: [String] })
+  classes?: string[];
 
   @ValidateNested()
-  @ApiProperty({ type: SpellDamageDto })
-  damage: SpellDamageDto;
+  @IsOptional()
+  @ApiPropertyOptional({ type: SpellDamageDto })
+  damage?: SpellDamageDto;
 
   @ValidateNested()
-  @ApiProperty({ type: SpellDcDto })
-  dc: SpellDcDto;
+  @IsOptional()
+  @ApiPropertyOptional({ type: SpellDcDto })
+  dc?: SpellDcDto;
 
   @ValidateNested()
-  @ApiProperty({ type: SpellAreaOfEffectDto })
-  areaOfEffect: SpellAreaOfEffectDto;
+  @IsOptional()
+  @ApiPropertyOptional({ type: SpellAreaOfEffectDto })
+  areaOfEffect?: SpellAreaOfEffectDto;
 }

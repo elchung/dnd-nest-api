@@ -1,12 +1,14 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsString } from "class-validator";
+import { ApiPropertyOptional } from "@nestjs/swagger";
+import { IsString, IsOptional } from "class-validator";
 
 export class SpellDcDto {
   @IsString()
-  @ApiProperty({ type: String })
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
   dc_success: string;
 
   @IsString()
-  @ApiProperty({ type: String })
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
   dc_type: string;
 }

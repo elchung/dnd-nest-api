@@ -27,12 +27,17 @@ export class SpellsMapper {
     spellEntity.attackType = spellDto.attackType;
     spellEntity.school = spellDto.school;
     spellEntity.classes = spellDto.classes;
-    spellEntity.damage = this.spellDamageDtoToEntity(spellDto.damage);
-    spellEntity.areaOfEffect = this.spellAreaOfEffectDtoToEntity(
-      spellDto.areaOfEffect
-    );
-    spellEntity.dc = this.spellDcDtoToEntity(spellDto.dc);
-
+    if (spellDto.damage != null) {
+      spellEntity.damage = this.spellDamageDtoToEntity(spellDto.damage);
+    }
+    if (spellDto.areaOfEffect != null) {
+      spellEntity.areaOfEffect = this.spellAreaOfEffectDtoToEntity(
+        spellDto.areaOfEffect
+      );
+    }
+    if (spellDto.dc != null) {
+      spellEntity.dc = this.spellDcDtoToEntity(spellDto.dc);
+    }
     return spellEntity;
   }
 
@@ -46,10 +51,10 @@ export class SpellsMapper {
     return spellAreaOfEffectEntity;
   }
 
-  spellDcDtoToEntity(dcDto: SpellDcDto): SpellDcEntity {
+  spellDcDtoToEntity(dcDto: SpellDcDto | null): SpellDcEntity {
     const spellDcEntity = new SpellDcEntity();
-    spellDcEntity.dc_success = dcDto.dc_success;
-    spellDcEntity.dc_type = dcDto.dc_type;
+    spellDcEntity.dc_success = dcDto?.dc_success;
+    spellDcEntity.dc_type = dcDto?.dc_type;
 
     return spellDcEntity;
   }
