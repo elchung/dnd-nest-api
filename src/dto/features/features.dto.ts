@@ -12,8 +12,9 @@ export class FeaturesDto {
   name: string;
 
   @IsString()
-  @ApiProperty({ type: String })
-  class: string;
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  class?: string;
 
   @IsString()
   @IsOptional()
