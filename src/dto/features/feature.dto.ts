@@ -1,12 +1,8 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import {
-  IsArray,
-  IsNumber,
-  IsString,
-  IsOptional,
-} from "class-validator";
+import { IsArray, IsNumber, IsString, IsOptional } from "class-validator";
+import { PrerequisiteDto } from "./prerequisite.dto";
 
-export class FeaturesDto {
+export class FeatureDto {
   @IsString()
   @ApiProperty({ type: String })
   name: string;
@@ -36,6 +32,6 @@ export class FeaturesDto {
 
   @IsArray()
   @IsOptional()
-  @ApiPropertyOptional({ type: [String] })
-  prerequisites?: string[];
+  @ApiPropertyOptional({ type: [PrerequisiteDto] })
+  prerequisites?: PrerequisiteDto[];
 }

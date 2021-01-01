@@ -1,12 +1,9 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
-import {
-  IsString,
-  IsOptional,
-} from "class-validator";
+import { IsString, IsOptional } from "class-validator";
 
 export class PrerequisiteDto {
   @IsString()
-  @IsOptional
+  @IsOptional()
   @ApiPropertyOptional({ type: String })
   name?: string;
 
@@ -14,5 +11,4 @@ export class PrerequisiteDto {
   @IsOptional()
   @ApiPropertyOptional({ type: String })
   type?: string;
-
 }
