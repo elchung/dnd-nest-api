@@ -9,7 +9,7 @@ import { SpellDcEntity } from "../entity/spells/SpellDc.entity";
 import { SpellAreaOfEffectEntity } from "../entity/spells/SpellAreaOfEffect.entity";
 import { BackfillMapper } from "../mapper/backfill.mapper";
 import { FeatureEntity } from "../entity/features/feature.entity";
-
+//todo add check to make sure name for backfill service is unique
 @Injectable()
 export class BackfillService {
   constructor(

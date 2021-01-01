@@ -62,7 +62,7 @@ export class SpellsEntity {
   @Column("text", { array: true, nullable: true })
   description!: string[];
 
-  @Column()
+  @Column({ unique: true })
   name!: string;
 
   @Column()
