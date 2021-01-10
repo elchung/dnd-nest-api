@@ -1,11 +1,11 @@
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { IsArray, IsNumber, IsOptional } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsArray, IsNumber } from "class-validator";
+import { TraitDto } from "./Trait.dto";
 
 export class RacialTraitOptionsDto {
   @IsArray()
-  @IsOptional()
-  @ApiPropertyOptional({ type: [String] })
-  from: string[]; //todo might want to expand from to be { name, description, etc } /api/traits/dwarven-toughness
+  @ApiProperty({ type: [TraitDto] })
+  from: TraitDto[];
 
   @IsNumber()
   @ApiProperty({ type: Number })
