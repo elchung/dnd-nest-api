@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { IsArray, IsNumber, IsString, IsOptional } from "class-validator";
+import { IsArray, IsNumber, IsString, IsOptional, ValidateNested } from "class-validator";
+import { OptionsDto } from "../Options.dto";
 import { PrerequisiteDto } from "./prerequisite.dto";
 
 export class FeatureDto {
@@ -18,7 +19,8 @@ export class FeatureDto {
   subclass?: string;
 
   @IsNumber()
-  @ApiProperty({ type: Number })
+  @IsOptional()
+  @ApiPropertyOptional({ type: Number })
   level: number;
 
   @IsString()
@@ -27,11 +29,22 @@ export class FeatureDto {
   group?: string;
 
   @IsArray()
-  @ApiProperty({ type: [String] })
+  @IsOptional()
+  @ApiPropertyOptional({ type: [String] })
   description?: string[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [PrerequisiteDto] })
   prerequisites?: PrerequisiteDto[];
+
+  @ValidateNested()
+  @IsOptional()
+  @ApiPropertyOptional({ type: OptionsDto })
+  choice: OptionsDto;
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  reference?: string;
 }

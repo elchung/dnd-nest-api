@@ -7,9 +7,9 @@ import {
   IsOptional,
   ValidateNested,
 } from "class-validator";
-import { LanguageOptionsDto } from "../LanguageOptions.dto";
+import { OptionsDto } from "../Options.dto";
 import { AbilityScoreBonusDto } from "../AbilityScoreBonus.dto";
-import { RacialTraitOptionsDto } from "../RacialTraitOptions.dto";
+import { TraitDto } from "../Trait.dto";
 
 export class SubraceDto {
   @IsString()
@@ -41,16 +41,16 @@ export class SubraceDto {
 
   @ValidateNested()
   @IsOptional()
-  @ApiPropertyOptional({ type: [LanguageOptionsDto] })
-  language_options: LanguageOptionsDto[];
+  @ApiPropertyOptional({ type: [OptionsDto] })
+  language_options: OptionsDto[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  racial_traits: string[]; //todo might want to expand from to be { name, description, etc } /api/traits/dwarven-toughness
+  racial_traits: string[];
 
   @ValidateNested()
   @IsOptional()
-  @ApiPropertyOptional({ type: RacialTraitOptionsDto })
-  racial_trait_options: RacialTraitOptionsDto;
+  @ApiPropertyOptional({ type: OptionsDto })
+  racial_trait_options: OptionsDto;
 }

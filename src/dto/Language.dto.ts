@@ -4,20 +4,18 @@ import { OptionsDto } from "./Options.dto";
 import { RaceDto } from "./races/Race.dto";
 import { SubraceDto } from "./subraces/subrace.dto";
 
-export class TraitDto {
+export class LanguageDto {
   @IsArray()
-  @IsOptional()
-  @ApiPropertyOptional({ type: [String] })
-  subraces: string[];
+  @ApiProperty({ type: String })
+  description: string;
 
   @IsArray()
-  @IsOptional()
-  @ApiPropertyOptional({ type: [String] })
-  races: string[];
+  @ApiProperty({ type: String })
+  script: string;
 
   @IsArray()
-  @ApiProperty({ type: [String] })
-  description: string[];
+  @ApiProperty({ type: String })
+  type: string;
 
   @IsString()
   @ApiProperty({ type: String })
@@ -25,10 +23,5 @@ export class TraitDto {
 
   @IsArray()
   @ApiProperty({ type: [String] })
-  proficiencies: string[];
-
-  @IsArray()
-  @IsOptional()
-  @ApiPropertyOptional({ type: [OptionsDto] })
-  proficiency_choices: OptionsDto[];
+  typical_speakers: [String]
 }

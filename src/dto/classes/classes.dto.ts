@@ -1,55 +1,62 @@
-index: ""
-name: ""
-hit_die: int 
-proficiency_choices: [
-    {
-        choose: int 
-        type: ""
-        from: [
-            {
-                index: ""
-                name: ""
-                url: ""
-            }
-        ]
-    }
-]
-proficiencies: [
-    {
-        index: ""
-        name: ""
-        url: ""
-    }
-]
-saving_throws: [
-    {
-        index: ""
-        name: ""
-        url: ""
-    }
-]
-starting_eequipment: -url-
-class_levels: -url-
-subclasses: [
-    {
-        index: ""
-        name: ""
-        url: ""  <- might want for more info
-    }
-]
-spellcasting: {
-    info: [
-        {
-            desc: [ "" ]
-            name: ""
-        }
-    ]
-    level: int 
-    spellcasting_ability: {
-        index: ""
-        name: ""
-        url: "'"
-    }
+import { ApiPropertyOptional } from "@nestjs/swagger";
+import {
+  IsNumber,
+  IsArray,
+  IsString,
+  ValidateNested,
+  IsOptional,
+} from "class-validator";
+import { OptionsDto } from "../Options.dto";
+import { ClassSpellcastingDto } from "./classSpellcasting.dto";
+
+export class Class {
+    @IsString()
+    @IsOptional()
+    @ApiPropertyOptional({ type: String })
+    class_levels: string;
+
+    @IsNumber()
+    @IsOptional()
+    @ApiPropertyOptional({ type: Number })
+    hit_die: number;
+
+    @IsString()
+    @IsOptional()
+    @ApiPropertyOptional({ type: String })
+    index: string;
+
+    @IsString()
+    @IsOptional()
+    @ApiPropertyOptional({ type: String })
+    name: string;
+
+    @IsArray()
+    @IsOptional()
+    @ApiPropertyOptional({ type: [String] })
+    proficiencies: string[];
+
+    @IsArray()
+    @IsOptional()
+    @ApiPropertyOptional({ type: [OptionsDto] })
+    proficiency_choices: OptionsDto[];
+
+    @IsArray()
+    @IsOptional()
+    @ApiPropertyOptional({ type: [String] })
+    saving_throws: string[];
+
+    @ValidateNested()
+    @IsOptional()
+    @ApiPropertyOptional({ type: ClassSpellcastingDto })
+    spellcasting: ClassSpellcastingDto;
+
+    @IsArray()
+    @IsOptional()
+    @ApiPropertyOptional({ type: [String] })
+    starting_equipment: string[];
+
+    @IsArray()
+    @IsOptional()
+    @ApiPropertyOptional({ type: [String] })
+    subclasses: string[];
 }
-spells: "url"
----

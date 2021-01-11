@@ -1,15 +1,9 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import {
   IsArray,
-  IsBoolean,
-  IsNumber,
   IsString,
   IsOptional,
-  ValidateNested,
 } from "class-validator";
-import { LanguageOptionsDto } from "../LanguageOptions.dto";
-import { AbilityScoreBonusDto } from "../AbilityScoreBonus.dto";
-import { RacialTraitOptionsDto } from "../RacialTraitOptions.dto";
 
 export class ProficiencyDto {
   @IsString()
@@ -25,5 +19,5 @@ export class ProficiencyDto {
   @ApiPropertyOptional({ type: String })
   description: string;
 
-  @IsArray()
+  // @IsArray()
 }
