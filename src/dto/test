@@ -1,0 +1,259 @@
+type AbilityScore {
+  _id: String!
+  desc: [String]
+  full_name: String
+  index: String
+  name: String
+  skills: [AbilityScoreSkills]
+  url: String
+}
+
+type Condition {
+  _id: String!
+  desc: [String]
+  index: String
+  name: String
+  url: String
+}
+
+type DamageType {
+  _id: String!
+  desc: [String]
+  index: String
+  name: String
+  url: String
+}
+
+type Equipment {
+  _id: String!
+  armor_category: String
+  armor_class: EquipmentArmor_class
+  capacity: String
+  category_range: String
+  contents: [EquipmentContents]
+  cost: EquipmentCost
+  damage: EquipmentDamage
+  desc: [String]
+  equipment_category: AbilityScoreSkills
+  gear_category: AbilityScoreSkills
+  index: String
+  name: String
+  properties: [AbilityScoreSkills]
+  quantity: Float
+  range: EquipmentRange
+  special: [String]
+  speed: EquipmentSpeed
+  stealth_disadvantage: Boolean
+  str_minimum: Float
+  throw_range: EquipmentThrow_range
+  tool_category: String
+  two_handed_damage: EquipmentTwo_handed_damage
+  url: String
+  vehicle_category: String
+  weapon_category: String
+  weapon_range: String
+  weight: Float
+}
+
+type EquipmentArmor_class {
+  base: Float
+  dex_bonus: Boolean
+  max_bonus: Float
+}
+
+type EquipmentCategory {
+  _id: String!
+  equipment: [AbilityScoreSkills]
+  index: String
+  name: String
+  url: String
+}
+
+type EquipmentContents {
+  item: AbilityScoreSkills
+  quantity: Float
+}
+
+type EquipmentCost {
+  quantity: Float
+  unit: String
+}
+
+type EquipmentDamage {
+  damage_dice: String
+  damage_type: AbilityScoreSkills
+}
+
+type EquipmentRange {
+  long: Float
+  normal: Float
+}
+
+type EquipmentSpeed {
+  quantity: Float
+  unit: String
+}
+
+type EquipmentThrow_range {
+  long: Float
+  normal: Float
+}
+
+type EquipmentTwo_handed_damage {
+  damage_dice: String
+  damage_type: AbilityScoreSkills
+}
+
+type MagicItem {
+  _id: String!
+  desc: [String]
+  equipment_category: AbilityScoreSkills
+  index: String
+  name: String
+  url: String
+}
+
+type MagicSchool {
+  _id: String!
+  desc: String
+  index: String
+  name: String
+  url: String
+}
+
+type Monster {
+  _id: String!
+  actions: [MonsterActions]
+  alignment: String
+  armor_class: Float
+  challenge_rating: Float
+  charisma: Float
+  condition_immunities: [AbilityScoreSkills]
+  constitution: Float
+  damage_immunities: [String]
+  damage_resistances: [String]
+  damage_vulnerabilities: [String]
+  dexterity: Float
+  forms: [AbilityScoreSkills]
+  hit_dice: String
+  hit_points: Float
+  index: String
+  intelligence: Float
+  languages: String
+  legendary_actions: [MonsterLegendary_actions]
+  name: String
+  proficiencies: [MonsterProficiencies]
+  reactions: [MonsterReactions]
+  senses: MonsterSenses
+  size: String
+  special_abilities: [MonsterSpecial_abilities]
+  speed: MonsterSpeed
+  strength: Float
+  subtype: String
+  type: String
+  url: String
+  wisdom: Float
+  xp: Float
+}
+
+type MonsterActions {
+  attack_bonus: Float
+  damage: [MonsterActionsDamage]
+  desc: String
+  name: String
+}
+
+type MonsterActionsDamage {
+  damage_dice: String
+  damage_type: AbilityScoreSkills
+}
+
+type MonsterLegendary_actions {
+  attack_bonus: Float
+  desc: String
+  name: String
+}
+
+type MonsterProficiencies {
+  proficiency: AbilityScoreSkills
+  value: Float
+}
+
+type MonsterReactions {
+  desc: String
+  name: String
+}
+
+type MonsterSenses {
+  blindsight: String
+  darkvision: String
+  passive_perception: Float
+  tremorsense: String
+  truesight: String
+}
+
+type MonsterSpecial_abilities {
+  desc: String
+  name: String
+}
+
+type MonsterSpeed {
+  burrow: String
+  climb: String
+  fly: String
+  hover: Boolean
+  swim: String
+  walk: String
+}
+
+type Proficiency {
+  _id: String!
+  classes: [AbilityScoreSkills]
+  index: String
+  name: String
+  races: [AbilityScoreSkills]
+  references: [ProficiencyReferences]
+  type: String
+  url: String
+}
+
+type ProficiencyReferences {
+  index: String
+  name: String
+  type: String
+  url: String
+}
+
+type StartingEquipment {
+  _id: String!
+  class: AbilityScoreSkills
+  index: String
+  starting_equipment: [StartingEquipmentStarting_equipment]
+  starting_equipment_options: [StartingEquipmentStarting_equipment_options]
+  url: String
+}
+
+type StartingEquipmentStarting_equipment {
+  equipment: AbilityScoreSkills
+  quantity: Float
+}
+
+type StartingEquipmentStarting_equipment_options {
+  choose: Float
+  from: [StartingEquipmentStarting_equipment_optionsFrom]
+  type: String
+}
+
+type StartingEquipmentStarting_equipment_optionsFrom {
+  equipment: AbilityScoreSkills
+  quantity: Float
+}
+
+type WeaponProperty {
+  _id: String!
+  desc: [String]
+  index: String
+  name: String
+  url: String
+}
+
