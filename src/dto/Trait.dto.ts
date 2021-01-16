@@ -1,8 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { IsArray, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsOptional, IsString } from "class-validator";
 import { OptionsDto } from "./Options.dto";
-import { RaceDto } from "./races/Race.dto";
-import { SubraceDto } from "./subraces/subrace.dto";
 
 export class TraitDto {
   @IsArray()
@@ -30,5 +28,5 @@ export class TraitDto {
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [OptionsDto] })
-  proficiency_choices: OptionsDto[];
+  proficiencyChoices: OptionsDto[];
 }
