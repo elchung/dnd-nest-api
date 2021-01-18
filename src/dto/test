@@ -4,7 +4,11 @@ type AbilityScore {
   full_name: String
   index: String
   name: String
-  skills: [AbilityScoreSkills]
+  skills: [AbilityScoreSkills]  {
+    "name": "Athletics",
+    "index": "athletics",
+    "url": "/api/skills/athletics"
+  } STRING
   url: String
 }
 
@@ -35,10 +39,15 @@ type Equipment {
   damage: EquipmentDamage
   desc: [String]
   equipment_category: AbilityScoreSkills
-  gear_category: AbilityScoreSkills
+              {
+                "index": "simple-weapons",
+                "name": "Simple Weapons",
+                "url": "/api/equipment-categories/simple-weapons"
+              }  // list of all simple weapons. STRING
+  gear_category: AbilityScoreSkills  adventuring gear, ammunition, armor, arcane foci, druidic foci, which then point to list of items in that category. STRING
   index: String
   name: String
-  properties: [AbilityScoreSkills]
+  properties: [AbilityScoreSkills] // ammunition, finesse, heavy, light, loading, monk, reach, special, thrown, two-handed, verssatile. -> name: ; desc: []; STRING
   quantity: Float
   range: EquipmentRange
   special: [String]
@@ -63,14 +72,14 @@ type EquipmentArmor_class {
 
 type EquipmentCategory {
   _id: String!
-  equipment: [AbilityScoreSkills]
+  equipment: [AbilityScoreSkills]  // lis of items that are in this category. STRING
   index: String
   name: String
   url: String
 }
 
 type EquipmentContents {
-  item: AbilityScoreSkills
+  item: AbilityScoreSkills  // STRING is fine
   quantity: Float
 }
 
@@ -81,7 +90,7 @@ type EquipmentCost {
 
 type EquipmentDamage {
   damage_dice: String
-  damage_type: AbilityScoreSkills
+  damage_type: AbilityScoreSkills  //string is fine
 }
 
 type EquipmentRange {
@@ -101,13 +110,13 @@ type EquipmentThrow_range {
 
 type EquipmentTwo_handed_damage {
   damage_dice: String
-  damage_type: AbilityScoreSkills
+  damage_type: AbilityScoreSkills  // string is fine
 }
 
 type MagicItem {
   _id: String!
   desc: [String]
-  equipment_category: AbilityScoreSkills
+  equipment_category: AbilityScoreSkills  // string is fine
   index: String
   name: String
   url: String
@@ -208,10 +217,10 @@ type MonsterSpeed {
 
 type Proficiency {
   _id: String!
-  classes: [AbilityScoreSkills]
+  classes: [AbilityScoreSkills]  // string is fine
   index: String
   name: String
-  races: [AbilityScoreSkills]
+  races: [AbilityScoreSkills]  // string is fine
   references: [ProficiencyReferences]
   type: String
   url: String
@@ -226,15 +235,15 @@ type ProficiencyReferences {
 
 type StartingEquipment {
   _id: String!
-  class: AbilityScoreSkills
+  class: AbilityScoreSkills  //string is fine
   index: String
-  starting_equipment: [StartingEquipmentStarting_equipment]
-  starting_equipment_options: [StartingEquipmentStarting_equipment_options]
+  starting_equipment: [StartingEquipmentStarting_equipment]  //string is fine
+  starting_equipment_options: [StartingEquipmentStarting_equipment_options] // string is fine
   url: String
 }
 
 type StartingEquipmentStarting_equipment {
-  equipment: AbilityScoreSkills
+  equipment: AbilityScoreSkills  //sting
   quantity: Float
 }
 
@@ -245,7 +254,7 @@ type StartingEquipmentStarting_equipment_options {
 }
 
 type StartingEquipmentStarting_equipment_optionsFrom {
-  equipment: AbilityScoreSkills
+  equipment: AbilityScoreSkills  //string
   quantity: Float
 }
 
