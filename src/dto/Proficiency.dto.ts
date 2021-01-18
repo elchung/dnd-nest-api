@@ -1,9 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import {
-  IsArray,
-  IsString,
-  IsOptional,
-} from "class-validator";
+import { IsString, IsOptional } from "class-validator";
 
 export class ProficiencyDto {
   @IsString()
@@ -18,6 +14,4 @@ export class ProficiencyDto {
   @IsOptional()
   @ApiPropertyOptional({ type: String })
   description: string;
-
-  // @IsArray()
 }

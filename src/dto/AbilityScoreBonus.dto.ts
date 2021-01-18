@@ -1,12 +1,14 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNumber, IsString } from "class-validator";
+import { ApiPropertyOptional } from "@nestjs/swagger";
+import { IsNumber, IsString, IsOptional } from "class-validator";
 
 export class AbilityScoreBonusDto {
   @IsString()
-  @ApiProperty({ type: String })
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
   name: string;
 
   @IsNumber()
-  @ApiProperty({ type: Number })
+  @IsOptional()
+  @ApiPropertyOptional({ type: Number })
   bonus: number;
 }

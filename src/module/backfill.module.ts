@@ -5,6 +5,7 @@ import { SpellDamageEntity } from "../entity/spells/SpellDamage.entity";
 import { SpellDamageAtLevelEntity } from "../entity/spells/SpellDamageAtLevel.entity";
 import { BackfillService } from "../service/backfill.service";
 import { BackfillController } from "../controllers/backfill.controller";
+import { FeatureEntity } from "../entity/features/feature.entity";
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { BackfillController } from "../controllers/backfill.controller";
       SpellsEntity,
       SpellDamageEntity,
       SpellDamageAtLevelEntity,
+      FeatureEntity,
     ]),
   ],
   exports: [BackfillService],

@@ -1,7 +1,13 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { IsArray, IsNumber, IsString, IsOptional, ValidateNested } from "class-validator";
+import {
+  IsArray,
+  IsNumber,
+  IsString,
+  IsOptional,
+  ValidateNested,
+} from "class-validator";
 import { OptionsDto } from "../Options.dto";
-import { PrerequisiteDto } from "./prerequisite.dto";
+import { PrerequisiteDto } from "./Prerequisite.dto";
 
 export class FeatureDto {
   @IsString()

@@ -1,12 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import {
-  IsArray,
-  IsString,
-  IsOptional,
-  ValidateNested,
-} from "class-validator";
+import { IsArray, IsString, IsOptional, ValidateNested } from "class-validator";
 import { LevelSubclassDto } from "../levels/LevelSubclass.dto";
-import { SubclassSpellDto } from "./subclassSpell.dto";
+import { SubclassSpellDto } from "./SubclassSpell.dto";
 
 export class SubclassDto {
   @IsString()
@@ -16,12 +11,12 @@ export class SubclassDto {
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  description: string[]
-  
+  description: string[];
+
   @IsString()
   @ApiProperty({ type: String })
   name: string;
-  
+
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
@@ -31,9 +26,9 @@ export class SubclassDto {
   @IsOptional()
   @ApiPropertyOptional({ type: [LevelSubclassDto] })
   sublclass_levels: LevelSubclassDto;
-  
+
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: [SubclassSpellDto] })
-  spells: SubclassSpellDto[]
+  spells: SubclassSpellDto[];
 }
