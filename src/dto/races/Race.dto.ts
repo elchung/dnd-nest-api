@@ -1,7 +1,13 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { IsArray, IsNumber, IsString, IsOptional, ValidateNested } from "class-validator";
-import { AbilityScoreBonusDto } from "../AbilityScoreBonus.dto";
-import { OptionsDto } from "../Options.dto";
+import {
+  IsArray,
+  IsNumber,
+  IsString,
+  IsOptional,
+  ValidateNested,
+} from "class-validator";
+import { AbilityScoreBonusDto } from "../general/AbilityScoreBonus.dto";
+import { OptionsDto } from "../general/Options.dto";
 
 export class RaceDto {
   @IsString()
@@ -13,74 +19,74 @@ export class RaceDto {
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
   speed: number;
-  
+
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: [AbilityScoreBonusDto] })
-  ability_bonuses: AbilityScoreBonusDto[];
-  
+  abilityBonuses: AbilityScoreBonusDto[];
+
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: [OptionsDto] })
-  ability_bonus_options: OptionsDto[];
-  
+  abilityBonusOptions: OptionsDto[];
+
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
   alignment: string;
-  
+
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
   age: string;
-  
+
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
   size: string;
-  
+
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
-  size_description: string;
-  
+  sizeDescription: string;
+
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  starting_proficiencies: string[];
-  
+  startingProficiencies: string[];
+
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: [OptionsDto] })
-  starting_proficiency_options: OptionsDto[];
-  
+  startingProficiencyOptions: OptionsDto[];
+
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
-  language_description: String;
-  
+  languageDescription: string;
+
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: [OptionsDto] })
-  language_options: OptionsDto[];
-  
+  languageOptions: OptionsDto[];
+
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
   languages: string[];
-  
+
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
   subraces: string[];
-  
+
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
   traits: string[];
-  
+
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: [OptionsDto] })
-  trait_options: OptionsDto[];
+  traitOptions: OptionsDto[];
 }

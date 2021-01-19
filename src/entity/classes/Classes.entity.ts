@@ -8,20 +8,18 @@ import {
   OneToOne,
 } from "typeorm";
 import { LevelEntity } from "../levels/Level.entity";
-import { OptionsEntity } from "../Options.entity";
+import { OptionsEntity } from "../general/Options.entity";
 
 @Entity()
 export class ClassesEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToMany(type => LevelEntity, level => level.parentClass,
-    {
-      cascade: true,
-      eager: true,
-      nullable: true,
-    }
-  )
+  @OneToMany((type) => LevelEntity, (level) => level.parentClass, {
+    cascade: true,
+    eager: true,
+    nullable: true,
+  })
   classLevels?: LevelEntity[];
 
   @Column({ nullable: true })
@@ -45,13 +43,11 @@ export class ClassesEntity {
   @JoinTable()
   proficiencyChoices?: OptionsEntity[];
 
-  @OneToOne((type) => OptionsEntity, 
-    {
-      cascade: true,
-      eager: true,
-      nullable: true,
-    }
-  )
+  @OneToOne((type) => OptionsEntity, {
+    cascade: true,
+    eager: true,
+    nullable: true,
+  })
   @JoinTable()
   spellcasting?: OptionsEntity;
 

@@ -6,7 +6,7 @@ import {
   IsOptional,
   ValidateNested,
 } from "class-validator";
-import { OptionsDto } from "../Options.dto";
+import { OptionsDto } from "../general/Options.dto";
 import { PrerequisiteDto } from "./Prerequisite.dto";
 
 export class FeatureDto {

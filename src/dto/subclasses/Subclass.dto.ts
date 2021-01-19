@@ -20,12 +20,12 @@ export class SubclassDto {
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
-  subclass_flavor: string;
+  subclassFlavor: string;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: [LevelSubclassDto] })
-  sublclass_levels: LevelSubclassDto;
+  sublclassLevels: LevelSubclassDto;
 
   @ValidateNested()
   @IsOptional()

@@ -13,7 +13,7 @@ export class TraitEntity {
   id!: number;
 
   @Column({ nullable: true })
-  name?: number;
+  name?: string;
 
   @Column("text", { array: true, nullable: true })
   subraces?: string[];
@@ -29,6 +29,8 @@ export class TraitEntity {
 
   @ManyToMany((type) => OptionsEntity, {
     cascade: true,
+    nullable: true,
+    eager: true,
   })
   @JoinTable()
   proficiencyChoices?: OptionsEntity[];

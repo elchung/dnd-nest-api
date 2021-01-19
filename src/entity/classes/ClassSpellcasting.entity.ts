@@ -6,7 +6,7 @@ import {
   JoinTable,
   OneToOne,
 } from "typeorm";
-import { InfoEntity } from "../Info.entity";
+import { InfoEntity } from "../general/Info.entity";
 
 @Entity()
 export class ClassSpellcastingEntity {

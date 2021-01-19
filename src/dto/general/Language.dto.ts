@@ -25,5 +25,5 @@ export class LanguageDto {
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  typical_speakers: string[];
+  typicalSpeakers: string[];
 }

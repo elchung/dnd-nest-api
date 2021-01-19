@@ -7,9 +7,9 @@ import {
   IsOptional,
   ValidateNested,
 } from "class-validator";
-import { OptionsDto } from "../Options.dto";
-import { AbilityScoreBonusDto } from "../AbilityScoreBonus.dto";
-import { TraitDto } from "../Trait.dto";
+import { OptionsDto } from "../general/Options.dto";
+import { AbilityScoreBonusDto } from "../general/AbilityScoreBonus.dto";
+import { TraitDto } from "../general/Trait.dto";
 
 export class SubraceDto {
   @IsString()
@@ -27,12 +27,12 @@ export class SubraceDto {
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: [AbilityScoreBonusDto] })
-  ability_score_bonuses: AbilityScoreBonusDto[];
+  abilityScoreBonuses: AbilityScoreBonusDto[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  starting_proficiencies: string[];
+  startingProficiencies: string[];
 
   @IsArray()
   @IsOptional()
@@ -42,15 +42,15 @@ export class SubraceDto {
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: [OptionsDto] })
-  language_options: OptionsDto[];
+  languageOptions: OptionsDto[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  racial_traits: string[];
+  racialTraits: string[];
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: OptionsDto })
-  racial_trait_options: OptionsDto;
+  racialTraitOptions: OptionsDto;
 }

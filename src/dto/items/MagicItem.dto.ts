@@ -1,7 +1,6 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { IsArray, IsOptional, IsString } from "class-validator";
 
-
 export class MagicItemDto {
   @IsArray()
   @IsOptional()
@@ -11,7 +10,7 @@ export class MagicItemDto {
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
-  equipment_category: string;
+  equipmentCategory: string;
 
   @IsString()
   @IsOptional()

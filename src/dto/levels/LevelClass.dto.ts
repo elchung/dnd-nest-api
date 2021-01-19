@@ -12,160 +12,160 @@ export class LevelClassDto {
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  action_surges: number;
-  
+  actionSurges: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  arcane_recovery_levels: number;
-  
+  arcaneRecoveryLevels: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  aura_range: number;
-  
+  auraRange: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  bardic_inspiration_die: number;
-  
+  bardicInspirationDie: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  brutal_critical_dice: number;
-  
+  brutalCriticalDice: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  channel_divinity_charges: number;
-  
+  channelDivinityCharges: number;
+
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: [LevelClassCreatingSpellSlotsDto] })
-  creating_spell_slots: LevelClassCreatingSpellSlotsDto[];
-  
+  creatingSpellSlots: LevelClassCreatingSpellSlotsDto[];
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  destroy_undead_cr: number;
-  
+  destroyUndeadCr: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  extra_attacks: number;
-  
+  extraAttacks: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  favored_enemies: number;
-  
+  favoredEnemies: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  favored_terrain: number;
-  
+  favoredTerrain: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  indomitable_uses: number;
-  
+  indomitableUses: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  invocations_known: number;
-  
+  invocationsKnown: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  ki_points: number;
-  
+  kiPoints: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  magical_secrets_max_5: number;
-  
+  magicalSecretsMax5: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  magical_secrets_max_7: number;
-  
+  magicalSecretsMax7: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  magical_secrets_max_9: number;
-  
-  @ValidateNested()
-  @IsOptional()
-  @ApiPropertyOptional({ type: LevelOptionsDiceDto })
-  martial_arts: LevelOptionsDiceDto;
-  
-  @IsNumber()
-  @IsOptional()
-  @ApiPropertyOptional({ type: Number })
-  metamagic_known: number;
-  
-  @IsNumber()
-  @IsOptional()
-  @ApiPropertyOptional({ type: Number })
-  mystic_arcanum_level_6: number;
-  
-  @IsNumber()
-  @IsOptional()
-  @ApiPropertyOptional({ type: Number })
-  mystic_arcanum_level_7: number;
-  
-  @IsNumber()
-  @IsOptional()
-  @ApiPropertyOptional({ type: Number })
-  mystic_arcanum_level_8: number;
-  
-  @IsNumber()
-  @IsOptional()
-  @ApiPropertyOptional({ type: Number })
-  mystic_arcanum_level_9: number;
-  
-  @IsNumber()
-  @IsOptional()
-  @ApiPropertyOptional({ type: Number })
-  rage_count: number;
-  
-  @IsNumber()
-  @IsOptional()
-  @ApiPropertyOptional({ type: Number })
-  rage_damage_bonus: number;
+  magicalSecretsMax9: number;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: LevelOptionsDiceDto })
-  sneak_attack: LevelOptionsDiceDto;
-  
+  martialArts: LevelOptionsDiceDto;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  song_of_rest_die: number;
-  
+  metamagicKnown: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  sorcery_points: number;
-  
+  mysticArcanumLevel6: number;
+
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  unarmored_movement: number;
+  mysticArcanumLevel7: number;
+
+  @IsNumber()
+  @IsOptional()
+  @ApiPropertyOptional({ type: Number })
+  mysticArcanumLevel8: number;
+
+  @IsNumber()
+  @IsOptional()
+  @ApiPropertyOptional({ type: Number })
+  mysticArcanumLevel9: number;
+
+  @IsNumber()
+  @IsOptional()
+  @ApiPropertyOptional({ type: Number })
+  rageCount: number;
+
+  @IsNumber()
+  @IsOptional()
+  @ApiPropertyOptional({ type: Number })
+  rageDamageBonus: number;
+
+  @ValidateNested()
+  @IsOptional()
+  @ApiPropertyOptional({ type: LevelOptionsDiceDto })
+  sneakAttack: LevelOptionsDiceDto;
+
+  @IsNumber()
+  @IsOptional()
+  @ApiPropertyOptional({ type: Number })
+  songOfRestDie: number;
+
+  @IsNumber()
+  @IsOptional()
+  @ApiPropertyOptional({ type: Number })
+  sorceryPoints: number;
+
+  @IsNumber()
+  @IsOptional()
+  @ApiPropertyOptional({ type: Number })
+  unarmoredMovement: number;
 
   @IsBoolean()
   @IsOptional()
   @ApiPropertyOptional({ type: Boolean })
-  wild_shape_fly: boolean;
+  wildShapeFly: boolean;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  wild_shape_max_cr: number;
+  wildShapeMaxCr: number;
 
   @IsBoolean()
   @IsOptional()
   @ApiPropertyOptional({ type: Boolean })
-  wild_shape_swim: boolean;
+  wildShapeSwim: boolean;
 }

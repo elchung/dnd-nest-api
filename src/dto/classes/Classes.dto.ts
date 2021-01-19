@@ -6,19 +6,19 @@ import {
   ValidateNested,
   IsOptional,
 } from "class-validator";
-import { OptionsDto } from "../Options.dto";
+import { OptionsDto } from "../general/Options.dto";
 import { ClassSpellcastingDto } from "./ClassSpellcasting.dto";
 
 export class ClassesDto {
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
-  class_levels: string; // todo this is wrong
+  classLevels: string; // todo this is wrong
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  hit_die: number;
+  hitDie: number;
 
   @IsString()
   @IsOptional()
@@ -33,12 +33,12 @@ export class ClassesDto {
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [OptionsDto] })
-  proficiency_choices: OptionsDto[];
+  proficiencyChoices: OptionsDto[];
 
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  saving_throws: string[];
+  savingThrows: string[];
 
   @ValidateNested()
   @IsOptional()
@@ -48,7 +48,7 @@ export class ClassesDto {
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  starting_equipment: string[];
+  startingEquipment: string[];
 
   @IsArray()
   @IsOptional()

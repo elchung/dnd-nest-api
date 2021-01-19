@@ -14,7 +14,7 @@ export class SubraceDto {
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  ability_score_bonuses: number;
+  abilityScoreBonuses: number;
 
   @IsString()
   @IsOptional()
@@ -24,17 +24,17 @@ export class SubraceDto {
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: LevelClassDto })
-  class_specific: LevelClassDto;
-  
+  classSpecific: LevelClassDto;
+
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  feature_choices: string[];
-  
+  featureChoices: string[];
+
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  features: string[]
+  features: string[];
 
   @IsNumber()
   @IsOptional()
@@ -44,13 +44,13 @@ export class SubraceDto {
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  proficiency_bonus: number;
+  proficiencyBonus: number;
 
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: LevelSpellcastingDto })
   spellcasting: LevelSpellcastingDto;
-  
+
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
@@ -59,5 +59,5 @@ export class SubraceDto {
   @ValidateNested()
   @IsOptional()
   @ApiPropertyOptional({ type: LevelSubclassDto })
-  subclass_specific: LevelSubclassDto;
+  subclassSpecific: LevelSubclassDto;
 }

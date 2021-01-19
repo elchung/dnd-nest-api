@@ -18,5 +18,5 @@ export class LanguageEntity {
   name?: number;
 
   @Column("text", { array: true, nullable: true })
-  typical_speakers?: string[];
+  typicalSpeakers?: string[];
 }

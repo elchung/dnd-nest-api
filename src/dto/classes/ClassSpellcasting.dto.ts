@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { IsNumber, IsArray, IsString, IsOptional } from "class-validator";
-import { InfoDto } from "../Info.dto";
+import { InfoDto } from "../general/Info.dto";
 
 export class ClassSpellcastingDto {
   @IsArray()
