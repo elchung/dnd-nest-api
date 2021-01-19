@@ -6,7 +6,7 @@ import {
   IsOptional,
   ValidateNested,
 } from "class-validator";
-import { LevelSpellcastingDto } from "./LevelSpellcasing.dto";
+import { LevelSpellcastingDto } from "./LevelSpellcasting.dto";
 import { LevelSubclassDto } from "./LevelSubclass.dto";
 import { LevelClassDto } from "./LevelClass.dto";
 
@@ -35,11 +35,6 @@ export class SubraceDto {
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
   features: string[]
-  
-  @IsString()
-  @IsOptional()
-  @ApiPropertyOptional({ type: String })
-  index: string
 
   @IsNumber()
   @IsOptional()
@@ -49,7 +44,7 @@ export class SubraceDto {
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  prof_bonus: number;
+  proficiency_bonus: number;
 
   @ValidateNested()
   @IsOptional()

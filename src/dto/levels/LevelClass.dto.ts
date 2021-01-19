@@ -41,8 +41,8 @@ export class LevelClassDto {
   
   @ValidateNested()
   @IsOptional()
-  @ApiPropertyOptional({ type: LevelClassCreatingSpellSlotsDto })
-  creating_spell_slots: [LevelClassCreatingSpellSlotsDto]
+  @ApiPropertyOptional({ type: [LevelClassCreatingSpellSlotsDto] })
+  creating_spell_slots: LevelClassCreatingSpellSlotsDto[];
   
   @IsNumber()
   @IsOptional()

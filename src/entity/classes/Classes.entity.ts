@@ -4,7 +4,10 @@ import {
   Column,
   ManyToMany,
   JoinTable,
+  OneToMany,
+  OneToOne,
 } from "typeorm";
+import { LevelEntity } from "../levels/Level.entity";
 import { OptionsEntity } from "../Options.entity";
 
 @Entity()
@@ -12,8 +15,14 @@ export class ClassesEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ nullable: true })
-  class_levels?: string; // todo this is wrong
+  @OneToMany(type => LevelEntity, level => level.parentClass,
+    {
+      cascade: true,
+      eager: true,
+      nullable: true,
+    }
+  )
+  classLevels?: LevelEntity[];
 
   @Column({ nullable: true })
   hit_die?: number;
@@ -25,7 +34,7 @@ export class ClassesEntity {
   proficiencies?: string[];
 
   @Column("text", { array: true, nullable: true })
-  saving_throws?: string[];
+  savingThrows?: string[];
 
   @Column("text", { array: true, nullable: true })
   subclasses?: string[];
@@ -36,13 +45,19 @@ export class ClassesEntity {
   @JoinTable()
   proficiencyChoices?: OptionsEntity[];
 
-  @OneToOne() //cascade
+  @OneToOne((type) => OptionsEntity, 
+    {
+      cascade: true,
+      eager: true,
+      nullable: true,
+    }
+  )
   @JoinTable()
   spellcasting?: OptionsEntity;
 
   @OneToOne((type) => OptionsEntity, {
     cascade: true,
   })
-  @JoinTable() //maybe. all optionsentities might need to be split into own tables....ugh
-  starting_equipment?: OptionsEntity[];
+  @JoinTable()
+  startingEquipment?: OptionsEntity[];
 }
