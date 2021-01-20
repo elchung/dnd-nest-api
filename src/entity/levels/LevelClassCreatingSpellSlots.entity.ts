@@ -1,11 +1,5 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { LevelClassEntity } from "./LevelClass.entity";
-
 
 @Entity()
 export class LevelClassCreatingSpellSlotsEntity {
@@ -13,11 +7,14 @@ export class LevelClassCreatingSpellSlotsEntity {
   id!: number;
 
   @Column({ nullable: true })
-  sorcery_point_cost: number;
+  sorceryPointCost: number;
 
   @Column({ nullable: true })
-  spell_slot_level: number;
+  spellSlotLevel: number;
 
-  @ManyToOne((type) => LevelClassEntity, (levelClass) => levelClass.creatingSpellSlots)
+  @ManyToOne(
+    (type) => LevelClassEntity,
+    (levelClass) => levelClass.creatingSpellSlots
+  )
   parentLevelClass: LevelClassEntity;
 }
