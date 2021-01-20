@@ -22,7 +22,7 @@ export class SpellsController {
   }
 
   @Get("/names")
-  async getAllSpellNames(): Promise<String[]> {
+  async getAllSpellNames(): Promise<string[]> {
     return await this.spellsService.getAllSpellNames();
   }
 
@@ -45,9 +45,7 @@ export class SpellsController {
   }
 
   @Post()
-  async createSpellWithName(
-    @Body() spellDto: SpellsDto
-  ): Promise<void> {
+  async createSpellWithName(@Body() spellDto: SpellsDto): Promise<void> {
     await this.spellsService.createSpellWithName(spellDto);
   }
 

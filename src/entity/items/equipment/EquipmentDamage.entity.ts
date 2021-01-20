@@ -1,13 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
-export class OptionsEntity {
+export class EquipmentDamageEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column({ nullable: true })
-  choose?: number;
+  damageDice: string;
 
-  @Column("text", { array: true, nullable: true })
-  from?: string[];
+  @Column({ nullable: true })
+  damageType: string;
 }

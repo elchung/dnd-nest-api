@@ -1,17 +1,10 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToOne
-} from "typeorm";
-import { LevelClassEntity } from "./LevelClass.entity";
-
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
 export class LevelOptionsDiceEntity {
   @PrimaryGeneratedColumn()
   id!: number;
-  
+
   @Column({ nullable: true })
   dice_count: number;
 

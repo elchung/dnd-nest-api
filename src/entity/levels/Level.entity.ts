@@ -3,7 +3,6 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToOne,
-  JoinTable,
   JoinColumn,
   ManyToOne,
 } from "typeorm";
@@ -23,7 +22,9 @@ export class LevelEntity {
   @Column({ nullable: true })
   class: string;
 
-  @OneToOne((type) => LevelClassEntity, levelClass => levelClass.parentLevel,
+  @OneToOne(
+    (type) => LevelClassEntity,
+    (levelClass) => levelClass.parentLevel,
     {
       cascade: true,
       eager: true,
@@ -37,7 +38,7 @@ export class LevelEntity {
   featureChoices: string[];
 
   @Column("text", { array: true, nullable: true })
-  features: string[]
+  features: string[];
 
   @Column({ nullable: true })
   level: number;
@@ -45,7 +46,9 @@ export class LevelEntity {
   @Column({ nullable: true })
   proficiencyBonus: number;
 
-  @OneToOne((type) => LevelSpellcastingEntity, levelSpellcasting => levelSpellcasting.parentLevel,
+  @OneToOne(
+    (type) => LevelSpellcastingEntity,
+    (levelSpellcasting) => levelSpellcasting.parentLevel,
     {
       cascade: true,
       eager: true,
@@ -54,11 +57,13 @@ export class LevelEntity {
   )
   @JoinColumn()
   spellcasting: LevelSpellcastingEntity;
-  
+
   @Column({ nullable: true })
   subclass: string;
 
-  @OneToOne((type) => LevelSubclassEntity, levelSubclass => levelSubclass.parentLevel,
+  @OneToOne(
+    (type) => LevelSubclassEntity,
+    (levelSubclass) => levelSubclass.parentLevel,
     {
       cascade: true,
       eager: true,
@@ -68,6 +73,6 @@ export class LevelEntity {
   @JoinColumn()
   subclassSpecific: LevelSubclassEntity;
 
-  @ManyToOne(type => ClassesEntity, classes => classes.classLevels)
+  @ManyToOne((type) => ClassesEntity, (classes) => classes.classLevels)
   parentClass: ClassesEntity;
 }

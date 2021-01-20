@@ -1,7 +1,6 @@
 import { Controller, Get } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { BackfillService } from "../service/backfill.service";
-import { BackfillMapper } from "../mapper/backfill.mapper";
 
 @ApiTags("backfill")
 @Controller("backfill")

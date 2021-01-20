@@ -1,15 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import {
-  IsArray,
-  IsBoolean,
-  IsNumber,
-  IsString,
-  IsOptional,
-  ValidateNested,
-} from "class-validator";
+import { IsArray, IsString, IsOptional, ValidateNested } from "class-validator";
 import { OptionsDto } from "../general/Options.dto";
 import { AbilityScoreBonusDto } from "../general/AbilityScoreBonus.dto";
-import { TraitDto } from "../general/Trait.dto";
 
 export class SubraceDto {
   @IsString()

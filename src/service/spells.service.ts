@@ -36,16 +36,18 @@ export class SpellsService {
       builder = builder.orWhere("LOWER(spells.name) = LOWER(:name)", {
         spellName,
       });
-    })
+    });
 
     return await builder.getMany();
   }
 
-  async getAllSpellNames(): Promise<String[]> {
-    return this.spellMapper.spellNamesEntityToList(await this.spellsRepository
-      .createQueryBuilder("spells")
-      .select(["spells.name"])
-      .getMany());
+  async getAllSpellNames(): Promise<string[]> {
+    return this.spellMapper.spellNamesEntityToList(
+      await this.spellsRepository
+        .createQueryBuilder("spells")
+        .select(["spells.name"])
+        .getMany()
+    );
   }
 
   async getSpellWithName(name: string): Promise<any> {
@@ -68,7 +70,7 @@ export class SpellsService {
   }
 
   async createSpellWithName(newSpell: SpellsDto): Promise<void> {
-    if (!newSpell.name || await this.getSpellWithName(newSpell.name)) {
+    if (!newSpell.name || (await this.getSpellWithName(newSpell.name))) {
       throw new Error("Spell already exists with that name");
     }
 

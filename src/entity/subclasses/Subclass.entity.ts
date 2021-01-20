@@ -10,6 +10,7 @@ import {
 import { SubclassSpellEntity } from "./SubclassSpell.entity";
 import { LevelSubclassEntity } from "../levels/LevelSubclass.entity";
 
+@Entity()
 export class SubclassEntity {
   @PrimaryGeneratedColumn()
   id!: number;

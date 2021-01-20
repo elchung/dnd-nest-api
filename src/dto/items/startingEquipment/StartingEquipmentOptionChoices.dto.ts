@@ -1,7 +1,6 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { IsNumber, IsOptional, IsString } from "class-validator";
 
-
 export class StartingEquipmentOptionChoicesDto {
   @IsString()
   @IsOptional()
@@ -13,4 +12,3 @@ export class StartingEquipmentOptionChoicesDto {
   @ApiPropertyOptional({ type: Number })
   quantity: number;
 }
-

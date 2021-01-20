@@ -2,8 +2,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
-  JoinTable,
+  JoinColumn,
   OneToOne,
 } from "typeorm";
 import { InfoEntity } from "../general/Info.entity";
@@ -22,6 +21,6 @@ export class ClassSpellcastingEntity {
   @OneToOne((type) => InfoEntity, {
     cascade: true,
   })
-  @JoinTable()
+  @JoinColumn()
   info?: InfoEntity[];
 }

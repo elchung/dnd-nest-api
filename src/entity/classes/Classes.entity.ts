@@ -6,6 +6,7 @@ import {
   JoinTable,
   OneToMany,
   OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { LevelEntity } from "../levels/Level.entity";
 import { OptionsEntity } from "../general/Options.entity";
@@ -48,12 +49,12 @@ export class ClassesEntity {
     eager: true,
     nullable: true,
   })
-  @JoinTable()
+  @JoinColumn()
   spellcasting?: OptionsEntity;
 
   @OneToOne((type) => OptionsEntity, {
     cascade: true,
   })
-  @JoinTable()
+  @JoinColumn()
   startingEquipment?: OptionsEntity[];
 }

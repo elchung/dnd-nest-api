@@ -2,7 +2,6 @@ import { ApiPropertyOptional } from "@nestjs/swagger";
 import { IsArray, IsOptional, IsString, IsNumber } from "class-validator";
 import { StartingEquipmentOptionChoicesDto } from "./StartingEquipmentOptionChoices.dto";
 
-
 export class StartingEquipmentOptionsDto {
   @IsNumber()
   @IsOptional()

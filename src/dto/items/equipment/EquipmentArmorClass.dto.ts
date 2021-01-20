@@ -6,7 +6,6 @@ export class EquipmentArmorClassDto {
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
   base: number;
-  
 
   @IsBoolean()
   @IsOptional()

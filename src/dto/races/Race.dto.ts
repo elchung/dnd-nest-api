@@ -11,13 +11,11 @@ import { OptionsDto } from "../general/Options.dto";
 
 export class RaceDto {
   @IsString()
-  @IsOptional()
-  @ApiPropertyOptional({ type: String })
+  @ApiProperty({ type: String })
   name: string;
 
   @IsNumber()
-  @IsOptional()
-  @ApiPropertyOptional({ type: Number })
+  @ApiProperty({ type: Number })
   speed: number;
 
   @ValidateNested()
