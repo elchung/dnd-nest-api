@@ -3,21 +3,22 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import { ClassesDto } from "../dto/classes/Classes.dto";
+import { SubclassDto } from "../dto/subclasses/Subclass.dto";
 
 @Injectable()
-export class ClassesService {
+export class SubclassesService {
   constructor() {} // private abilityScoreRepository: Repository<CharacterAbilityScoresEntity> // @InjectRepository(CharacterAbilityScoresEntity) // private characterDataRepository: Repository<CharacterDataEntity>, // @InjectRepository(CharacterDataEntity)
 
   // private characterMapper = new CharacterMapper();
 
-  async getClassByName(name: string): Promise<any> {}
+  async getSubclassByName(name: string): Promise<any> {}
 
-  async updateClassByName(
+  async updateSubclassByName(
     name: string,
-    updatedClass: ClassesDto
+    updatedClass: SubclassDto
   ): Promise<any> {}
 
-  async createClass(newClass: ClassesDto): Promise<any> {}
+  async createSubclass(newSubclass: SubclassDto): Promise<any> {}
 
-  async deleteClass(name: string): Promise<any> {}
+  async deleteSubclass(name: string): Promise<any> {}
 }

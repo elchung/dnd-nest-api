@@ -34,7 +34,7 @@ export class ClassesController {
     return await this.classesService.createClass(newClass);
   }
 
-  @Delete()
+  @Delete("/:className")
   async deleteClass(@Param("className") name: string): Promise<void> {
     return await this.classesService.deleteClass(name);
   }
