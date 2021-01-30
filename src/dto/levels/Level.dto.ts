@@ -10,7 +10,7 @@ import { LevelSpellcastingDto } from "./LevelSpellcasting.dto";
 import { LevelSubclassDto } from "./LevelSubclass.dto";
 import { LevelClassDto } from "./LevelClass.dto";
 
-export class SubraceDto {
+export class LevelDto {
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })

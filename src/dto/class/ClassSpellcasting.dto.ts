@@ -16,5 +16,5 @@ export class ClassSpellcastingDto {
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
-  spellcasting_ability: string;
+  spellcastingAbility: string;
 }

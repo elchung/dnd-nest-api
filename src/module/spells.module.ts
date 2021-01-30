@@ -1,25 +1,25 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { SpellsEntity } from "../entity/spells/Spells.entity";
+import { SpellEntity } from "../entity/spells/Spell.entity";
 import { SpellDamageEntity } from "../entity/spells/SpellDamage.entity";
 import { SpellDamageAtLevelEntity } from "../entity/spells/SpellDamageAtLevel.entity";
-import { SpellsController } from "../controllers/spells.controller";
-import { SpellsService } from "../service/spells.service";
+import { SpellsController } from "../controllers/spell.controller";
+import { SpellService } from "../service/spell.service";
 import { SpellAreaOfEffectEntity } from "src/entity/spells/SpellAreaOfEffect.entity";
 import { SpellDcEntity } from "src/entity/spells/SpellDc.entity";
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      SpellsEntity,
+      SpellEntity,
       SpellDamageEntity,
       SpellDamageAtLevelEntity,
       SpellAreaOfEffectEntity,
       SpellDcEntity,
     ]),
   ],
-  exports: [SpellsService],
+  exports: [SpellService],
   controllers: [SpellsController],
-  providers: [SpellsService],
+  providers: [SpellService],
 })
 export class SpellsModule {}

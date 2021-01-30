@@ -5,16 +5,16 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { SpellsEntity } from "./Spells.entity";
+import { SpellEntity } from "./Spell.entity";
 
 @Entity()
 export class SpellAreaOfEffectEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToOne((type) => SpellsEntity, (spellEntity) => spellEntity.areaOfEffect)
+  @OneToOne((type) => SpellEntity, (spellEntity) => spellEntity.areaOfEffect)
   @JoinColumn()
-  parentSpell!: SpellsEntity;
+  parentSpell!: SpellEntity;
 
   @Column()
   size!: number;

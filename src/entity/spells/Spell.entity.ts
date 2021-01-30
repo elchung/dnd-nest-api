@@ -4,7 +4,7 @@ import { SpellAreaOfEffectEntity } from "./SpellAreaOfEffect.entity";
 import { SpellDcEntity } from "./SpellDc.entity";
 
 @Entity()
-export class SpellsEntity {
+export class SpellEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

@@ -5,10 +5,10 @@ export class SpellDcDto {
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
-  dc_success: string;
+  dcSuccess: string;
 
   @IsString()
   @IsOptional()
   @ApiPropertyOptional({ type: String })
-  dc_type: string;
+  dcType: string;
 }

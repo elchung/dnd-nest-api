@@ -5,7 +5,7 @@ export class InfoDto {
   @IsArray()
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
-  desc: string[];
+  description: string[];
 
   @IsString()
   @IsOptional()

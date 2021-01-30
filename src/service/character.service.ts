@@ -93,7 +93,6 @@ export class CharacterService {
     const characterEntity = this.characterMapper.characterDataDtoToEntity(
       characterDto
     );
-    console.log(characterEntity);
 
     return await this.characterDataRepository.save(characterEntity);
   }

@@ -1,5 +1,5 @@
 import { SpellsDto } from "../dto/spells/Spells.dto";
-import { SpellsEntity } from "../entity/spells/Spells.entity";
+import { SpellEntity } from "../entity/spells/Spell.entity";
 import { SpellDamageAtLevelEntity } from "../entity/spells/SpellDamageAtLevel.entity";
 import { SpellDamageEntity } from "../entity/spells/SpellDamage.entity";
 import { SpellDamageDto } from "../dto/spells/SpellDamage.dto";
@@ -10,8 +10,8 @@ import { SpellAreaOfEffectEntity } from "../entity/spells/SpellAreaOfEffect.enti
 import { SpellAreaOfEffectDto } from "../dto/spells/SpellAreaOfEffect.dto";
 
 export class SpellsMapper {
-  spellDtoToEntity(spellDto: SpellsDto): SpellsEntity {
-    const spellEntity = new SpellsEntity();
+  spellDtoToEntity(spellDto: SpellsDto): SpellEntity {
+    const spellEntity = new SpellEntity();
 
     spellEntity.name = spellDto.name;
     spellEntity.description = spellDto.description;
@@ -53,8 +53,8 @@ export class SpellsMapper {
 
   spellDcDtoToEntity(dcDto: SpellDcDto | null): SpellDcEntity {
     const spellDcEntity = new SpellDcEntity();
-    spellDcEntity.dc_success = dcDto?.dc_success;
-    spellDcEntity.dc_type = dcDto?.dc_type;
+    spellDcEntity.dcSuccess = dcDto?.dcSuccess;
+    spellDcEntity.dcType = dcDto?.dcType;
 
     return spellDcEntity;
   }
@@ -85,7 +85,7 @@ export class SpellsMapper {
     return spellDamageAtLevelEntity;
   }
 
-  spellNamesEntityToList(spellList: SpellsEntity[]): string[] {
+  spellNamesEntityToList(spellList: SpellEntity[]): string[] {
     return spellList.map((spell) => spell.name);
   }
 }

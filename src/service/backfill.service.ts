@@ -2,7 +2,7 @@ import axios from "axios";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { SpellsEntity } from "../entity/spells/Spells.entity";
+import { SpellEntity } from "../entity/spells/Spell.entity";
 import { SpellDamageEntity } from "../entity/spells/SpellDamage.entity";
 import { SpellDamageAtLevelEntity } from "../entity/spells/SpellDamageAtLevel.entity";
 import { SpellDcEntity } from "../entity/spells/SpellDc.entity";
@@ -13,8 +13,8 @@ import { FeatureEntity } from "../entity/features/feature.entity";
 @Injectable()
 export class BackfillService {
   constructor(
-    @InjectRepository(SpellsEntity)
-    private spellsRepository: Repository<SpellsEntity>,
+    @InjectRepository(SpellEntity)
+    private spellsRepository: Repository<SpellEntity>,
 
     @InjectRepository(FeatureEntity)
     private featureRepository: Repository<FeatureEntity>
@@ -68,7 +68,7 @@ export class BackfillService {
     console.info(`Done. Failed ${name}s: ${failed}`);
   }
 
-  async saveSpell(spellEntity: SpellsEntity): Promise<void> {
+  async saveSpell(spellEntity: SpellEntity): Promise<void> {
     console.info("Saving Spell...");
     await this.spellsRepository.save(spellEntity);
   }

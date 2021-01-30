@@ -7,13 +7,14 @@ import {
   IsOptional,
 } from "class-validator";
 import { OptionsDto } from "../general/Options.dto";
+import { LevelDto } from "../levels/Level.dto";
 import { ClassSpellcastingDto } from "./ClassSpellcasting.dto";
 
-export class ClassesDto {
-  @IsString()
+export class ClassDto {
+  @ValidateNested()
   @IsOptional()
-  @ApiPropertyOptional({ type: String })
-  classLevels: string; // todo this is wrong
+  @ApiPropertyOptional({ type: [LevelDto] })
+  classLevels: LevelDto[];
 
   @IsNumber()
   @IsOptional()

@@ -6,7 +6,7 @@ import {
   JoinColumn,
   ManyToOne,
 } from "typeorm";
-import { ClassesEntity } from "../classes/Classes.entity";
+import { ClassEntity } from "../classes/Class.entity";
 import { LevelClassEntity } from "./LevelClass.entity";
 import { LevelSpellcastingEntity } from "./LevelSpellcasting.entity";
 import { LevelSubclassEntity } from "./LevelSubclass.entity";
@@ -63,7 +63,6 @@ export class LevelEntity {
 
   @OneToOne(
     (type) => LevelSubclassEntity,
-    (levelSubclass) => levelSubclass.parentLevel,
     {
       cascade: true,
       eager: true,
@@ -73,6 +72,6 @@ export class LevelEntity {
   @JoinColumn()
   subclassSpecific: LevelSubclassEntity;
 
-  @ManyToOne((type) => ClassesEntity, (classes) => classes.classLevels)
-  parentClass: ClassesEntity;
+  @ManyToOne((type) => ClassEntity, (classes) => classes.classLevels)
+  parentClass: ClassEntity;
 }

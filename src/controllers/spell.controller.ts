@@ -8,13 +8,13 @@ import {
   Param,
 } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { SpellsService } from "../service/spells.service";
+import { SpellService } from "../service/spell.service";
 import { SpellsDto } from "../dto/spells/Spells.dto";
 
 @ApiTags("5eSpells")
 @Controller("5eSpells")
 export class SpellsController {
-  constructor(private readonly spellsService: SpellsService) {}
+  constructor(private readonly spellsService: SpellService) {}
 
   @Get()
   async getAllSpells(): Promise<SpellsDto[]> {

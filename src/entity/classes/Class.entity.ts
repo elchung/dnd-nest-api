@@ -10,9 +10,10 @@ import {
 } from "typeorm";
 import { LevelEntity } from "../levels/Level.entity";
 import { OptionsEntity } from "../general/Options.entity";
+import { ClassSpellcastingEntity } from "./ClassSpellcasting.entity";
 
 @Entity()
-export class ClassesEntity {
+export class ClassEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -24,7 +25,7 @@ export class ClassesEntity {
   classLevels?: LevelEntity[];
 
   @Column({ nullable: true })
-  hit_die?: number;
+  hitDie?: number;
 
   @Column({ nullable: true })
   name?: string;
@@ -44,17 +45,14 @@ export class ClassesEntity {
   @JoinTable()
   proficiencyChoices?: OptionsEntity[];
 
-  @OneToOne((type) => OptionsEntity, {
+  @OneToOne((type) => ClassSpellcastingEntity, {
     cascade: true,
     eager: true,
     nullable: true,
   })
   @JoinColumn()
-  spellcasting?: OptionsEntity;
+  spellcasting?: ClassSpellcastingEntity;
 
-  @OneToOne((type) => OptionsEntity, {
-    cascade: true,
-  })
-  @JoinColumn()
-  startingEquipment?: OptionsEntity[];
+  @Column("text", { array: true, nullable: true })
+  startingEquipment?: string[];
 }

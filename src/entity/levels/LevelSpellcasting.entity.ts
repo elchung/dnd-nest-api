@@ -10,7 +10,7 @@ export class LevelSpellcastingEntity {
   cantripsKnown: number;
 
   @Column({ nullable: true })
-  spellSlots_level_1: number;
+  spellSlotsLevel1: number;
 
   @Column({ nullable: true })
   spellSlotsLevel2: number;

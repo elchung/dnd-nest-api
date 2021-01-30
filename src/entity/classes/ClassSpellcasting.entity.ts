@@ -16,7 +16,7 @@ export class ClassSpellcastingEntity {
   level?: number;
 
   @Column({ nullable: true })
-  spellcasting_ability?: string;
+  spellcastingAbility?: string;
 
   @OneToOne((type) => InfoEntity, {
     cascade: true,

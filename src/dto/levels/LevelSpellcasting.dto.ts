@@ -5,55 +5,55 @@ export class LevelSpellcastingDto {
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  cantrips_known: number;
+  cantripsKnown: number;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  spell_slots_level_1: number;
+  spellSlotsLevel1: number;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  spell_slots_level_2: number;
+  spellSlotsLevel2: number;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  spell_slots_level_3: number;
+  spellSlotsLevel3: number;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  spell_slots_level_4: number;
+  spellSlotsLevel4: number;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  spell_slots_level_5: number;
+  spellSlotsLevel5: number;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  spell_slots_level_6: number;
+  spellSlotsLevel6: number;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  spell_slots_level_7: number;
+  spellSlotsLevel7: number;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  spell_slots_level_8: number;
+  spellSlotsLevel8: number;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  spell_slots_level_9: number;
+  spellSlotsLevel9: number;
 
   @IsNumber()
   @IsOptional()
   @ApiPropertyOptional({ type: Number })
-  spells_known: number;
+  spellsKnown: number;
 }

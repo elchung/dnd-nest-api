@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from "typeorm";
 import { PrerequisiteEntity } from "./prerequisite.entity";
 
 @Entity()
@@ -24,14 +24,14 @@ export class FeatureEntity {
   @Column("text", { array: true, nullable: true })
   description?: string[];
 
-  @OneToMany(
+  @ManyToMany(
     (type) => PrerequisiteEntity,
-    (prerequisite) => prerequisite.parentFeature,
     {
       cascade: true,
       eager: true,
       nullable: true,
     }
   )
+  @JoinTable()
   prerequisites?: PrerequisiteEntity[];
 }

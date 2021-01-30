@@ -9,7 +9,7 @@ import { OptionsEntity } from "../general/Options.entity";
 import { AbilityScoreBonusEntity } from "../general/AbilityScoreBonus.entity";
 
 @Entity()
-export class raceEntity {
+export class RaceEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

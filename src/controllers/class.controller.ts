@@ -8,29 +8,34 @@ import {
   Param,
 } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { ClassesService } from "../service/classes.service";
-import { ClassesDto } from "../dto/classes/Classes.dto";
+import { ClassService } from "../service/class.service";
+import { ClassDto } from "../dto/class/Class.dto";
 
 @ApiTags("classes")
 @Controller("classes")
-export class ClassesController {
-  constructor(private readonly classesService: ClassesService) {}
+export class ClassController {
+  constructor(private readonly classesService: ClassService) {}
 
   @Get("/:className")
-  async getClassData(@Param("className") name: string): Promise<ClassesDto> {
+  async getClassData(@Param("className") name: string): Promise<ClassDto> {
     return await this.classesService.getClassByName(name);
+  }
+
+  @Get()
+  async getAllClasses(): Promise<ClassDto[]> {
+    return await this.classesService.getAllClasses();
   }
 
   @Put("/:className")
   async updateClassById(
     @Param("className") name: string,
-    @Body() updatedClass: ClassesDto
-  ): Promise<ClassesDto> {
+    @Body() updatedClass: ClassDto
+  ): Promise<void> {
     return await this.classesService.updateClassByName(name, updatedClass);
   }
 
   @Post()
-  async createClass(@Body() newClass: ClassesDto): Promise<ClassesDto> {
+  async createClass(@Body() newClass: ClassDto): Promise<void> {
     return await this.classesService.createClass(newClass);
   }
 

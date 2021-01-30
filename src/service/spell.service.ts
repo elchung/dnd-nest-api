@@ -1,34 +1,26 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { SpellsEntity } from "../entity/spells/Spells.entity";
-import { SpellDamageEntity } from "../entity/spells/SpellDamage.entity";
-import { SpellDamageAtLevelEntity } from "../entity/spells/SpellDamageAtLevel.entity";
+import { SpellEntity } from "../entity/spells/Spell.entity";
 import { SpellsDto } from "../dto/spells/Spells.dto";
 import { SpellsMapper } from "../mapper/spells.mapper";
 
 @Injectable()
-export class SpellsService {
+export class SpellService {
   constructor(
-    @InjectRepository(SpellsEntity)
-    private spellsRepository: Repository<SpellsEntity>,
-
-    @InjectRepository(SpellDamageEntity)
-    private spellDamageRepository: Repository<SpellDamageEntity>,
-
-    @InjectRepository(SpellDamageAtLevelEntity)
-    private spellDamageAtLevelRepository: Repository<SpellDamageAtLevelEntity>
+    @InjectRepository(SpellEntity)
+    private spellRepository: Repository<SpellEntity>,
   ) {}
 
   private spellMapper = new SpellsMapper();
 
   async getAllSpells(): Promise<any> {
-    return await this.spellsRepository.find();
+    return await this.spellRepository.find();
   }
 
   async getSpells(spellNames: string[]): Promise<any> {
     const whereOptions = spellNames.map((spellName) => ({ name: spellName }));
-    let builder = await this.spellsRepository
+    let builder = await this.spellRepository
       .createQueryBuilder("spells")
       .where("spells.name is not null");
 
@@ -43,7 +35,7 @@ export class SpellsService {
 
   async getAllSpellNames(): Promise<string[]> {
     return this.spellMapper.spellNamesEntityToList(
-      await this.spellsRepository
+      await this.spellRepository
         .createQueryBuilder("spells")
         .select(["spells.name"])
         .getMany()
@@ -51,7 +43,7 @@ export class SpellsService {
   }
 
   async getSpellWithName(name: string): Promise<any> {
-    return await this.spellsRepository
+    return await this.spellRepository
       .createQueryBuilder("spells")
       .where("LOWER(spells.name) = LOWER(:name)", { name })
       .getOne();
@@ -61,9 +53,9 @@ export class SpellsService {
     name: string,
     updatedSpell: SpellsDto
   ): Promise<void> {
-    await this.spellsRepository
+    await this.spellRepository
       .createQueryBuilder()
-      .update(SpellsEntity)
+      .update(SpellEntity)
       .set(updatedSpell)
       .where("name = :name", { name: name })
       .execute();
@@ -75,11 +67,11 @@ export class SpellsService {
     }
 
     const newSpellEntity = this.spellMapper.spellDtoToEntity(newSpell);
-    await this.spellsRepository.save(newSpellEntity);
+    await this.spellRepository.save(newSpellEntity);
   }
 
   async deleteSpellWithName(name): Promise<void> {
-    await this.spellsRepository
+    await this.spellRepository
       .createQueryBuilder()
       .delete()
       .where("name = :name", { name: name })

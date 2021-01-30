@@ -6,16 +6,16 @@ import {
   JoinColumn,
 } from "typeorm";
 import { SpellDamageAtLevelEntity } from "./SpellDamageAtLevel.entity";
-import { SpellsEntity } from "./Spells.entity";
+import { SpellEntity } from "./Spell.entity";
 
 @Entity()
 export class SpellDamageEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToOne((type) => SpellsEntity, (spellsEntity) => spellsEntity.damage)
+  @OneToOne((type) => SpellEntity, (spellsEntity) => spellsEntity.damage)
   @JoinColumn()
-  parentSpell!: SpellsEntity;
+  parentSpell!: SpellEntity;
 
   @Column({ nullable: true })
   type?: string;

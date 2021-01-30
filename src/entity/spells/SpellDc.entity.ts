@@ -5,20 +5,20 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { SpellsEntity } from "./Spells.entity";
+import { SpellEntity } from "./Spell.entity";
 
 @Entity()
 export class SpellDcEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToOne((type) => SpellsEntity, (spellEntity) => spellEntity.dc)
+  @OneToOne((type) => SpellEntity, (spellEntity) => spellEntity.dc)
   @JoinColumn()
-  parentSpell!: SpellsEntity;
+  parentSpell!: SpellEntity;
 
   @Column({ nullable: true })
-  dc_success?: string;
+  dcSuccess?: string;
 
   @Column({ nullable: true })
-  dc_type?: string;
+  dcType?: string;
 }

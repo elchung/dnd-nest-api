@@ -236,7 +236,7 @@ export class CharacterMapper {
     return newCharacter;
   }
 
-  private mergeCharacterEntitiesHelper_oneToOne(
+  private mergeCharacterEntitiesHelperOneToOne(
     primary: any,
     update: any,
     subfields: string[]
@@ -249,7 +249,7 @@ export class CharacterMapper {
     });
   }
 
-  private mergeCharacterEntitiesHelper_oneToMany(
+  private mergeCharacterEntitiesHelperOneToMany(
     primary: any,
     update: any,
     field: string
@@ -270,7 +270,7 @@ export class CharacterMapper {
       switch (field) {
         case "hitDice":
         case "featuresAndTraits":
-          this.mergeCharacterEntitiesHelper_oneToMany(
+          this.mergeCharacterEntitiesHelperOneToMany(
             primaryCharacter,
             updateCharacter,
             field
@@ -287,7 +287,7 @@ export class CharacterMapper {
           ];
           console.log(primaryCharacter[field]);
           console.log(updateCharacter[field]);
-          this.mergeCharacterEntitiesHelper_oneToOne(
+          this.mergeCharacterEntitiesHelperOneToOne(
             primaryCharacter[field],
             updateCharacter[field],
             subfields
@@ -296,7 +296,7 @@ export class CharacterMapper {
           break;
         case "deathSaves":
           subfields = ["successes", "failures"];
-          this.mergeCharacterEntitiesHelper_oneToOne(
+          this.mergeCharacterEntitiesHelperOneToOne(
             primaryCharacter[field],
             updateCharacter[field],
             subfields
@@ -304,7 +304,7 @@ export class CharacterMapper {
           break;
         case "knownSpells":
           subfields = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-          this.mergeCharacterEntitiesHelper_oneToOne(
+          this.mergeCharacterEntitiesHelperOneToOne(
             primaryCharacter[field],
             updateCharacter[field],
             subfields
@@ -312,12 +312,12 @@ export class CharacterMapper {
           break;
         case "treasure":
           subfields = ["gold", "silver", "electrum", "copper"];
-          this.mergeCharacterEntitiesHelper_oneToMany(
+          this.mergeCharacterEntitiesHelperOneToMany(
             primaryCharacter[field],
             updateCharacter[field],
             "items"
           );
-          this.mergeCharacterEntitiesHelper_oneToOne(
+          this.mergeCharacterEntitiesHelperOneToOne(
             primaryCharacter[field],
             updateCharacter[field],
             subfields
@@ -325,7 +325,7 @@ export class CharacterMapper {
           break;
         case "settings":
           subfields = ["abilityScoreOnTop"];
-          this.mergeCharacterEntitiesHelper_oneToOne(
+          this.mergeCharacterEntitiesHelperOneToOne(
             primaryCharacter[field],
             updateCharacter[field],
             subfields
@@ -334,7 +334,7 @@ export class CharacterMapper {
         case "spellSlots":
           subfields = ["max", "used"];
           spellSlotFields.forEach((pf) => {
-            this.mergeCharacterEntitiesHelper_oneToOne(
+            this.mergeCharacterEntitiesHelperOneToOne(
               primaryCharacter[field][pf],
               updateCharacter[field][pf],
               subfields

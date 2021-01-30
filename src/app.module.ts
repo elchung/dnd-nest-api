@@ -6,6 +6,10 @@ import { AppService } from "./service/app.service";
 import { AppController } from "./controllers/app.controller";
 import { SpellsModule } from "./module/spells.module";
 import { BackfillModule } from "./module/backfill.module";
+import { SubclassModule } from "./module/subclass.module";
+import { ClassModule } from "./module/class.module";
+import { RaceModule } from "./module/race.module";
+import { SubraceModule } from "./module/subrace.module";
 
 if (process.env.NODE_ENV !== "production") {
   dotenv.config({ path: __dirname + "/../.env" });
@@ -38,6 +42,10 @@ if (
     CharacterModule,
     SpellsModule,
     BackfillModule,
+    SubclassModule,
+    ClassModule,
+    RaceModule,
+    SubraceModule,
   ],
   exports: [AppService],
   controllers: [AppController],

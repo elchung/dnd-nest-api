@@ -11,7 +11,4 @@ export class PrerequisiteEntity {
 
   @Column({ nullable: true })
   type?: string;
-
-  @ManyToOne((type) => FeatureEntity, (feature) => feature.prerequisites)
-  parentFeature: FeatureEntity;
 }

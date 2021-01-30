@@ -6,8 +6,8 @@ export class LevelOptionsDiceEntity {
   id!: number;
 
   @Column({ nullable: true })
-  dice_count: number;
+  diceCount: number;
 
   @Column({ nullable: true })
-  dice_value: number;
+  diceValue: number;
 }

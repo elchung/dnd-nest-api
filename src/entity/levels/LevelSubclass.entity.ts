@@ -7,11 +7,8 @@ export class LevelSubclassEntity {
   id!: number;
 
   @Column({ nullable: true })
-  additional_magical_secrets_max_lvl: number;
+  additionalMagicalSecretsMaxLvl: number;
 
   @Column({ nullable: true })
-  aura_range: number;
-
-  @OneToOne((type) => LevelEntity, (level) => level.subclassSpecific)
-  parentLevel: LevelEntity;
+  auraRange: number;
 }

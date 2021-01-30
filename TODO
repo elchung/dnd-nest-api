@@ -1,13 +1,14 @@
 TODO LIST
-verify all entities are set correctly with jointable/joincolumn, and their respective onetoone/onetomany etc mappings
-
 add source to all top level dtos and entities (phb, volos, etc)
 
-add tests
-
-finish entities
+finish entities -- verify item mapping is how i want
 
 add backfill scripts for all new generation
 
-add endpoints to add/remove/edit/get for new endpoints
+add GET calls that can specify source (or anything really with object.add({}, whatever)
 
+NO <ANY>
+
+fill out mappers
+
+add tests
