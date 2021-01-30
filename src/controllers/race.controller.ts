@@ -31,10 +31,7 @@ export class RaceController {
     @Param("raceName") name: string,
     @Body() updatedRace: RaceDto
   ): Promise<void> {
-    return await this.raceService.updateRaceByName(
-      name,
-      updatedRace
-    );
+    return await this.raceService.updateRaceByName(name, updatedRace);
   }
 
   @Post()

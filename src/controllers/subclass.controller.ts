@@ -17,7 +17,9 @@ export class SubclassController {
   constructor(private readonly subclassService: SubclassService) {}
 
   @Get("/:subclassName")
-  async getSubclassData(@Param("subclassName") name: string): Promise<SubclassDto> {
+  async getSubclassData(
+    @Param("subclassName") name: string
+  ): Promise<SubclassDto> {
     return await this.subclassService.getSubclassByName(name);
   }
 

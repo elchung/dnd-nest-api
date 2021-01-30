@@ -17,7 +17,9 @@ export class SubraceController {
   constructor(private readonly subraceService: SubraceService) {}
 
   @Get("/:subraceName")
-  async getSubraceData(@Param("subraceName") name: string): Promise<SubraceDto> {
+  async getSubraceData(
+    @Param("subraceName") name: string
+  ): Promise<SubraceDto> {
     return await this.subraceService.getSubraceByName(name);
   }
 
@@ -31,10 +33,7 @@ export class SubraceController {
     @Param("subraceName") name: string,
     @Body() updatedSubrace: SubraceDto
   ): Promise<void> {
-    return await this.subraceService.updateSubraceByName(
-      name,
-      updatedSubrace
-    );
+    return await this.subraceService.updateSubraceByName(name, updatedSubrace);
   }
 
   @Post()

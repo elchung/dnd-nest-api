@@ -40,7 +40,7 @@ export class CharacterController {
     return await this.characterService.getCharactersByUsername(username);
   }
 
-  @Post("")
+  @Post()
   async createCharacter(
     @Body() characterDataDto: CharacterDataDto
   ): Promise<CharacterDataDto> {
