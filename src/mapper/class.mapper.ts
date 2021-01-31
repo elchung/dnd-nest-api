@@ -2,14 +2,13 @@ import { ClassDto as ClassDto } from "src/dto/class/Class.dto";
 import { ClassEntity } from "src/entity/classes/Class.entity";
 import { ClassSpellcastingEntity } from "../entity/classes/ClassSpellcasting.entity";
 import { ClassSpellcastingDto } from "../dto/class/ClassSpellcasting.dto";
-import { InfoDto } from "../dto/general/Info.dto";
-import { InfoEntity } from "../entity/general/Info.entity";
-import { OptionsDto } from "../dto/general/Options.dto";
-import { OptionsEntity } from "../entity/general/Options.entity";
+import { CommonMapper } from "./common.mapper";
 import { LevelDto } from "../dto/levels/Level.dto";
 import { LevelEntity } from "../entity/levels/Level.entity";
 
 export class ClassMapper {
+  private commonMapper = new CommonMapper();
+
   classDtoToEntity(classDto: ClassDto): ClassEntity {
     const classEntity = new ClassEntity();
     classEntity.hitDie = classDto.hitDie;
@@ -22,7 +21,7 @@ export class ClassMapper {
       classDto.spellcasting
     );
     classEntity.proficiencyChoices = classDto.proficiencyChoices.map((choice) =>
-      this.optionsDtoToEntity(choice)
+      this.commonMapper.optionsDtoToEntity(choice)
     );
     classEntity.classLevels = classDto.classLevels.map((classLevel) =>
       this.classLevelDtoToEntity(classLevel)
@@ -53,26 +52,10 @@ export class ClassMapper {
     spellCastingEntity.spellcastingAbility =
       spellcastingDto.spellcastingAbility;
     spellCastingEntity.info = spellcastingDto.info.map((infoDto) =>
-      this.infoDtoToEntity(infoDto)
+      this.commonMapper.infoDtoToEntity(infoDto)
     );
 
     return spellCastingEntity;
-  }
-
-  optionsDtoToEntity(optionsDto: OptionsDto): OptionsEntity {
-    const optionsEntity = new OptionsEntity();
-    optionsEntity.choose = optionsDto.choose;
-    optionsEntity.from = optionsDto.from;
-
-    return optionsEntity;
-  }
-
-  infoDtoToEntity(infoDto: InfoDto): InfoEntity {
-    const infoEntity = new InfoEntity();
-    infoEntity.description = infoDto.description;
-    infoEntity.name = infoDto.name;
-
-    return infoEntity;
   }
 
   classEntityToDto(classEntity: ClassEntity): ClassDto {
