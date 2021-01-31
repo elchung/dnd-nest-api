@@ -61,14 +61,11 @@ export class LevelEntity {
   @Column({ nullable: true })
   subclass: string;
 
-  @OneToOne(
-    (type) => LevelSubclassEntity,
-    {
-      cascade: true,
-      eager: true,
-      nullable: true,
-    }
-  )
+  @OneToOne((type) => LevelSubclassEntity, {
+    cascade: true,
+    eager: true,
+    nullable: true,
+  })
   @JoinColumn()
   subclassSpecific: LevelSubclassEntity;
 

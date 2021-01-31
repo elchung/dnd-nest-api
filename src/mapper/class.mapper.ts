@@ -5,6 +5,12 @@ import { ClassSpellcastingDto } from "../dto/class/ClassSpellcasting.dto";
 import { CommonMapper } from "./common.mapper";
 import { LevelDto } from "../dto/levels/Level.dto";
 import { LevelEntity } from "../entity/levels/Level.entity";
+import { LevelSubclassDto } from "../dto/levels/LevelSubclass.dto";
+import { LevelSubclassEntity } from "../entity/levels/LevelSubclass.entity";
+import { LevelSpellcastingDto } from "../dto/levels/LevelSpellcasting.dto";
+import { LevelSpellcastingEntity } from "../entity/levels/LevelSpellcasting.entity";
+import { LevelClassDto } from "../dto/levels/LevelClass.dto";
+import { LevelClassEntity } from "../entity/levels/LevelClass.entity";
 
 export class ClassMapper {
   private commonMapper = new CommonMapper();
@@ -39,9 +45,90 @@ export class ClassMapper {
     levelEntity.level = classLevel.level;
     levelEntity.proficiencyBonus = classLevel.proficiencyBonus;
     levelEntity.subclass = classLevel.subclass;
+    levelEntity.subclassSpecific = this.subclassSpecificDtoToEntity(
+      classLevel.subclassSpecific
+    );
+    levelEntity.spellcasting = this.levelSpellcastingDtoToEntity(
+      classLevel.spellcasting
+    );
+    levelEntity.classSpecific = this.levelClassDtoToEntity(
+      classLevel.classSpecific
+    );
 
-    //todo need to map rest of objects, then maybe refactor generic entity/dtos to their own mappers
     return levelEntity;
+  }
+
+  levelClassDtoToEntity(levelClassDto: LevelClassDto): LevelClassEntity {
+    const levelClassEntity = new LevelClassEntity();
+    levelClassEntity.actionSurges = levelClassDto.actionSurges;
+    levelClassEntity.arcaneRecoveryLevels = levelClassDto.arcaneRecoveryLevels;
+    levelClassEntity.auraRange = levelClassDto.auraRange;
+    levelClassEntity.bardicInspirationDie = levelClassDto.bardicInspirationDie;
+    levelClassEntity.brutalCriticalDice = levelClassDto.brutalCriticalDice;
+    levelClassEntity.channelDivinityCharges =
+      levelClassDto.channelDivinityCharges;
+    levelClassEntity.destroyUndeadCr = levelClassDto.destroyUndeadCr;
+    levelClassEntity.extraAttacks = levelClassDto.extraAttacks;
+    levelClassEntity.favoredEnemies = levelClassDto.favoredEnemies;
+    levelClassEntity.favoredTerrain = levelClassDto.favoredTerrain;
+    levelClassEntity.indomitableUses = levelClassDto.indomitableUses;
+    levelClassEntity.invocationsKnown = levelClassDto.invocationsKnown;
+    levelClassEntity.kiPoints = levelClassDto.kiPoints;
+    levelClassEntity.magicalSecretsMax5 = levelClassDto.magicalSecretsMax5;
+    levelClassEntity.magicalSecretsMax7 = levelClassDto.magicalSecretsMax7;
+    levelClassEntity.magicalSecretsMax9 = levelClassDto.magicalSecretsMax9;
+    levelClassEntity.metamagicKnown = levelClassDto.metamagicKnown;
+    levelClassEntity.mysticArcanumLevel6 = levelClassDto.mysticArcanumLevel6;
+    levelClassEntity.mysticArcanumLevel7 = levelClassDto.mysticArcanumLevel7;
+    levelClassEntity.mysticArcanumLevel8 = levelClassDto.mysticArcanumLevel8;
+    levelClassEntity.mysticArcanumLevel9 = levelClassDto.mysticArcanumLevel9;
+    levelClassEntity.rageCount = levelClassDto.rageCount;
+    levelClassEntity.rageDamageBonus = levelClassDto.rageDamageBonus;
+    levelClassEntity.songOfRestDie = levelClassDto.songOfRestDie;
+    levelClassEntity.sorceryPoints = levelClassDto.sorceryPoints;
+    levelClassEntity.unarmoredMovement = levelClassDto.unarmoredMovement;
+    levelClassEntity.wildShapeFly = levelClassDto.wildShapeFly;
+    levelClassEntity.wildShapeMaxCr = levelClassDto.wildShapeMaxCr;
+    levelClassEntity.wildShapeSwim = levelClassDto.wildShapeSwim;
+    return levelClassEntity;
+  }
+
+  levelSpellcastingDtoToEntity(
+    levelSpellcastingDto: LevelSpellcastingDto
+  ): LevelSpellcastingEntity {
+    const levelSpellcastingEntity = new LevelSpellcastingEntity();
+    levelSpellcastingEntity.cantripsKnown = levelSpellcastingDto.cantripsKnown;
+    levelSpellcastingEntity.spellSlotsLevel1 =
+      levelSpellcastingDto.spellSlotsLevel1;
+    levelSpellcastingEntity.spellSlotsLevel2 =
+      levelSpellcastingDto.spellSlotsLevel2;
+    levelSpellcastingEntity.spellSlotsLevel3 =
+      levelSpellcastingDto.spellSlotsLevel3;
+    levelSpellcastingEntity.spellSlotsLevel4 =
+      levelSpellcastingDto.spellSlotsLevel4;
+    levelSpellcastingEntity.spellSlotsLevel5 =
+      levelSpellcastingDto.spellSlotsLevel5;
+    levelSpellcastingEntity.spellSlotsLevel6 =
+      levelSpellcastingDto.spellSlotsLevel6;
+    levelSpellcastingEntity.spellSlotsLevel7 =
+      levelSpellcastingDto.spellSlotsLevel7;
+    levelSpellcastingEntity.spellSlotsLevel8 =
+      levelSpellcastingDto.spellSlotsLevel8;
+    levelSpellcastingEntity.spellSlotsLevel9 =
+      levelSpellcastingDto.spellSlotsLevel9;
+
+    return levelSpellcastingEntity;
+  }
+
+  subclassSpecificDtoToEntity(
+    levelSubclassDto: LevelSubclassDto
+  ): LevelSubclassEntity {
+    const levelSubclassEntity = new LevelSubclassEntity();
+    levelSubclassEntity.additionalMagicalSecretsMaxLvl =
+      levelSubclassDto.additionalMagicalSecretsMaxLvl;
+    levelSubclassEntity.auraRange = levelSubclassDto.auraRange;
+
+    return levelSubclassEntity;
   }
 
   classSpellcastingDtoToEntity(
@@ -60,7 +147,7 @@ export class ClassMapper {
 
   classEntityToDto(classEntity: ClassEntity): ClassDto {
     const classDto = new ClassDto();
-
+    // todo fill this out
     return classDto;
   }
 }
