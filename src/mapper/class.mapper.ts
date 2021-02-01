@@ -11,6 +11,8 @@ import { LevelSpellcastingDto } from "../dto/levels/LevelSpellcasting.dto";
 import { LevelSpellcastingEntity } from "../entity/levels/LevelSpellcasting.entity";
 import { LevelClassDto } from "../dto/levels/LevelClass.dto";
 import { LevelClassEntity } from "../entity/levels/LevelClass.entity";
+import { LevelClassCreatingSpellSlotsDto } from "src/dto/levels/LevelClassCreatingSpellSlots.dto";
+import { LevelClassCreatingSpellSlotsEntity } from "src/entity/levels/LevelClassCreatingSpellSlots.entity";
 
 export class ClassMapper {
   private commonMapper = new CommonMapper();
@@ -90,7 +92,19 @@ export class ClassMapper {
     levelClassEntity.wildShapeFly = levelClassDto.wildShapeFly;
     levelClassEntity.wildShapeMaxCr = levelClassDto.wildShapeMaxCr;
     levelClassEntity.wildShapeSwim = levelClassDto.wildShapeSwim;
+    levelClassEntity.sneakAttack = this.commonMapper.levelOptionsDiceDtoToEntity(levelClassDto.sneakAttack);
+    levelClassEntity.martialArts = this.commonMapper.levelOptionsDiceDtoToEntity(levelClassDto.martialArts);
+    levelClassEntity.creatingSpellSlots = levelClassDto.creatingSpellSlots.map(spellSlot => this.levelClassCreatingSpellSLotsDtoToEntity(spellSlot));
+    
     return levelClassEntity;
+  }
+
+  levelClassCreatingSpellSLotsDtoToEntity(levelClassCreatingSpellSLotsDto: LevelClassCreatingSpellSlotsDto): LevelClassCreatingSpellSlotsEntity {
+    const levelClassCreatingSpellSLotsEntity = new LevelClassCreatingSpellSlotsEntity();
+    levelClassCreatingSpellSLotsEntity.sorceryPointCost = levelClassCreatingSpellSLotsDto.sorceryPointCost
+    levelClassCreatingSpellSLotsEntity.sorceryPointCost = levelClassCreatingSpellSLotsDto.sorceryPointCost
+
+    return levelClassCreatingSpellSLotsEntity;
   }
 
   levelSpellcastingDtoToEntity(
