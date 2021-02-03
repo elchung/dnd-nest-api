@@ -22,7 +22,9 @@ export class CommonMapper {
     return infoEntity;
   }
 
-  levelOptionsDiceDtoToEntity(levelOptionsDiceDto: LevelOptionsDiceDto): LevelOptionsDiceEntity {
+  levelOptionsDiceDtoToEntity(
+    levelOptionsDiceDto: LevelOptionsDiceDto
+  ): LevelOptionsDiceEntity {
     const levelOptionsDiceEntity = new LevelOptionsDiceEntity();
     levelOptionsDiceEntity.diceCount = levelOptionsDiceDto.diceCount;
     levelOptionsDiceEntity.diceValue = levelOptionsDiceDto.diceValue;

@@ -8,7 +8,7 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { LevelEntity } from "../levels/Level.entity";
+import { LevelClassEntity } from "../levels/LevelClass.entity";
 import { OptionsEntity } from "../general/Options.entity";
 import { ClassSpellcastingEntity } from "./ClassSpellcasting.entity";
 
@@ -17,17 +17,17 @@ export class ClassEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @OneToMany((type) => LevelEntity, (level) => level.parentClass, {
+  @OneToMany((type) => LevelClassEntity, (level) => level.parentClass, {
     cascade: true,
     eager: true,
     nullable: true,
   })
-  classLevels?: LevelEntity[];
+  classLevels?: LevelClassEntity[];
 
   @Column({ nullable: true })
   hitDie?: number;
 
-  @Column({ nullable: true })
+  @Column({ unique: true })
   name?: string;
 
   @Column("text", { array: true, nullable: true })

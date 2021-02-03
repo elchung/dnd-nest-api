@@ -9,7 +9,7 @@ import { SpellsMapper } from "../mapper/spells.mapper";
 export class SpellService {
   constructor(
     @InjectRepository(SpellEntity)
-    private spellRepository: Repository<SpellEntity>,
+    private spellRepository: Repository<SpellEntity>
   ) {}
 
   private spellMapper = new SpellsMapper();
@@ -34,12 +34,12 @@ export class SpellService {
   }
 
   async getAllSpellNames(): Promise<string[]> {
-    return this.spellMapper.spellNamesEntityToList(
+    return (
       await this.spellRepository
         .createQueryBuilder("spells")
         .select(["spells.name"])
         .getMany()
-    );
+    ).map((spell) => spell.name);
   }
 
   async getSpellWithName(name: string): Promise<any> {

@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { ClassEntity } from "src/entity/classes/Class.entity";
-import { ClassMapper } from "src/mapper/class.mapper";
 import { Repository } from "typeorm";
 
 import { ClassDto } from "../dto/class/Class.dto";
@@ -10,23 +9,18 @@ import { ClassDto } from "../dto/class/Class.dto";
 export class ClassService {
   constructor(
     @InjectRepository(ClassEntity)
-    private classRepository: Repository<ClassEntity>,
+    private classRepository: Repository<ClassEntity>
   ) {}
 
-  private classMapper = new ClassMapper();
-
-  async getAllClasses(): Promise<ClassDto[]> {
-    return (await this.classRepository.find()).map(classEntity => (this.classMapper.classEntityToDto(classEntity)));
+  async getAllClasses(): Promise<any[]> {
+    return await this.classRepository.find();
   }
 
-  async getClassByName(name: string): Promise<ClassDto> {
-    return this.classMapper.classEntityToDto(await this.classRepository.findOne({where: { name }}));
+  async getClassByName(name: string): Promise<any> {
+    return await this.classRepository.findOne({ where: { name } });
   }
 
-  async updateClassByName(
-    name: string,
-    updatedClass: ClassDto
-  ): Promise<void> {
+  async updateClassByName(name: string, updatedClass: ClassDto): Promise<void> {
     await this.classRepository
       .createQueryBuilder()
       .update(ClassEntity)
@@ -36,7 +30,7 @@ export class ClassService {
   }
 
   async createClass(newClass: ClassDto): Promise<void> {
-    await this.classRepository.save(this.classMapper.classDtoToEntity(newClass));
+    await this.classRepository.save(newClass);
   }
 
   async deleteClass(name: string): Promise<void> {

@@ -21,7 +21,7 @@ export class SubclassEntity {
   @Column("text", { array: true, nullable: true })
   description: string[];
 
-  @Column({ nullable: true })
+  @Column({ unique: true })
   name: string;
 
   @Column({ nullable: true })

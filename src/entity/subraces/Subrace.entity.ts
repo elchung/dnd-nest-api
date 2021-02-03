@@ -15,10 +15,10 @@ export class SubraceEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ nullable: true })
+  @Column({ unique: true })
   name: string;
 
-  @Column({ nullable: true })
+  @Column()
   race: string;
 
   @Column({ nullable: true })

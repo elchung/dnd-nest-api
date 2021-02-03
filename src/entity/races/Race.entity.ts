@@ -13,10 +13,10 @@ export class RaceEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ nullable: true })
+  @Column({ unique: true })
   name?: string;
 
-  @Column({ nullable: true })
+  @Column()
   speed?: number;
 
   @Column({ nullable: true })
@@ -25,7 +25,7 @@ export class RaceEntity {
   @Column({ nullable: true })
   age?: string;
 
-  @Column({ nullable: true })
+  @Column()
   size?: string;
 
   @Column({ nullable: true })

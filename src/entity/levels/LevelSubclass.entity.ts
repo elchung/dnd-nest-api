@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
-import { LevelEntity } from "./Level.entity";
+import { LevelClassEntity } from "./LevelClass.entity";
 
 @Entity()
 export class LevelSubclassEntity {

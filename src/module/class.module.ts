@@ -5,8 +5,8 @@ import { ClassEntity } from "src/entity/classes/Class.entity";
 import { ClassSpellcastingEntity } from "src/entity/classes/ClassSpellcasting.entity";
 import { InfoEntity } from "src/entity/general/Info.entity";
 import { OptionsEntity } from "src/entity/general/Options.entity";
-import { LevelEntity } from "src/entity/levels/Level.entity";
 import { LevelClassEntity } from "src/entity/levels/LevelClass.entity";
+import { LevelClassSpecificEntity } from "src/entity/levels/LevelClassSpecific.entity";
 import { LevelClassCreatingSpellSlotsEntity } from "src/entity/levels/LevelClassCreatingSpellSlots.entity";
 import { LevelOptionsDiceEntity } from "src/entity/levels/LevelOptionsDice.entity";
 import { LevelSpellcastingEntity } from "src/entity/levels/LevelSpellcasting.entity";
@@ -17,15 +17,15 @@ import { ClassService } from "src/service/class.service";
   imports: [
     TypeOrmModule.forFeature([
       ClassEntity,
-      LevelEntity,
       LevelClassEntity,
+      LevelClassSpecificEntity,
       LevelSpellcastingEntity,
       LevelSubclassEntity,
       LevelClassCreatingSpellSlotsEntity,
       LevelOptionsDiceEntity,
       OptionsEntity,
       ClassSpellcastingEntity,
-      InfoEntity,      
+      InfoEntity,
     ]),
   ],
   exports: [ClassService],

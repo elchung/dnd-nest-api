@@ -4,13 +4,13 @@ import { ClassSpellcastingEntity } from "../entity/classes/ClassSpellcasting.ent
 import { ClassSpellcastingDto } from "../dto/class/ClassSpellcasting.dto";
 import { CommonMapper } from "./common.mapper";
 import { LevelDto } from "../dto/levels/Level.dto";
-import { LevelEntity } from "../entity/levels/Level.entity";
+import { LevelClassEntity } from "../entity/levels/LevelClass.entity";
 import { LevelSubclassDto } from "../dto/levels/LevelSubclass.dto";
 import { LevelSubclassEntity } from "../entity/levels/LevelSubclass.entity";
 import { LevelSpellcastingDto } from "../dto/levels/LevelSpellcasting.dto";
 import { LevelSpellcastingEntity } from "../entity/levels/LevelSpellcasting.entity";
 import { LevelClassDto } from "../dto/levels/LevelClass.dto";
-import { LevelClassEntity } from "../entity/levels/LevelClass.entity";
+import { LevelClassSpecificEntity } from "../entity/levels/LevelClassSpecific.entity";
 import { LevelClassCreatingSpellSlotsDto } from "src/dto/levels/LevelClassCreatingSpellSlots.dto";
 import { LevelClassCreatingSpellSlotsEntity } from "src/entity/levels/LevelClassCreatingSpellSlots.entity";
 
@@ -38,8 +38,8 @@ export class ClassMapper {
     return classEntity;
   }
 
-  classLevelDtoToEntity(classLevel: LevelDto): LevelEntity {
-    const levelEntity = new LevelEntity();
+  classLevelDtoToEntity(classLevel: LevelDto): LevelClassEntity {
+    const levelEntity = new LevelClassEntity();
     levelEntity.abilityScoreBonuses = classLevel.abilityScoreBonuses;
     levelEntity.class = classLevel.class;
     levelEntity.featureChoices = classLevel.featureChoices;
@@ -60,8 +60,10 @@ export class ClassMapper {
     return levelEntity;
   }
 
-  levelClassDtoToEntity(levelClassDto: LevelClassDto): LevelClassEntity {
-    const levelClassEntity = new LevelClassEntity();
+  levelClassDtoToEntity(
+    levelClassDto: LevelClassDto
+  ): LevelClassSpecificEntity {
+    const levelClassEntity = new LevelClassSpecificEntity();
     levelClassEntity.actionSurges = levelClassDto.actionSurges;
     levelClassEntity.arcaneRecoveryLevels = levelClassDto.arcaneRecoveryLevels;
     levelClassEntity.auraRange = levelClassDto.auraRange;
@@ -92,17 +94,27 @@ export class ClassMapper {
     levelClassEntity.wildShapeFly = levelClassDto.wildShapeFly;
     levelClassEntity.wildShapeMaxCr = levelClassDto.wildShapeMaxCr;
     levelClassEntity.wildShapeSwim = levelClassDto.wildShapeSwim;
-    levelClassEntity.sneakAttack = this.commonMapper.levelOptionsDiceDtoToEntity(levelClassDto.sneakAttack);
-    levelClassEntity.martialArts = this.commonMapper.levelOptionsDiceDtoToEntity(levelClassDto.martialArts);
-    levelClassEntity.creatingSpellSlots = levelClassDto.creatingSpellSlots.map(spellSlot => this.levelClassCreatingSpellSLotsDtoToEntity(spellSlot));
-    
+    levelClassEntity.sneakAttack = this.commonMapper.levelOptionsDiceDtoToEntity(
+      levelClassDto.sneakAttack
+    );
+    levelClassEntity.martialArts = this.commonMapper.levelOptionsDiceDtoToEntity(
+      levelClassDto.martialArts
+    );
+    levelClassEntity.creatingSpellSlots = levelClassDto.creatingSpellSlots.map(
+      (spellSlot) => this.levelClassCreatingSpellSLotsDtoToEntity(spellSlot)
+    );
+
     return levelClassEntity;
   }
 
-  levelClassCreatingSpellSLotsDtoToEntity(levelClassCreatingSpellSLotsDto: LevelClassCreatingSpellSlotsDto): LevelClassCreatingSpellSlotsEntity {
+  levelClassCreatingSpellSLotsDtoToEntity(
+    levelClassCreatingSpellSLotsDto: LevelClassCreatingSpellSlotsDto
+  ): LevelClassCreatingSpellSlotsEntity {
     const levelClassCreatingSpellSLotsEntity = new LevelClassCreatingSpellSlotsEntity();
-    levelClassCreatingSpellSLotsEntity.sorceryPointCost = levelClassCreatingSpellSLotsDto.sorceryPointCost
-    levelClassCreatingSpellSLotsEntity.sorceryPointCost = levelClassCreatingSpellSLotsDto.sorceryPointCost
+    levelClassCreatingSpellSLotsEntity.sorceryPointCost =
+      levelClassCreatingSpellSLotsDto.sorceryPointCost;
+    levelClassCreatingSpellSLotsEntity.sorceryPointCost =
+      levelClassCreatingSpellSLotsDto.sorceryPointCost;
 
     return levelClassCreatingSpellSLotsEntity;
   }

@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { SubclassEntity } from "src/entity/subclasses/Subclass.entity";
-import { SubclassMapper } from "src/mapper/subclass.mapper";
 import { Repository } from "typeorm";
 
 import { SubclassDto } from "../dto/subclasses/Subclass.dto";
@@ -11,16 +10,14 @@ export class SubclassService {
   constructor(
     @InjectRepository(SubclassEntity)
     private subclassRepository: Repository<SubclassEntity>
-  ) {} 
+  ) {}
 
-  private subclassMapper = new SubclassMapper();
-
-  async getAllSubclasses(): Promise<SubclassDto[]> {
-    return (await this.subclassRepository.find()).map(subclassEntity => (this.subclassMapper.subclassEntityToDto(subclassEntity)));
+  async getAllSubclasses(): Promise<any[]> {
+    return await this.subclassRepository.find();
   }
 
-  async getSubclassByName(name: string): Promise<SubclassDto> {
-    return this.subclassMapper.subclassEntityToDto(await this.subclassRepository.findOne({where: { name }}));
+  async getSubclassByName(name: string): Promise<any> {
+    return await this.subclassRepository.findOne({ where: { name } });
   }
 
   async updateSubclassByName(
@@ -36,7 +33,7 @@ export class SubclassService {
   }
 
   async createSubclass(newSubclass: SubclassDto): Promise<void> {
-    await this.subclassRepository.save(this.subclassMapper.subclassDtoToEntity(newSubclass));
+    await this.subclassRepository.save(newSubclass);
   }
 
   async deleteSubclass(name: string): Promise<void> {
@@ -47,4 +44,3 @@ export class SubclassService {
       .execute();
   }
 }
-

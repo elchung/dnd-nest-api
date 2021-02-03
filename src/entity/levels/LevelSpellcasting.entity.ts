@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
-import { LevelEntity } from "./Level.entity";
+import { LevelClassEntity } from "./LevelClass.entity";
 
 @Entity()
 export class LevelSpellcastingEntity {
@@ -39,6 +39,6 @@ export class LevelSpellcastingEntity {
   @Column({ nullable: true })
   spellsKnown: number;
 
-  @OneToOne((type) => LevelEntity, (level) => level.spellcasting)
-  parentLevel: LevelEntity;
+  @OneToOne((type) => LevelClassEntity, (level) => level.spellcasting)
+  parentLevel: LevelClassEntity;
 }
