@@ -3,10 +3,6 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { SpellEntity } from "../entity/spells/Spell.entity";
-import { SpellDamageEntity } from "../entity/spells/SpellDamage.entity";
-import { SpellDamageAtLevelEntity } from "../entity/spells/SpellDamageAtLevel.entity";
-import { SpellDcEntity } from "../entity/spells/SpellDc.entity";
-import { SpellAreaOfEffectEntity } from "../entity/spells/SpellAreaOfEffect.entity";
 import { BackfillMapper } from "../mapper/backfill.mapper";
 import { FeatureEntity } from "../entity/features/feature.entity";
 //todo add check to make sure name for backfill service is unique
@@ -33,8 +29,8 @@ export class BackfillService {
 
     let count = 1;
     const failed = [];
+    // using 'for..of..' for async compatibility
     for (const idx of indexList) {
-      // using 'for..of..' for async compatibility
       console.log(
         `${count} of ${indexList.length}: Getting data for ${idx.name} at ${
           this.apiUrlBase + urlSuffix
@@ -53,6 +49,35 @@ export class BackfillService {
           case "Feature": {
             const entity = this.backfillMapper.featureResponseToEntity(data);
             await this.saveFeature(entity);
+            break;
+          }
+          case "Classes": {
+            // todo need to recursively query for nested fields
+            break;
+          }
+          case "Subclasses": {
+            // todo need to recursively query for nested fields
+            break;
+          }
+          case "Races": {
+            // todo need to recursively query for nested fields
+            break;
+          }
+          case "Subraces": {
+            // todo need to recursively query for nested fields
+            break;
+          }
+          case "Traits": {
+            name?: string;
+            subraces?: string[];
+            races?: string[];
+            description?: string[];
+            proficiencies?: string[];
+            proficiencyChoices?: OptionsEntity[];
+            break;
+          }
+          case "Items": {
+            // todo need to recursively query for nested fields
             break;
           }
           default: {
