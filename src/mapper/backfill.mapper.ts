@@ -5,6 +5,12 @@ import { SpellDcEntity } from "../entity/spells/SpellDc.entity";
 import { SpellAreaOfEffectEntity } from "../entity/spells/SpellAreaOfEffect.entity";
 import { FeatureEntity } from "../entity/features/feature.entity";
 import { PrerequisiteEntity } from "../entity/features/prerequisite.entity";
+import { TraitDto } from "../dto/general/Trait.dto";
+import { SpellsDto } from "../dto/spells/Spells.dto";
+import { TraitEntity } from "../entity/general/Trait.entity";
+import { OptionsEntity } from "../entity/general/Options.entity";
+import { RaceEntity } from "../entity/races/Race.entity";
+import { SubraceEntity } from "../entity/subraces/Subrace.entity";
 
 export class BackfillMapper {
   featureResponseToEntity(feature: any): FeatureEntity {
@@ -80,5 +86,37 @@ export class BackfillMapper {
     }
 
     return spellEntity;
+  }
+
+  traitResponseToEntity(trait: any): TraitEntity {
+    const traitEntity = new TraitEntity();
+    traitEntity.name = trait.name;
+    traitEntity.subraces = trait.subraces?.map((subraceObj) => subraceObj.name);
+    traitEntity.races = trait.races?.map((raceObj) => raceObj.name);
+    traitEntity.description = trait.desc;
+    traitEntity.proficiencies = trait.proficiencies;
+
+    traitEntity.proficiencyChoices = trait.proficiency_choices?.map(
+      (choice) => {
+        const optionsEntity = new OptionsEntity();
+        optionsEntity.choose = choice.choose;
+        optionsEntity.from = choice.from.map((choiceFrom) => choiceFrom.name);
+        return optionsEntity;
+      }
+    );
+
+    return traitEntity;
+  }
+
+  raceResponseToEntity(race: any): RaceEntity {
+    const raceEntity = new RaceEntity();
+
+    return raceEntity;
+  }
+
+  subraceResponseToEntity(subrace: any): SubraceEntity {
+    const subraceEntity = new SubraceEntity();
+
+    return subraceEntity;
   }
 }

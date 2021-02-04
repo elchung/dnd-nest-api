@@ -22,7 +22,8 @@ export class TraitDto {
   name: string;
 
   @IsArray()
-  @ApiProperty({ type: [String] })
+  @IsOptional()
+  @ApiPropertyOptional({ type: [String] })
   proficiencies: string[];
 
   @IsArray()

@@ -1,10 +1,13 @@
 import axios from "axios";
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { SpellEntity } from "../entity/spells/Spell.entity";
 import { BackfillMapper } from "../mapper/backfill.mapper";
 import { FeatureEntity } from "../entity/features/feature.entity";
+import { TraitEntity } from "../entity/general/Trait.entity";
+import { RaceEntity } from "../entity/races/Race.entity";
+import { SubraceEntity } from "../entity/subraces/Subrace.entity";
 //todo add check to make sure name for backfill service is unique
 @Injectable()
 export class BackfillService {
@@ -13,7 +16,16 @@ export class BackfillService {
     private spellsRepository: Repository<SpellEntity>,
 
     @InjectRepository(FeatureEntity)
-    private featureRepository: Repository<FeatureEntity>
+    private featureRepository: Repository<FeatureEntity>,
+
+    @InjectRepository(TraitEntity)
+    private traitRepository: Repository<TraitEntity>,
+
+    @InjectRepository(RaceEntity)
+    private raceRepository: Repository<RaceEntity>,
+
+    @InjectRepository(SubraceEntity)
+    private subraceRepository: Repository<SubraceEntity>
   ) {}
   private apiUrlBase = "http://www.dnd5eapi.co";
   private backfillMapper = new BackfillMapper();
@@ -40,15 +52,18 @@ export class BackfillService {
         const data = (await axios.get(this.apiUrlBase + idx.url)).data;
         console.info(`received data for ${idx.name}: ${JSON.stringify(data)}`);
         switch (name) {
-          //todo convert these to enums (+in controller...wait if i print will it print the number or name?)
           case "Spell": {
-            const entity = this.backfillMapper.spellResponseToEntity(data);
-            await this.saveSpell(entity);
+            await this.save(
+              this.backfillMapper.spellResponseToEntity(data),
+              this.spellsRepository
+            );
             break;
           }
           case "Feature": {
-            const entity = this.backfillMapper.featureResponseToEntity(data);
-            await this.saveFeature(entity);
+            await this.save(
+              this.backfillMapper.featureResponseToEntity(data),
+              this.featureRepository
+            );
             break;
           }
           case "Classes": {
@@ -60,20 +75,24 @@ export class BackfillService {
             break;
           }
           case "Races": {
-            // todo need to recursively query for nested fields
+            await this.save(
+              this.backfillMapper.raceResponseToEntity(data),
+              this.raceRepository
+            );
             break;
           }
           case "Subraces": {
-            // todo need to recursively query for nested fields
+            await this.save(
+              this.backfillMapper.subraceResponseToEntity(data),
+              this.subraceRepository
+            );
             break;
           }
           case "Traits": {
-            name?: string;
-            subraces?: string[];
-            races?: string[];
-            description?: string[];
-            proficiencies?: string[];
-            proficiencyChoices?: OptionsEntity[];
+            await this.save(
+              this.backfillMapper.traitResponseToEntity(data),
+              this.traitRepository
+            );
             break;
           }
           case "Items": {
@@ -92,15 +111,9 @@ export class BackfillService {
     }
     console.info(`Done. Failed ${name}s: ${failed}`);
   }
-
-  async saveSpell(spellEntity: SpellEntity): Promise<void> {
-    console.info("Saving Spell...");
-    await this.spellsRepository.save(spellEntity);
-  }
-
-  async saveFeature(featureEntity: FeatureEntity): Promise<void> {
-    console.info("Saving Feature...");
-    await this.featureRepository.save(featureEntity);
+  async save(entity: any, repo: Repository<any>): Promise<void> {
+    console.info(`saving..`);
+    await repo.save(entity);
   }
 }
 
