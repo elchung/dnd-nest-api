@@ -8,7 +8,7 @@ import { FeatureEntity } from "../entity/features/feature.entity";
 import { TraitEntity } from "../entity/general/Trait.entity";
 import { RaceEntity } from "../entity/races/Race.entity";
 import { SubraceEntity } from "../entity/subraces/Subrace.entity";
-//todo add check to make sure name for backfill service is unique
+//todo add check to make sure name for backfill service is unique (fail or just update if name already exists)
 @Injectable()
 export class BackfillService {
   constructor(
