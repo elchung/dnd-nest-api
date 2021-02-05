@@ -3,32 +3,42 @@ const { default: axios } = require("axios");
 const root = 'https://www.dnd5eapi.co'
 
 let dataurls;
-let racesUrl = [];
-let raceData = [];
+let res = {};
 
 axios.get(root + "/api")
   .then((data) => {
     dataurls = data.data;
   })
-axios.get(root + "/api/subclasses")
-  .then((data) => {
-    data.data.results.map(race => racesUrl.push(race.url));
-  })
   .catch((e) => {
-    console.log('error', e)
+    console.log('error', e);
   })
   .then(() => {
-    console.log(racesUrl);
-    racesUrl.map(url => {
-      axios.get(root + url)
+    Object.entries(dataurls).map((entry) => {
+      res[entry[0]] = [];
+      let dataurls = [];
+      console.log(root + entry[1])
+      axios.get(root + entry[1])
         .then((data) => {
-          raceData.push(data.data);
+          data.data.results.map(item => dataurls.push(item.url));
         })
         .catch((e) => {
-          console.log('error', e);
+          console.log('error', e)
         })
         .then(() => {
-          console.log(raceData);
+          dataurls.map(url => {
+            axios.get(root + url)
+              .then((data) => {
+                res[entry[0]].push(data.data);
+                console.log(res)
+              })
+              .catch((e) => {
+                console.log('error', e);
+              })
+          })
         })
     })
+  })
+  .then(() => {
+    console.log("test");
+    console.log(res)
   })
