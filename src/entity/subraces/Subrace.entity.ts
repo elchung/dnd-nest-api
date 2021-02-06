@@ -44,7 +44,7 @@ export class SubraceEntity {
     eager: true,
   })
   @JoinTable()
-  languageOptions: OptionsEntity[];
+  languageOptions: OptionsEntity;
 
   @Column("text", { array: true, nullable: true })
   racialTraits: string[];

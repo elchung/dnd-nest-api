@@ -33,8 +33,8 @@ export class SubraceDto {
 
   @ValidateNested()
   @IsOptional()
-  @ApiPropertyOptional({ type: [OptionsDto] })
-  languageOptions: OptionsDto[];
+  @ApiPropertyOptional({ type: OptionsDto })
+  languageOptions: OptionsDto;
 
   @IsArray()
   @IsOptional()

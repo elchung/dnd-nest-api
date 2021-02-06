@@ -8,6 +8,8 @@ import { FeatureEntity } from "../entity/features/feature.entity";
 import { TraitEntity } from "../entity/general/Trait.entity";
 import { RaceEntity } from "../entity/races/Race.entity";
 import { SubraceEntity } from "../entity/subraces/Subrace.entity";
+import { SubclassEntity } from "../entity/subclasses/Subclass.entity";
+import { ClassEntity } from "../entity/classes/Class.entity";
 //todo add check to make sure name for backfill service is unique (fail or just update if name already exists)
 @Injectable()
 export class BackfillService {
@@ -25,7 +27,13 @@ export class BackfillService {
     private raceRepository: Repository<RaceEntity>,
 
     @InjectRepository(SubraceEntity)
-    private subraceRepository: Repository<SubraceEntity>
+    private subraceRepository: Repository<SubraceEntity>,
+
+    @InjectRepository(SubclassEntity)
+    private subclassRepository: Repository<SubclassEntity>,
+
+    @InjectRepository(ClassEntity)
+    private classRepository: Repository<ClassEntity>
   ) {}
   private apiUrlBase = "http://www.dnd5eapi.co";
   private backfillMapper = new BackfillMapper();
@@ -71,7 +79,10 @@ export class BackfillService {
             break;
           }
           case "Subclasses": {
-            // todo need to recursively query for nested fields
+            await this.save(
+              this.backfillMapper.subclassResponseToEntity(data),
+              this.subclassRepository
+            );
             break;
           }
           case "Races": {

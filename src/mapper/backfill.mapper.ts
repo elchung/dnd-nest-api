@@ -13,6 +13,8 @@ import { RaceEntity } from "../entity/races/Race.entity";
 import { SubraceEntity } from "../entity/subraces/Subrace.entity";
 import { AbilityScoreBonusDto } from "src/dto/general/AbilityScoreBonus.dto";
 import { AbilityScoreBonusEntity } from "src/entity/general/AbilityScoreBonus.entity";
+import {SubclassEntity} from "../entity/subclasses/Subclass.entity";
+import {SubclassSpellEntity} from "../entity/subclasses/SubclassSpell.entity";
 
 export class BackfillMapper {
   featureResponseToEntity(feature: any): FeatureEntity {
@@ -118,16 +120,26 @@ export class BackfillMapper {
     raceEntity.age = race.age;
     raceEntity.size = race.size;
     raceEntity.sizeDescription = race.size_description;
-    raceEntity.startingProficiencies = race.starting_proficiencies.map(startingProf => startingProf.name) // todo check
-    raceEntity.startingProficiencyOptions = this.optionsDataToEntity(race.starting_proficiency_options);
-    raceEntity.languages = race.languages.map(language => language.name);
-    raceEntity.languageOptions = this.optionsDataToEntity(race.language_options);
+    raceEntity.startingProficiencies = race.starting_proficiencies.map(
+      (startingProf) => startingProf.name
+    );
+    raceEntity.startingProficiencyOptions = this.optionsDataToEntity(
+      race.starting_proficiency_options
+    );
+    raceEntity.languages = race.languages.map((language) => language.name);
+    raceEntity.languageOptions = this.optionsDataToEntity(
+      race.language_options
+    );
     raceEntity.languageDescription = race.language_desc;
-    raceEntity.traits = race.traits.map(trait => trait.name);
+    raceEntity.traits = race.traits.map((trait) => trait.name);
     raceEntity.traitOptions = this.optionsDataToEntity(race.trait_options);
-    raceEntity.abilityBonuses = race.ability_bonuses.map(bonus => this.abilityBonusDataToEntity(bonus))
-    raceEntity.abilityBonusOptions = this.optionsDataToEntity(race.ability_bonus_options);
-    raceEntity.subraces = race.subraces.map(subrace => subrace.name);
+    raceEntity.abilityBonuses = race.ability_bonuses.map((bonus) =>
+      this.abilityBonusDataToEntity(bonus)
+    );
+    raceEntity.abilityBonusOptions = this.optionsDataToEntity(
+      race.ability_bonus_options
+    );
+    raceEntity.subraces = race.subraces.map((subrace) => subrace.name);
     return raceEntity;
   }
 
@@ -135,10 +147,45 @@ export class BackfillMapper {
     const subraceEntity = new SubraceEntity();
     subraceEntity.name = subrace.name;
     subraceEntity.race = subrace.race.name;
-    subraceEntity.description = subrace.desc
-    subraceEntity.abilityScoreBonuses = subrace.ability_bonuses.map(bonus => bonus.name);
+    subraceEntity.description = subrace.desc;
+    subraceEntity.abilityScoreBonuses = subrace.ability_bonuses.map(
+      (bonus) => bonus.name
+    );
+    subraceEntity.startingProficiencies = subrace.starting_proficiencies.map(
+      (startProf) => startProf.name
+    );
+    subraceEntity.languages = subrace.languages.map(
+      (language) => language.name
+    );
+    subraceEntity.languageOptions = this.optionsDataToEntity(
+      subrace.language_options
+    );
+    subraceEntity.racialTraits = subrace.racial_traits.map(
+      (trait) => trait.name
+    );
+    subraceEntity.racialTraitOptions = this.optionsDataToEntity(
+      subrace.racial_trait_options
+    );
     return subraceEntity;
   }
+
+  subclassResponseToEntity(subclass: any): SubclassEntity {
+    const subclassEntity = new SubclassEntity();
+    subclassEntity.class = subclass.class.name
+    subclassEntity.name = subclass.name
+    subclassEntity.subclassFlavor = subclass.subclass_flavor
+    subclassEntity.description = subclass.desc
+    subclassEntity.spells = subclass.spells.map(spell => spell.)
+    subclassEntity.subclassLevels = subclass.//todoglkpn map subclass levels
+    return subclassEntity;
+  }
+
+  subclassSpellDataToEntity(spelldata: any): SubclassSpellEntity {
+    const spellEntity = SubclassSpellEntity;
+    spellEntity.spell = spelldata.spell.name
+    return spellEntity;
+  }
+
   abilityBonusDataToEntity(bonuses: any): AbilityScoreBonusEntity {
     const bonusEntity = new AbilityScoreBonusEntity();
     bonusEntity.bonus = bonuses.bonus;
@@ -148,7 +195,7 @@ export class BackfillMapper {
 
   optionsDataToEntity(options: any): OptionsEntity {
     const optionsEntity = new OptionsEntity();
-    optionsEntity.from = options.from.map(optionFrom => optionFrom.name);
+    optionsEntity.from = options.from.map((optionFrom) => optionFrom.name);
     optionsEntity.choose = options.choose;
     optionsEntity.type = options.type;
     return optionsEntity;
