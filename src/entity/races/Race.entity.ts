@@ -4,6 +4,8 @@ import {
   Column,
   ManyToMany,
   JoinTable,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { OptionsEntity } from "../general/Options.entity";
 import { AbilityScoreBonusEntity } from "../general/AbilityScoreBonus.entity";
@@ -52,7 +54,7 @@ export class RaceEntity {
     eager: true,
   })
   @JoinTable()
-  languageOptions?: OptionsEntity[];
+  languageOptions?: OptionsEntity;
 
   @ManyToMany((type) => OptionsEntity, {
     cascade: true,
@@ -60,7 +62,7 @@ export class RaceEntity {
     eager: true,
   })
   @JoinTable()
-  traitOptions?: OptionsEntity[];
+  traitOptions?: OptionsEntity;
 
   @ManyToMany((type) => OptionsEntity, {
     cascade: true,
@@ -68,15 +70,15 @@ export class RaceEntity {
     eager: true,
   })
   @JoinTable()
-  startingProficiencyOptions?: OptionsEntity[];
+  startingProficiencyOptions?: OptionsEntity;
 
-  @ManyToMany((type) => OptionsEntity, {
+  @OneToOne((type) => OptionsEntity, {
     cascade: true,
     nullable: true,
     eager: true,
   })
-  @JoinTable()
-  abilityBonusOptions?: OptionsEntity[];
+  @JoinColumn()
+  abilityBonusOptions?: OptionsEntity;
 
   @ManyToMany((type) => AbilityScoreBonusEntity, {
     cascade: true,

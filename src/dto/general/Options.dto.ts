@@ -10,4 +10,9 @@ export class OptionsDto {
   @IsNumber()
   @ApiProperty({ type: Number })
   choose: number;
+
+  @IsNumber()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  type: string;
 }

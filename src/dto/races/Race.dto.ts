@@ -25,8 +25,8 @@ export class RaceDto {
 
   @ValidateNested()
   @IsOptional()
-  @ApiPropertyOptional({ type: [OptionsDto] })
-  abilityBonusOptions: OptionsDto[];
+  @ApiPropertyOptional({ type: OptionsDto })
+  abilityBonusOptions: OptionsDto;
 
   @IsString()
   @IsOptional()
@@ -55,8 +55,8 @@ export class RaceDto {
 
   @ValidateNested()
   @IsOptional()
-  @ApiPropertyOptional({ type: [OptionsDto] })
-  startingProficiencyOptions: OptionsDto[];
+  @ApiPropertyOptional({ type: OptionsDto })
+  startingProficiencyOptions: OptionsDto;
 
   @IsString()
   @IsOptional()
@@ -65,8 +65,8 @@ export class RaceDto {
 
   @ValidateNested()
   @IsOptional()
-  @ApiPropertyOptional({ type: [OptionsDto] })
-  languageOptions: OptionsDto[];
+  @ApiPropertyOptional({ type: OptionsDto })
+  languageOptions: OptionsDto;
 
   @IsArray()
   @IsOptional()
@@ -85,6 +85,6 @@ export class RaceDto {
 
   @ValidateNested()
   @IsOptional()
-  @ApiPropertyOptional({ type: [OptionsDto] })
-  traitOptions: OptionsDto[];
+  @ApiPropertyOptional({ type: OptionsDto })
+  traitOptions: OptionsDto;
 }

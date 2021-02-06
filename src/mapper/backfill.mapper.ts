@@ -11,6 +11,8 @@ import { TraitEntity } from "../entity/general/Trait.entity";
 import { OptionsEntity } from "../entity/general/Options.entity";
 import { RaceEntity } from "../entity/races/Race.entity";
 import { SubraceEntity } from "../entity/subraces/Subrace.entity";
+import { AbilityScoreBonusDto } from "src/dto/general/AbilityScoreBonus.dto";
+import { AbilityScoreBonusEntity } from "src/entity/general/AbilityScoreBonus.entity";
 
 export class BackfillMapper {
   featureResponseToEntity(feature: any): FeatureEntity {
@@ -110,13 +112,45 @@ export class BackfillMapper {
 
   raceResponseToEntity(race: any): RaceEntity {
     const raceEntity = new RaceEntity();
-
+    raceEntity.name = race.name;
+    raceEntity.speed = race.speed;
+    raceEntity.alignment = race.alignment;
+    raceEntity.age = race.age;
+    raceEntity.size = race.size;
+    raceEntity.sizeDescription = race.size_description;
+    raceEntity.startingProficiencies = race.starting_proficiencies.map(startingProf => startingProf.name) // todo check
+    raceEntity.startingProficiencyOptions = this.optionsDataToEntity(race.starting_proficiency_options);
+    raceEntity.languages = race.languages.map(language => language.name);
+    raceEntity.languageOptions = this.optionsDataToEntity(race.language_options);
+    raceEntity.languageDescription = race.language_desc;
+    raceEntity.traits = race.traits.map(trait => trait.name);
+    raceEntity.traitOptions = this.optionsDataToEntity(race.trait_options);
+    raceEntity.abilityBonuses = race.ability_bonuses.map(bonus => this.abilityBonusDataToEntity(bonus))
+    raceEntity.abilityBonusOptions = this.optionsDataToEntity(race.ability_bonus_options);
+    raceEntity.subraces = race.subraces.map(subrace => subrace.name);
     return raceEntity;
   }
 
   subraceResponseToEntity(subrace: any): SubraceEntity {
     const subraceEntity = new SubraceEntity();
-
+    subraceEntity.name = subrace.name;
+    subraceEntity.race = subrace.race.name;
+    subraceEntity.description = subrace.desc
+    subraceEntity.abilityScoreBonuses = subrace.ability_bonuses.map(bonus => bonus.name);
     return subraceEntity;
+  }
+  abilityBonusDataToEntity(bonuses: any): AbilityScoreBonusEntity {
+    const bonusEntity = new AbilityScoreBonusEntity();
+    bonusEntity.bonus = bonuses.bonus;
+    bonusEntity.name = bonuses.ability_score.name;
+    return bonusEntity;
+  }
+
+  optionsDataToEntity(options: any): OptionsEntity {
+    const optionsEntity = new OptionsEntity();
+    optionsEntity.from = options.from.map(optionFrom => optionFrom.name);
+    optionsEntity.choose = options.choose;
+    optionsEntity.type = options.type;
+    return optionsEntity;
   }
 }
