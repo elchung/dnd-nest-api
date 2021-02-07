@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, JoinColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  OneToMany,
+  JoinColumn,
+} from "typeorm";
 import { StartingEquipmentEquipmentEntity } from "./StartingEquipmentEquipment.entity";
 import { StartingEquipmentOptionsEntity } from "./StartingEquipmentOptions.entity";
 
@@ -10,12 +17,13 @@ export class StartingEquipmentEntity {
   @Column({ nullable: true })
   class: string;
 
-  @OneToMany((type) => StartingEquipmentEquipmentEntity,
+  @OneToMany(
+    (type) => StartingEquipmentEquipmentEntity,
     (startingEquipment) => startingEquipment.parent,
     {
       nullable: true,
       cascade: true,
-      eager: true
+      eager: true,
     }
   )
   @JoinColumn()

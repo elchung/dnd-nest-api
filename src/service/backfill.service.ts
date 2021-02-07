@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Inject, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { SpellEntity } from "../entity/spells/Spell.entity";
@@ -75,16 +75,26 @@ export class BackfillService {
             break;
           }
           case "Classes": {
-            const leveldata = (await axios.get(this.apiUrlBase + idx.url + "/levels")).data;
-            const startingEquipment = (await axios.get(this.apiUrlBase + data.starting_equipment)).data
+            const leveldata = (
+              await axios.get(this.apiUrlBase + idx.url + "/levels")
+            ).data;
+            const startingEquipment = (
+              await axios.get(this.apiUrlBase + data.starting_equipment)
+            ).data;
             await this.save(
-              this.backfillMapper.classResponseToEntity(data, leveldata, startingEquipment),
+              this.backfillMapper.classResponseToEntity(
+                data,
+                leveldata,
+                startingEquipment
+              ),
               this.classRepository
             );
             break;
           }
           case "Subclasses": {
-            const leveldata = (await axios.get(this.apiUrlBase + idx.url + "/levels")).data;
+            const leveldata = (
+              await axios.get(this.apiUrlBase + idx.url + "/levels")
+            ).data;
             await this.save(
               this.backfillMapper.subclassResponseToEntity(data, leveldata),
               this.subclassRepository

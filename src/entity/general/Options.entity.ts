@@ -11,6 +11,6 @@ export class OptionsEntity {
   @Column("text", { array: true, nullable: true })
   from?: string[];
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   type?: string;
 }

@@ -6,7 +6,7 @@ export class SubraceMapper {
     const subraceEntity = new SubraceEntity();
 
     // todo fill in
-    
+
     return subraceEntity;
   }
 
@@ -14,7 +14,7 @@ export class SubraceMapper {
     const subraceDto = new SubraceDto();
 
     // todo fill in
-     
+
     return subraceDto;
   }
 }

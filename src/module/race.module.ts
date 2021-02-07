@@ -11,7 +11,7 @@ import { RaceService } from "src/service/race.service";
     TypeOrmModule.forFeature([
       RaceEntity,
       OptionsEntity,
-      AbilityScoreBonusEntity
+      AbilityScoreBonusEntity,
     ]),
   ],
   exports: [RaceService],

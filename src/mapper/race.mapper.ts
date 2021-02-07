@@ -6,7 +6,7 @@ export class RaceMapper {
     const raceEntity = new RaceEntity();
 
     // todo fill in
-    
+
     return raceEntity;
   }
 
@@ -14,7 +14,7 @@ export class RaceMapper {
     const raceDto = new RaceDto();
 
     // todo fill in
-     
+
     return raceDto;
   }
 }

@@ -13,7 +13,7 @@ import { PrerequisiteEntity } from "src/entity/features/prerequisite.entity";
       SubclassEntity,
       LevelSubclassEntity,
       SubclassSpellEntity,
-      PrerequisiteEntity
+      PrerequisiteEntity,
     ]),
   ],
   exports: [SubclassService],

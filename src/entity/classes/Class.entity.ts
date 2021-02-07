@@ -2,8 +2,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
-  JoinTable,
   OneToMany,
   OneToOne,
   JoinColumn,
@@ -56,11 +54,10 @@ export class ClassEntity {
   @JoinColumn()
   spellcasting?: ClassSpellcastingEntity;
 
-  @OneToOne((type) => StartingEquipmentEntity,
-  {
+  @OneToOne((type) => StartingEquipmentEntity, {
     nullable: true,
     eager: true,
-    cascade: true
+    cascade: true,
   })
   @JoinColumn()
   startingEquipment?: StartingEquipmentEntity;

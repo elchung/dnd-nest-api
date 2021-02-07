@@ -33,14 +33,11 @@ export class EquipmentEntity {
   @Column({ nullable: true })
   categoryRange: string;
 
-  @OneToOne(
-    (type) => EquipmentContentsEntity,
-    {
-      eager: true,
-      cascade: true,
-      nullable: true,
-    }
-  )
+  @OneToOne((type) => EquipmentContentsEntity, {
+    eager: true,
+    cascade: true,
+    nullable: true,
+  })
   @JoinColumn()
   contents: EquipmentContentsEntity;
 

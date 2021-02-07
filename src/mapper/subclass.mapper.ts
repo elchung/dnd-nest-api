@@ -6,7 +6,7 @@ export class SubclassMapper {
     const subclassEntity = new SubclassEntity();
 
     // todo fill in
-    
+
     return subclassEntity;
   }
 
@@ -14,7 +14,7 @@ export class SubclassMapper {
     const subclassDto = new SubclassDto();
 
     // todo fill in
-     
+
     return subclassDto;
   }
 }
