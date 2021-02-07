@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IsArray, IsString, IsOptional, ValidateNested } from "class-validator";
-import { LevelSubclassDto } from "../levels/LevelSubclass.dto";
+import { LevelClassDto } from "../levels/LevelClass.dto";
 import { SubclassSpellDto } from "./SubclassSpell.dto";
 
 export class SubclassDto {
@@ -24,8 +24,8 @@ export class SubclassDto {
 
   @ValidateNested()
   @IsOptional()
-  @ApiPropertyOptional({ type: [LevelSubclassDto] })
-  sublclassLevels: LevelSubclassDto;
+  @ApiPropertyOptional({ type: [LevelClassDto] })
+  sublclassLevels: LevelClassDto;
 
   @ValidateNested()
   @IsOptional()

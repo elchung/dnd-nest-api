@@ -11,6 +11,7 @@ import {
 import { LevelClassEntity } from "../levels/LevelClass.entity";
 import { OptionsEntity } from "../general/Options.entity";
 import { ClassSpellcastingEntity } from "./ClassSpellcasting.entity";
+import { StartingEquipmentEntity } from "../items/startingEquipment/StartingEquipment.entity";
 
 @Entity()
 export class ClassEntity {
@@ -39,11 +40,13 @@ export class ClassEntity {
   @Column("text", { array: true, nullable: true })
   subclasses?: string[];
 
-  @ManyToMany((type) => OptionsEntity, {
+  @OneToOne((type) => OptionsEntity, {
     cascade: true,
+    nullable: true,
+    eager: true,
   })
-  @JoinTable()
-  proficiencyChoices?: OptionsEntity[];
+  @JoinColumn()
+  proficiencyChoices?: OptionsEntity;
 
   @OneToOne((type) => ClassSpellcastingEntity, {
     cascade: true,
@@ -53,6 +56,12 @@ export class ClassEntity {
   @JoinColumn()
   spellcasting?: ClassSpellcastingEntity;
 
-  @Column("text", { array: true, nullable: true })
-  startingEquipment?: string[];
+  @OneToOne((type) => StartingEquipmentEntity,
+  {
+    nullable: true,
+    eager: true,
+    cascade: true
+  })
+  @JoinColumn()
+  startingEquipment?: StartingEquipmentEntity;
 }

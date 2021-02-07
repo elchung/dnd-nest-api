@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, JoinColumn } from "typeorm";
+import { StartingEquipmentEquipmentEntity } from "./StartingEquipmentEquipment.entity";
 import { StartingEquipmentOptionsEntity } from "./StartingEquipmentOptions.entity";
 
 @Entity()
@@ -9,8 +10,16 @@ export class StartingEquipmentEntity {
   @Column({ nullable: true })
   class: string;
 
-  @Column("text", { array: true, nullable: true })
-  startingEquipment: string[];
+  @OneToMany((type) => StartingEquipmentEquipmentEntity,
+    (startingEquipment) => startingEquipment.parent,
+    {
+      nullable: true,
+      cascade: true,
+      eager: true
+    }
+  )
+  @JoinColumn()
+  startingEquipment: StartingEquipmentEquipmentEntity[];
 
   @OneToOne(
     (type) => StartingEquipmentOptionsEntity,

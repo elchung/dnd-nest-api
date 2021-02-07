@@ -8,7 +8,7 @@ import {
   JoinColumn,
 } from "typeorm";
 import { SubclassSpellEntity } from "./SubclassSpell.entity";
-import { LevelSubclassEntity } from "../levels/LevelSubclass.entity";
+import { LevelClassEntity } from "../levels/LevelClass.entity";
 
 @Entity()
 export class SubclassEntity {
@@ -27,13 +27,13 @@ export class SubclassEntity {
   @Column({ nullable: true })
   subclassFlavor: string;
 
-  @OneToOne((type) => LevelSubclassEntity, {
+  @OneToOne((type) => LevelClassEntity, {
     cascade: true,
     nullable: true,
     eager: true,
   })
   @JoinColumn()
-  sublclassLevels: LevelSubclassEntity;
+  subclassLevels: LevelClassEntity;
 
   @ManyToMany((type) => SubclassSpellEntity, {
     cascade: true,

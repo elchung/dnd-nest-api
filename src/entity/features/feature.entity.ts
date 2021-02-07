@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToOne } from "typeorm";
+import { OptionsEntity } from "../general/Options.entity";
 import { PrerequisiteEntity } from "./prerequisite.entity";
 
 @Entity()
@@ -23,6 +24,16 @@ export class FeatureEntity {
 
   @Column("text", { array: true, nullable: true })
   description?: string[];
+
+  @OneToOne(
+    (type) => OptionsEntity,
+    {
+      cascade: true,
+      eager: true,
+      nullable: true,
+    }
+  )
+  choice: OptionsEntity;
 
   @ManyToMany(
     (type) => PrerequisiteEntity,

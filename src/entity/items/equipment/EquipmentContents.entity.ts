@@ -17,10 +17,4 @@ export class EquipmentContentsEntity {
 
   @Column({ nullable: true })
   items: string;
-
-  @OneToOne((type) => EquipmentEntity, (equipment) => equipment.contents, {
-    nullable: true,
-  })
-  @JoinColumn()
-  parentEquipment: EquipmentEntity;
 }

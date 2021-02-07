@@ -35,13 +35,13 @@ export class EquipmentEntity {
 
   @OneToOne(
     (type) => EquipmentContentsEntity,
-    (contents) => contents.parentEquipment,
     {
       eager: true,
       cascade: true,
       nullable: true,
     }
   )
+  @JoinColumn()
   contents: EquipmentContentsEntity;
 
   @OneToOne((type) => EquipmentCostEntity, (cost) => cost.parentEquipment, {

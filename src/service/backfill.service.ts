@@ -75,12 +75,18 @@ export class BackfillService {
             break;
           }
           case "Classes": {
-            // todo need to recursively query for nested fields
+            const leveldata = (await axios.get(this.apiUrlBase + idx.url + "/levels")).data;
+            const startingEquipment = (await axios.get(this.apiUrlBase + data.starting_equipment)).data
+            await this.save(
+              this.backfillMapper.classResponseToEntity(data, leveldata, startingEquipment),
+              this.classRepository
+            );
             break;
           }
           case "Subclasses": {
+            const leveldata = (await axios.get(this.apiUrlBase + idx.url + "/levels")).data;
             await this.save(
-              this.backfillMapper.subclassResponseToEntity(data),
+              this.backfillMapper.subclassResponseToEntity(data, leveldata),
               this.subclassRepository
             );
             break;

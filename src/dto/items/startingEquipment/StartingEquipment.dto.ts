@@ -1,5 +1,6 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { ValidateNested, IsOptional, IsString, IsArray } from "class-validator";
+import { StartingEquipmentEquipmentDto } from "./StartingEquipmentEquipment.dto";
 import { StartingEquipmentOptionsDto } from "./StartingEquipmentOptions.dto";
 
 export class StartingEquipmentDto {
@@ -10,8 +11,8 @@ export class StartingEquipmentDto {
 
   @IsArray()
   @IsOptional()
-  @ApiPropertyOptional({ type: [String] })
-  startingEquipment: string[];
+  @ApiPropertyOptional({ type: [StartingEquipmentEquipmentDto] })
+  startingEquipment: StartingEquipmentEquipmentDto[];
 
   @ValidateNested()
   @IsOptional()

@@ -33,8 +33,8 @@ export class ClassDto {
 
   @IsArray()
   @IsOptional()
-  @ApiPropertyOptional({ type: [OptionsDto] })
-  proficiencyChoices: OptionsDto[];
+  @ApiPropertyOptional({ type: OptionsDto })
+  proficiencyChoices: OptionsDto;
 
   @IsArray()
   @IsOptional()
