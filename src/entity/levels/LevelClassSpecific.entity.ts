@@ -13,7 +13,7 @@ import { LevelOptionsDiceEntity } from "./LevelOptionsDice.entity";
 @Entity()
 export class LevelClassSpecificEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   actionSurges: number;
@@ -132,11 +132,6 @@ export class LevelClassSpecificEntity {
   @OneToOne(
     (type) => LevelClassEntity,
     (levelEntity) => levelEntity.classSpecific,
-    {
-      cascade: true,
-      eager: true,
-      nullable: true,
-    }
   )
   parentLevel: LevelClassEntity;
 }

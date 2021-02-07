@@ -14,7 +14,7 @@ import { LevelSubclassEntity } from "./LevelSubclass.entity";
 @Entity()
 export class LevelClassEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   abilityScoreBonuses: number;

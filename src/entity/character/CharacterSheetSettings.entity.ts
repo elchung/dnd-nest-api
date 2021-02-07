@@ -10,7 +10,7 @@ import { CharacterDataEntity } from "./CharacterData.entity";
 @Entity()
 export class CharacterSheetSettingsEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ default: true })
   abilityScoreOnTop!: boolean;

@@ -10,7 +10,7 @@ import { OptionsEntity } from "./Options.entity";
 @Entity()
 export class TraitEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column()
   name?: string;

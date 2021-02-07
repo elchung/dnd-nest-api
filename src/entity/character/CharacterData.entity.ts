@@ -17,7 +17,7 @@ import { CharacterTreasureEntity } from "./CharacterTreasure.entity";
 @Entity()
 export class CharacterDataEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column()
   username!: string;

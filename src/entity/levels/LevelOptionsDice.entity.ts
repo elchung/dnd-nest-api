@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 @Entity()
 export class LevelOptionsDiceEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   diceCount: number;

@@ -13,6 +13,14 @@ import { LevelClassDto } from "../dto/levels/LevelClass.dto";
 import { LevelClassSpecificEntity } from "../entity/levels/LevelClassSpecific.entity";
 import { LevelClassCreatingSpellSlotsDto } from "src/dto/levels/LevelClassCreatingSpellSlots.dto";
 import { LevelClassCreatingSpellSlotsEntity } from "src/entity/levels/LevelClassCreatingSpellSlots.entity";
+import { StartingEquipmentDto } from "src/dto/items/startingEquipment/StartingEquipment.dto";
+import { StartingEquipmentEntity } from "src/entity/items/startingEquipment/StartingEquipment.entity";
+import { StartingEquipmentEquipmentEntity } from "src/entity/items/startingEquipment/StartingEquipmentEquipment.entity";
+import { StartingEquipmentEquipmentDto } from "src/dto/items/startingEquipment/StartingEquipmentEquipment.dto";
+import { StartingEquipmentOptionsDto } from "src/dto/items/startingEquipment/StartingEquipmentOptions.dto";
+import { StartingEquipmentOptionsEntity } from "src/entity/items/startingEquipment/StartingEquipmentOptions.entity";
+import { StartingEquipmentOptionChoicesDto } from "src/dto/items/startingEquipment/StartingEquipmentOptionChoices.dto";
+import { StartingEquipmentOptionChoicesEntity } from "src/entity/items/startingEquipment/StartingEquipmentOptionChoices.entity";
 
 export class ClassMapper {
   private commonMapper = new CommonMapper();
@@ -24,18 +32,46 @@ export class ClassMapper {
     classEntity.proficiencies = classDto.proficiencies;
     classEntity.savingThrows = classDto.savingThrows;
     classEntity.subclasses = classDto.subclasses;
-    classEntity.startingEquipment = classDto.startingEquipment;
+    classEntity.startingEquipment = this.startingEquipmentDtoToEntity(classDto.startingEquipment);
     classEntity.spellcasting = this.classSpellcastingDtoToEntity(
       classDto.spellcasting
     );
-    classEntity.proficiencyChoices = classDto.proficiencyChoices.map((choice) =>
-      this.commonMapper.optionsDtoToEntity(choice)
-    );
+    classEntity.proficiencyChoices = this.commonMapper.optionsDtoToEntity(classDto.proficiencyChoices)
     classEntity.classLevels = classDto.classLevels.map((classLevel) =>
       this.classLevelDtoToEntity(classLevel)
     );
 
     return classEntity;
+  }
+
+  startingEquipmentDtoToEntity(equipment: StartingEquipmentDto): StartingEquipmentEntity {
+    const startingEquipmentEntity = new StartingEquipmentEntity();
+    startingEquipmentEntity.class = equipment.class;
+    startingEquipmentEntity.startingEquipment = equipment.startingEquipment.map(equipment => this.startingEquipmentEquipmentDtoToEntity(equipment));
+    startingEquipmentEntity.startingEquipmentOptions = this.startingEquipmentOptionsDtoToEntity(equipment.startingEquipmentOptions);
+    return startingEquipmentEntity;
+  }
+
+  startingEquipmentEquipmentDtoToEntity(equipmentEquipment: StartingEquipmentEquipmentDto): StartingEquipmentEquipmentEntity{
+    const startingEquipmentEquipmentEntity = new StartingEquipmentEquipmentEntity();
+    startingEquipmentEquipmentEntity.equipment = equipmentEquipment.equipment;
+    startingEquipmentEquipmentEntity.quantity = equipmentEquipment.quantity;
+    return startingEquipmentEquipmentEntity;
+  }
+
+  startingEquipmentOptionsDtoToEntity(options: StartingEquipmentOptionsDto): StartingEquipmentOptionsEntity{
+    const startingEquipmentOptionsEntity = new StartingEquipmentOptionsEntity();
+    startingEquipmentOptionsEntity.choose = options.choose;
+    startingEquipmentOptionsEntity.type = options.type;
+    startingEquipmentOptionsEntity.from = options.from.map(choice => this.startingEquipmentOptionChoicesDtoToEntity(choice))
+    return startingEquipmentOptionsEntity;
+  }
+
+  startingEquipmentOptionChoicesDtoToEntity(choice: StartingEquipmentOptionChoicesDto): StartingEquipmentOptionChoicesEntity {
+    const startingEquipmentOptionChoicesEntity = new StartingEquipmentOptionChoicesEntity();
+    startingEquipmentOptionChoicesEntity.equipment = choice.equipment;
+    startingEquipmentOptionChoicesEntity.quantity = choice.quantity;
+    return startingEquipmentOptionChoicesEntity;
   }
 
   classLevelDtoToEntity(classLevel: LevelDto): LevelClassEntity {

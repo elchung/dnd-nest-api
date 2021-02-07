@@ -10,7 +10,7 @@ import { CharacterTreasureEntity } from "./CharacterTreasure.entity";
 @Entity()
 export class CharacterTreasureMoneyEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ default: 0 })
   gold!: number;

@@ -10,7 +10,7 @@ import { StartingEquipmentOptionsEntity } from "./StartingEquipmentOptions.entit
 @Entity()
 export class StartingEquipmentOptionChoicesEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   equipment: string;

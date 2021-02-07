@@ -7,6 +7,7 @@ import {
   IsOptional,
 } from "class-validator";
 import { OptionsDto } from "../general/Options.dto";
+import { StartingEquipmentDto } from "../items/startingEquipment/StartingEquipment.dto";
 import { LevelDto } from "../levels/Level.dto";
 import { ClassSpellcastingDto } from "./ClassSpellcasting.dto";
 
@@ -48,8 +49,8 @@ export class ClassDto {
 
   @IsArray()
   @IsOptional()
-  @ApiPropertyOptional({ type: [String] })
-  startingEquipment: string[];
+  @ApiPropertyOptional({ type: StartingEquipmentDto })
+  startingEquipment: StartingEquipmentDto;
 
   @IsArray()
   @IsOptional()

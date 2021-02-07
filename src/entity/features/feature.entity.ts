@@ -12,7 +12,7 @@ import { PrerequisiteEntity } from "./prerequisite.entity";
 @Entity()
 export class FeatureEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ unique: true })
   name: string;

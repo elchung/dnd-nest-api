@@ -5,7 +5,7 @@ import { CharacterSpellSlotsAtLevelEntity } from "./CharacterSpellSlotsAtLevel.e
 @Entity()
 export class CharacterSpellSlotsEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @OneToOne((type) => CharacterDataEntity, (character) => character.spellSlots)
   @JoinColumn()

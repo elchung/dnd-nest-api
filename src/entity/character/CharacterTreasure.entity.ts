@@ -12,7 +12,7 @@ import { CharacterDataEntity } from "./CharacterData.entity";
 @Entity()
 export class CharacterTreasureEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @OneToOne((type) => CharacterDataEntity, (character) => character.treasure)
   @JoinColumn()

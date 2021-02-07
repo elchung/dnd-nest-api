@@ -13,7 +13,7 @@ import { AbilityScoreBonusEntity } from "../general/AbilityScoreBonus.entity";
 @Entity()
 export class SubraceEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ unique: true })
   name: string;

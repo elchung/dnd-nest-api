@@ -10,7 +10,7 @@ import { PrerequisiteEntity } from "../features/prerequisite.entity";
 @Entity()
 export class SubclassSpellEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   spell: string;

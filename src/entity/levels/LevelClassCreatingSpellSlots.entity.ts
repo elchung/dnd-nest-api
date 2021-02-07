@@ -4,7 +4,7 @@ import { LevelClassSpecificEntity } from "./LevelClassSpecific.entity";
 @Entity()
 export class LevelClassCreatingSpellSlotsEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   sorceryPointCost: number;

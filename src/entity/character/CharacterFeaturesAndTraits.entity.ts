@@ -10,7 +10,7 @@ import { CharacterDataEntity } from "./CharacterData.entity";
 @Entity()
 export class CharacterFeaturesAndTraitsEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @ManyToOne(
     (type) => CharacterDataEntity,

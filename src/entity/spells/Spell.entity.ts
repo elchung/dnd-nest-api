@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import { SpellDamageEntity } from "./SpellDamage.entity";
 import { SpellAreaOfEffectEntity } from "./SpellAreaOfEffect.entity";
 import { SpellDcEntity } from "./SpellDc.entity";
@@ -6,7 +6,7 @@ import { SpellDcEntity } from "./SpellDc.entity";
 @Entity()
 export class SpellEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @OneToOne(
     (type) => SpellAreaOfEffectEntity,
@@ -17,6 +17,7 @@ export class SpellEntity {
       nullable: true,
     }
   )
+  @JoinColumn()
   areaOfEffect?: SpellAreaOfEffectEntity;
 
   @Column()
@@ -40,6 +41,7 @@ export class SpellEntity {
       nullable: true,
     }
   )
+  @JoinColumn()
   damage?: SpellDamageEntity;
 
   @Column()
@@ -54,6 +56,7 @@ export class SpellEntity {
       nullable: true,
     }
   )
+  @JoinColumn()
   dc: SpellDcEntity;
 
   @Column("text", { array: true, nullable: true })

@@ -4,7 +4,7 @@ import { EquipmentEntity } from "./Equipment.entity";
 @Entity()
 export class EquipmentRangeEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   long: number;

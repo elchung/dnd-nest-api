@@ -4,7 +4,7 @@ import { FeatureEntity } from "./feature.entity";
 @Entity()
 export class PrerequisiteEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   name?: string;

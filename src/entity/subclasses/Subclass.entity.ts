@@ -13,7 +13,7 @@ import { LevelClassEntity } from "../levels/LevelClass.entity";
 @Entity()
 export class SubclassEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   class: string;

@@ -10,7 +10,7 @@ import { CharacterDataEntity } from "./CharacterData.entity";
 @Entity()
 export class CharacterHitDiceEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @ManyToOne((type) => CharacterDataEntity, (character) => character.hitDice)
   @JoinColumn()

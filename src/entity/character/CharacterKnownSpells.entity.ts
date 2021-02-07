@@ -10,7 +10,7 @@ import { CharacterDataEntity } from "./CharacterData.entity";
 @Entity()
 export class CharacterKnownSpellsEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @OneToOne((type) => CharacterDataEntity, (character) => character.knownSpells)
   @JoinColumn()

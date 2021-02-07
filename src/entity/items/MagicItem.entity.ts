@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 @Entity()
 export class MagicItemEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column("text", { array: true, nullable: true })
   description: string[];

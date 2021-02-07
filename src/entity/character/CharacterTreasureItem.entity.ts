@@ -4,7 +4,7 @@ import { CharacterTreasureEntity } from "./CharacterTreasure.entity";
 @Entity()
 export class CharacterTreasureItemEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column()
   name!: string;

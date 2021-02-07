@@ -15,7 +15,7 @@ import { EquipmentSpeedEntity } from "./EquipmentSpeed.entity";
 @Entity()
 export class EquipmentEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   armorCategory: string;

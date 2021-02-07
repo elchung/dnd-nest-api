@@ -10,10 +10,9 @@ import { SpellEntity } from "./Spell.entity";
 @Entity()
 export class SpellAreaOfEffectEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @OneToOne((type) => SpellEntity, (spellEntity) => spellEntity.areaOfEffect)
-  @JoinColumn()
   parentSpell!: SpellEntity;
 
   @Column()

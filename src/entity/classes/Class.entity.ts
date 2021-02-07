@@ -14,7 +14,7 @@ import { StartingEquipmentEntity } from "../items/startingEquipment/StartingEqui
 @Entity()
 export class ClassEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @OneToMany((type) => LevelClassEntity, (level) => level.parentClass, {
     cascade: true,

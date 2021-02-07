@@ -11,10 +11,9 @@ import { SpellEntity } from "./Spell.entity";
 @Entity()
 export class SpellDamageEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @OneToOne((type) => SpellEntity, (spellsEntity) => spellsEntity.damage)
-  @JoinColumn()
   parentSpell!: SpellEntity;
 
   @Column({ nullable: true })

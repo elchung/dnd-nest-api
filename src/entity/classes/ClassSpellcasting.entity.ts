@@ -10,7 +10,7 @@ import { InfoEntity } from "../general/Info.entity";
 @Entity()
 export class ClassSpellcastingEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   level?: number;

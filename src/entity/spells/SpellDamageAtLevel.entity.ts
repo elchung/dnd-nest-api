@@ -10,7 +10,7 @@ import { SpellDamageEntity } from "./SpellDamage.entity";
 @Entity()
 export class SpellDamageAtLevelEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @OneToOne(
     (type) => SpellDamageEntity,

@@ -10,7 +10,7 @@ import { EquipmentEntity } from "./Equipment.entity";
 @Entity()
 export class EquipmentSpeedEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   quantity: number;

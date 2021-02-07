@@ -4,7 +4,7 @@ import { LevelClassEntity } from "./LevelClass.entity";
 @Entity()
 export class LevelSpellcastingEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id: number;
 
   @Column({ nullable: true })
   cantripsKnown: number;

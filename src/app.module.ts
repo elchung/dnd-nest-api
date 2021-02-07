@@ -22,6 +22,11 @@ if (
   !process.env.DB_USER_PASSWORD ||
   !process.env.DB_PORT
 ) {
+  console.error(`DB_USER_NAME: ${process.env.DB_USER_NAME}`)
+  console.error(`DB_HOST: ${process.env.DB_HOST}`)
+  console.error(`DB_NAME: ${process.env.DB_NAME}`)
+  console.error(`DB_USER_PASSWORD: ${process.env.DB_USER_PASSWORD}`)
+  console.error(`DB_PORT: ${process.env.DB_PORT}`)
   throw new Error("Missing db variables.");
 }
 
