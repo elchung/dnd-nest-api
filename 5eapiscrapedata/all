@@ -1,0 +1,10 @@
+TypeError: Cannot read property 'name' of undefined
+    at BackfillMapper.classLevelDataToEntity (C:\Users\newbi\Documents\Projects\dnd-nest-api\dist\mapper\backfill.mapper.js:227:40)
+    at BackfillMapper.subclassResponseToEntity (C:\Users\newbi\Documents\Projects\dnd-nest-api\dist\mapper\backfill.mapper.js:187:46)
+    at BackfillService.backfill (C:\Users\newbi\Documents\Projects\dnd-nest-api\dist\service\backfill.service.js:71:61)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async BackfillController.backfillSubclasses (C:\Users\newbi\Documents\Projects\dnd-nest-api\dist\controllers\backfill.controller.js:33:16)
+    at async C:\Users\newbi\Documents\Projects\dnd-nest-api\node_modules\@nestjs\core\router\router-execution-context.js:46:28
+    at async C:\Users\newbi\Documents\Projects\dnd-nest-api\node_modules\@nestjs\core\router\router-proxy.js:9:17
+
+    maybe didn't query levels and pass it in correctly
