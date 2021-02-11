@@ -78,6 +78,7 @@ export class BackfillService {
             const leveldata = (
               await axios.get(this.apiUrlBase + idx.url + "/levels")
             ).data;
+            console.log(leveldata);
             const startingEquipment = (
               await axios.get(this.apiUrlBase + data.starting_equipment)
             ).data;
