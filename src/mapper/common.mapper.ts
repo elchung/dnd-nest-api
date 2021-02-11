@@ -4,6 +4,8 @@ import { LevelOptionsDiceDto } from "src/dto/levels/LevelOptionsDice.dto";
 import { InfoEntity } from "src/entity/general/Info.entity";
 import { OptionsEntity } from "src/entity/general/Options.entity";
 import { LevelOptionsDiceEntity } from "src/entity/levels/LevelOptionsDice.entity";
+import {AbilityScoreBonusEntity} from "../entity/general/AbilityScoreBonus.entity";
+import {AbilityScoreBonusDto} from "../dto/general/AbilityScoreBonus.dto";
 
 export class CommonMapper {
   optionsDtoToEntity(optionsDto: OptionsDto): OptionsEntity {
@@ -12,6 +14,10 @@ export class CommonMapper {
     optionsEntity.from = optionsDto.from;
 
     return optionsEntity;
+  }
+
+  infoDtosToEntities(infoDtos: InfoDto[]): InfoEntity[] {
+    return infoDtos.map(dto => this.infoDtoToEntity(dto));
   }
 
   infoDtoToEntity(infoDto: InfoDto): InfoEntity {
@@ -30,5 +36,16 @@ export class CommonMapper {
     levelOptionsDiceEntity.diceValue = levelOptionsDiceDto.diceValue;
 
     return levelOptionsDiceEntity;
+  }
+  abilityBonusDtosToEntities(abilityBonusDtos: AbilityScoreBonusDto[]): AbilityScoreBonusEntity[] {
+    return abilityBonusDtos.map(dto => this.abilityBonusDtoToEntity(dto))
+  }
+
+  abilityBonusDtoToEntity(abilityBonusDto: AbilityScoreBonusDto): AbilityScoreBonusEntity {
+    const abilityBonusEntity = new AbilityScoreBonusEntity();
+    abilityBonusEntity.name = abilityBonusDto.name;
+    abilityBonusEntity.bonus = abilityBonusDto.bonus;
+
+    return abilityBonusEntity;
   }
 }

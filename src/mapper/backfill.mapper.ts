@@ -131,22 +131,14 @@ export class BackfillMapper {
     raceEntity.age = race.age;
     raceEntity.size = race.size;
     raceEntity.sizeDescription = race.size_description;
-    raceEntity.startingProficiencies = race.starting_proficiencies?.map(
-      (startingProf) => startingProf.name
-    );
-    raceEntity.startingProficiencyOptions = this.optionsDataToEntity(
-      race.starting_proficiency_options
-    );
+    raceEntity.startingProficiencies = race.starting_proficiencies?.map((startingProf) => startingProf.name);
+    raceEntity.startingProficiencyOptions = this.optionsDataToEntity(race.starting_proficiency_options);
     raceEntity.languages = race.languages?.map((language) => language.name);
-    raceEntity.languageOptions = this.optionsDataToEntity(
-      race.language_options
-    );
+    raceEntity.languageOptions = this.optionsDataToEntity(race.language_options);
     raceEntity.languageDescription = race.language_desc;
     raceEntity.traits = race.traits?.map((trait) => trait.name);
     raceEntity.traitOptions = this.optionsDataToEntity(race.trait_options);
-    raceEntity.abilityBonuses = race.ability_bonuses?.map((bonus) =>
-      this.abilityBonusDataToEntity(bonus)
-    );
+    raceEntity.abilityBonuses = race.ability_bonuses?.map((bonus) => this.abilityBonusDataToEntity(bonus));
     raceEntity.abilityBonusOptions = this.optionsDataToEntity(
       race.ability_bonus_options
     );
@@ -182,7 +174,7 @@ export class BackfillMapper {
 
   classResponseToEntity(
     classData: any,
-    classLevelData: any,
+    classLevelData: any[],
     startingEquipment: any
   ): ClassEntity {
     const classEntity = new ClassEntity();

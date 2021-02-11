@@ -12,7 +12,7 @@ export class TraitEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   name?: string;
 
   @Column("text", { array: true, nullable: true })

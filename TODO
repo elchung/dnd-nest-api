@@ -12,3 +12,9 @@ NO <ANY>
 fill out mappers
 
 add tests
+
+add get/put/post/delete endpoint to traits
+add get/put/post/delete endpoint to features
+add get/put/post/delete endpoint to items
+
+

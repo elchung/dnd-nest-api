@@ -33,13 +33,9 @@ export class ClassMapper {
     classEntity.savingThrows = classDto.savingThrows;
     classEntity.subclasses = classDto.subclasses;
     classEntity.startingEquipment = this.startingEquipmentDtoToEntity(classDto.startingEquipment);
-    classEntity.spellcasting = this.classSpellcastingDtoToEntity(
-      classDto.spellcasting
-    );
-    classEntity.proficiencyChoices = this.commonMapper.optionsDtoToEntity(classDto.proficiencyChoices)
-    classEntity.classLevels = classDto.classLevels.map((classLevel) =>
-      this.classLevelDtoToEntity(classLevel)
-    );
+    classEntity.spellcasting = this.classSpellcastingDtoToEntity(classDto.spellcasting);
+    classEntity.proficiencyChoices = this.commonMapper.optionsDtoToEntity(classDto.proficiencyChoices);
+    classEntity.classLevels = this.classLevelDtosToEntities(classDto.classLevels);
 
     return classEntity;
   }
@@ -47,24 +43,34 @@ export class ClassMapper {
   startingEquipmentDtoToEntity(equipment: StartingEquipmentDto): StartingEquipmentEntity {
     const startingEquipmentEntity = new StartingEquipmentEntity();
     startingEquipmentEntity.class = equipment.class;
-    startingEquipmentEntity.startingEquipment = equipment.startingEquipment.map(equipment => this.startingEquipmentEquipmentDtoToEntity(equipment));
+    startingEquipmentEntity.startingEquipment = this.startingEquipmentEquipmentDtosToEntities(equipment.startingEquipment);
     startingEquipmentEntity.startingEquipmentOptions = this.startingEquipmentOptionsDtoToEntity(equipment.startingEquipmentOptions);
+
     return startingEquipmentEntity;
   }
 
-  startingEquipmentEquipmentDtoToEntity(equipmentEquipment: StartingEquipmentEquipmentDto): StartingEquipmentEquipmentEntity{
+  startingEquipmentEquipmentDtosToEntities(equipmentEquipment: StartingEquipmentEquipmentDto[]): StartingEquipmentEquipmentEntity[] {
+    return equipmentEquipment.map(dto => this.startingEquipmentEquipmentDtoToEntity(dto));
+  }
+
+  startingEquipmentEquipmentDtoToEntity(equipmentEquipment: StartingEquipmentEquipmentDto): StartingEquipmentEquipmentEntity {
     const startingEquipmentEquipmentEntity = new StartingEquipmentEquipmentEntity();
     startingEquipmentEquipmentEntity.equipment = equipmentEquipment.equipment;
     startingEquipmentEquipmentEntity.quantity = equipmentEquipment.quantity;
     return startingEquipmentEquipmentEntity;
   }
 
-  startingEquipmentOptionsDtoToEntity(options: StartingEquipmentOptionsDto): StartingEquipmentOptionsEntity{
+  startingEquipmentOptionsDtoToEntity(options: StartingEquipmentOptionsDto): StartingEquipmentOptionsEntity {
     const startingEquipmentOptionsEntity = new StartingEquipmentOptionsEntity();
     startingEquipmentOptionsEntity.choose = options.choose;
     startingEquipmentOptionsEntity.type = options.type;
-    startingEquipmentOptionsEntity.from = options.from.map(choice => this.startingEquipmentOptionChoicesDtoToEntity(choice))
+    startingEquipmentOptionsEntity.from = this.startingEquipmentOptionChoicesDtosToEntities(options.from);
+
     return startingEquipmentOptionsEntity;
+  }
+
+  startingEquipmentOptionChoicesDtosToEntities(choices: StartingEquipmentOptionChoicesDto[]): StartingEquipmentOptionChoicesEntity[] {
+    return choices.map(dto => this.startingEquipmentOptionChoicesDtoToEntity(dto));
   }
 
   startingEquipmentOptionChoicesDtoToEntity(choice: StartingEquipmentOptionChoicesDto): StartingEquipmentOptionChoicesEntity {
@@ -72,6 +78,10 @@ export class ClassMapper {
     startingEquipmentOptionChoicesEntity.equipment = choice.equipment;
     startingEquipmentOptionChoicesEntity.quantity = choice.quantity;
     return startingEquipmentOptionChoicesEntity;
+  }
+
+  classLevelDtosToEntities(classLevels: LevelDto[]): LevelClassEntity[] {
+    return classLevels.map(dto => this.classLevelDtoToEntity(dto));
   }
 
   classLevelDtoToEntity(classLevel: LevelDto): LevelClassEntity {
@@ -83,30 +93,21 @@ export class ClassMapper {
     levelEntity.level = classLevel.level;
     levelEntity.proficiencyBonus = classLevel.proficiencyBonus;
     levelEntity.subclass = classLevel.subclass;
-    levelEntity.subclassSpecific = this.subclassSpecificDtoToEntity(
-      classLevel.subclassSpecific
-    );
-    levelEntity.spellcasting = this.levelSpellcastingDtoToEntity(
-      classLevel.spellcasting
-    );
-    levelEntity.classSpecific = this.levelClassDtoToEntity(
-      classLevel.classSpecific
-    );
+    levelEntity.subclassSpecific = this.subclassSpecificDtoToEntity(classLevel.subclassSpecific);
+    levelEntity.spellcasting = this.levelSpellcastingDtoToEntity(classLevel.spellcasting);
+    levelEntity.classSpecific = this.levelClassDtoToEntity(classLevel.classSpecific);
 
     return levelEntity;
   }
 
-  levelClassDtoToEntity(
-    levelClassDto: LevelClassDto
-  ): LevelClassSpecificEntity {
+  levelClassDtoToEntity(levelClassDto: LevelClassDto): LevelClassSpecificEntity {
     const levelClassEntity = new LevelClassSpecificEntity();
     levelClassEntity.actionSurges = levelClassDto.actionSurges;
     levelClassEntity.arcaneRecoveryLevels = levelClassDto.arcaneRecoveryLevels;
     levelClassEntity.auraRange = levelClassDto.auraRange;
     levelClassEntity.bardicInspirationDie = levelClassDto.bardicInspirationDie;
     levelClassEntity.brutalCriticalDice = levelClassDto.brutalCriticalDice;
-    levelClassEntity.channelDivinityCharges =
-      levelClassDto.channelDivinityCharges;
+    levelClassEntity.channelDivinityCharges = levelClassDto.channelDivinityCharges;
     levelClassEntity.destroyUndeadCr = levelClassDto.destroyUndeadCr;
     levelClassEntity.extraAttacks = levelClassDto.extraAttacks;
     levelClassEntity.favoredEnemies = levelClassDto.favoredEnemies;
@@ -130,79 +131,54 @@ export class ClassMapper {
     levelClassEntity.wildShapeFly = levelClassDto.wildShapeFly;
     levelClassEntity.wildShapeMaxCr = levelClassDto.wildShapeMaxCr;
     levelClassEntity.wildShapeSwim = levelClassDto.wildShapeSwim;
-    levelClassEntity.sneakAttack = this.commonMapper.levelOptionsDiceDtoToEntity(
-      levelClassDto.sneakAttack
-    );
-    levelClassEntity.martialArts = this.commonMapper.levelOptionsDiceDtoToEntity(
-      levelClassDto.martialArts
-    );
-    levelClassEntity.creatingSpellSlots = levelClassDto.creatingSpellSlots.map(
-      (spellSlot) => this.levelClassCreatingSpellSLotsDtoToEntity(spellSlot)
-    );
+    levelClassEntity.sneakAttack = this.commonMapper.levelOptionsDiceDtoToEntity(levelClassDto.sneakAttack);
+    levelClassEntity.martialArts = this.commonMapper.levelOptionsDiceDtoToEntity(levelClassDto.martialArts);
+    levelClassEntity.creatingSpellSlots = this.levelClassCreatingSpellSlotsDtosToEntities(levelClassDto.creatingSpellSlots);
 
     return levelClassEntity;
   }
 
-  levelClassCreatingSpellSLotsDtoToEntity(
-    levelClassCreatingSpellSLotsDto: LevelClassCreatingSpellSlotsDto
-  ): LevelClassCreatingSpellSlotsEntity {
-    const levelClassCreatingSpellSLotsEntity = new LevelClassCreatingSpellSlotsEntity();
-    levelClassCreatingSpellSLotsEntity.sorceryPointCost =
-      levelClassCreatingSpellSLotsDto.sorceryPointCost;
-    levelClassCreatingSpellSLotsEntity.sorceryPointCost =
-      levelClassCreatingSpellSLotsDto.sorceryPointCost;
-
-    return levelClassCreatingSpellSLotsEntity;
+  levelClassCreatingSpellSlotsDtosToEntities(levelClassCreatingSpellSLotsDtos: LevelClassCreatingSpellSlotsDto[]): LevelClassCreatingSpellSlotsEntity[] {
+    return levelClassCreatingSpellSLotsDtos.map(dto => this.levelClassCreatingSpellSlotsDtoToEntity(dto));
   }
 
-  levelSpellcastingDtoToEntity(
-    levelSpellcastingDto: LevelSpellcastingDto
-  ): LevelSpellcastingEntity {
+  levelClassCreatingSpellSlotsDtoToEntity(levelClassCreatingSpellSlotsDto: LevelClassCreatingSpellSlotsDto): LevelClassCreatingSpellSlotsEntity {
+    const levelClassCreatingSpellSlotsEntity = new LevelClassCreatingSpellSlotsEntity();
+    levelClassCreatingSpellSlotsEntity.sorceryPointCost = levelClassCreatingSpellSlotsDto.sorceryPointCost;
+    levelClassCreatingSpellSlotsEntity.sorceryPointCost = levelClassCreatingSpellSlotsDto.sorceryPointCost;
+
+    return levelClassCreatingSpellSlotsEntity;
+  }
+
+  levelSpellcastingDtoToEntity(levelSpellcastingDto: LevelSpellcastingDto): LevelSpellcastingEntity {
     const levelSpellcastingEntity = new LevelSpellcastingEntity();
-    levelSpellcastingEntity.cantripsKnown = levelSpellcastingDto.cantripsKnown;
-    levelSpellcastingEntity.spellSlotsLevel1 =
-      levelSpellcastingDto.spellSlotsLevel1;
-    levelSpellcastingEntity.spellSlotsLevel2 =
-      levelSpellcastingDto.spellSlotsLevel2;
-    levelSpellcastingEntity.spellSlotsLevel3 =
-      levelSpellcastingDto.spellSlotsLevel3;
-    levelSpellcastingEntity.spellSlotsLevel4 =
-      levelSpellcastingDto.spellSlotsLevel4;
-    levelSpellcastingEntity.spellSlotsLevel5 =
-      levelSpellcastingDto.spellSlotsLevel5;
-    levelSpellcastingEntity.spellSlotsLevel6 =
-      levelSpellcastingDto.spellSlotsLevel6;
-    levelSpellcastingEntity.spellSlotsLevel7 =
-      levelSpellcastingDto.spellSlotsLevel7;
-    levelSpellcastingEntity.spellSlotsLevel8 =
-      levelSpellcastingDto.spellSlotsLevel8;
-    levelSpellcastingEntity.spellSlotsLevel9 =
-      levelSpellcastingDto.spellSlotsLevel9;
+    levelSpellcastingEntity.cantripsKnown    = levelSpellcastingDto.cantripsKnown;
+    levelSpellcastingEntity.spellSlotsLevel1 = levelSpellcastingDto.spellSlotsLevel1;
+    levelSpellcastingEntity.spellSlotsLevel2 = levelSpellcastingDto.spellSlotsLevel2;
+    levelSpellcastingEntity.spellSlotsLevel3 = levelSpellcastingDto.spellSlotsLevel3;
+    levelSpellcastingEntity.spellSlotsLevel4 = levelSpellcastingDto.spellSlotsLevel4;
+    levelSpellcastingEntity.spellSlotsLevel5 = levelSpellcastingDto.spellSlotsLevel5;
+    levelSpellcastingEntity.spellSlotsLevel6 = levelSpellcastingDto.spellSlotsLevel6;
+    levelSpellcastingEntity.spellSlotsLevel7 = levelSpellcastingDto.spellSlotsLevel7;
+    levelSpellcastingEntity.spellSlotsLevel8 = levelSpellcastingDto.spellSlotsLevel8;
+    levelSpellcastingEntity.spellSlotsLevel9 = levelSpellcastingDto.spellSlotsLevel9;
 
     return levelSpellcastingEntity;
   }
 
-  subclassSpecificDtoToEntity(
-    levelSubclassDto: LevelSubclassDto
-  ): LevelSubclassEntity {
+  subclassSpecificDtoToEntity(levelSubclassDto: LevelSubclassDto): LevelSubclassEntity {
     const levelSubclassEntity = new LevelSubclassEntity();
-    levelSubclassEntity.additionalMagicalSecretsMaxLvl =
-      levelSubclassDto.additionalMagicalSecretsMaxLvl;
+    levelSubclassEntity.additionalMagicalSecretsMaxLvl = levelSubclassDto.additionalMagicalSecretsMaxLvl;
     levelSubclassEntity.auraRange = levelSubclassDto.auraRange;
 
     return levelSubclassEntity;
   }
 
-  classSpellcastingDtoToEntity(
-    spellcastingDto: ClassSpellcastingDto
-  ): ClassSpellcastingEntity {
+  classSpellcastingDtoToEntity(spellcastingDto: ClassSpellcastingDto): ClassSpellcastingEntity {
     const spellCastingEntity = new ClassSpellcastingEntity();
     spellCastingEntity.level = spellcastingDto.level;
-    spellCastingEntity.spellcastingAbility =
-      spellcastingDto.spellcastingAbility;
-    spellCastingEntity.info = spellcastingDto.info.map((infoDto) =>
-      this.commonMapper.infoDtoToEntity(infoDto)
-    );
+    spellCastingEntity.spellcastingAbility = spellcastingDto.spellcastingAbility;
+    spellCastingEntity.info = this.commonMapper.infoDtosToEntities(spellcastingDto.info);
 
     return spellCastingEntity;
   }

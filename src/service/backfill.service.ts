@@ -96,6 +96,7 @@ export class BackfillService {
             const leveldata = (
               await axios.get(this.apiUrlBase + idx.url + "/levels")
             ).data;
+            console.log(leveldata);
             await this.save(
               this.backfillMapper.subclassResponseToEntity(data, leveldata),
               this.subclassRepository
@@ -139,6 +140,7 @@ export class BackfillService {
     }
     console.info(`Done. Failed ${name}s: ${failed}`);
   }
+
   async save(entity: any, repo: Repository<any>): Promise<void> {
     console.info(`saving..`);
     await repo.save(entity);

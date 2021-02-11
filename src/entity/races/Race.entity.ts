@@ -48,28 +48,28 @@ export class RaceEntity {
   @Column("text", { array: true, nullable: true })
   traits?: string[];
 
-  @ManyToMany((type) => OptionsEntity, {
+  @OneToOne((type) => OptionsEntity, {
     cascade: true,
     nullable: true,
     eager: true,
   })
-  @JoinTable()
+  @JoinColumn()
   languageOptions?: OptionsEntity;
 
-  @ManyToMany((type) => OptionsEntity, {
+  @OneToOne((type) => OptionsEntity, {
     cascade: true,
     nullable: true,
     eager: true,
   })
-  @JoinTable()
+  @JoinColumn()
   traitOptions?: OptionsEntity;
 
-  @ManyToMany((type) => OptionsEntity, {
+  @OneToOne((type) => OptionsEntity, {
     cascade: true,
     nullable: true,
     eager: true,
   })
-  @JoinTable()
+  @JoinColumn()
   startingProficiencyOptions?: OptionsEntity;
 
   @OneToOne((type) => OptionsEntity, {
