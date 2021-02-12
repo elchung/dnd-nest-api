@@ -11,4 +11,9 @@ export class ConditionDto {
   @IsOptional()
   @ApiPropertyOptional({ type: String })
   name: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  source: string;
 }

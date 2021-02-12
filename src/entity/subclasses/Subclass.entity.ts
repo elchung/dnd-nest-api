@@ -42,4 +42,7 @@ export class SubclassEntity {
   })
   @JoinTable()
   spells: SubclassSpellEntity[];
+
+  @Column({ nullable: true })
+  source: string;
 }

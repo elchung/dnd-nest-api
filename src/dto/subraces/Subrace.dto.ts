@@ -45,4 +45,9 @@ export class SubraceDto {
   @IsOptional()
   @ApiPropertyOptional({ type: OptionsDto })
   racialTraitOptions: OptionsDto;
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  source: string;
 }

@@ -86,4 +86,9 @@ export class SpellsDto {
   @IsOptional()
   @ApiPropertyOptional({ type: SpellAreaOfEffectDto })
   areaOfEffect?: SpellAreaOfEffectDto;
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  source: string;
 }

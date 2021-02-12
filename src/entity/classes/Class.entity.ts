@@ -61,4 +61,7 @@ export class ClassEntity {
   })
   @JoinColumn()
   startingEquipment?: StartingEquipmentEntity;
+
+  @Column({ nullable: true })
+  source: string;
 }

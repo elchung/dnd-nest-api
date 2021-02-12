@@ -85,4 +85,7 @@ export class SpellEntity {
 
   @Column()
   school!: string;
+
+  @Column({ nullable: true })
+  source: string;
 }

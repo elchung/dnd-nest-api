@@ -30,4 +30,9 @@ export class TraitDto {
   @IsOptional()
   @ApiPropertyOptional({ type: [OptionsDto] })
   proficiencyChoices: OptionsDto[];
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  source: string;
 }

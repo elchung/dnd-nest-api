@@ -18,3 +18,5 @@ add get/put/post/delete endpoint to features
 add get/put/post/delete endpoint to items
 
 FILL OUT LINTER WITH RULES I LIKE
+
+once all data is in, turn off db syncronization and switch to migration scripts

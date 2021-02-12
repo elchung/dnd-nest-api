@@ -31,4 +31,9 @@ export class SubclassDto {
   @IsOptional()
   @ApiPropertyOptional({ type: [SubclassSpellDto] })
   spells: SubclassSpellDto[];
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  source: string;
 }

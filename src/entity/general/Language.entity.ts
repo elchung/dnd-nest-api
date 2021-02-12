@@ -19,4 +19,7 @@ export class LanguageEntity {
 
   @Column("text", { array: true, nullable: true })
   typicalSpeakers?: string[];
+
+  @Column({ nullable: true })
+  source: string;
 }

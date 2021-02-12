@@ -87,4 +87,9 @@ export class RaceDto {
   @IsOptional()
   @ApiPropertyOptional({ type: OptionsDto })
   traitOptions: OptionsDto;
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  source: string;
 }

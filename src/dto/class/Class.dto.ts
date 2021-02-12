@@ -56,4 +56,9 @@ export class ClassDto {
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
   subclasses: string[];
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  source: string;
 }

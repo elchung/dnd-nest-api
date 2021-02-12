@@ -46,4 +46,7 @@ export class FeatureEntity {
   })
   @JoinTable()
   prerequisites?: PrerequisiteEntity[];
+
+  @Column({ nullable: true })
+  source: string;
 }

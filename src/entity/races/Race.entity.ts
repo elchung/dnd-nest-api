@@ -87,4 +87,7 @@ export class RaceEntity {
   })
   @JoinTable()
   abilityBonuses?: AbilityScoreBonusEntity[];
+
+  @Column({ nullable: true })
+  source: string;
 }

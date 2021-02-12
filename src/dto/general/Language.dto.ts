@@ -26,4 +26,9 @@ export class LanguageDto {
   @IsOptional()
   @ApiPropertyOptional({ type: [String] })
   typicalSpeakers: string[];
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  source: string;
 }

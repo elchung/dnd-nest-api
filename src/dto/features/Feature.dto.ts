@@ -53,4 +53,9 @@ export class FeatureDto {
   @IsOptional()
   @ApiPropertyOptional({ type: String })
   reference?: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ type: String })
+  source: string;
 }

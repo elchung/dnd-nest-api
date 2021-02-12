@@ -56,4 +56,7 @@ export class SubraceEntity {
   })
   @JoinColumn()
   racialTraitOptions: OptionsEntity;
+
+  @Column({ nullable: true })
+  source: string;
 }
