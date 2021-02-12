@@ -1,5 +1,5 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
-import { ValidateNested, IsOptional, IsString, IsArray } from "class-validator";
+import { IsArray, IsOptional, IsString, ValidateNested } from "class-validator";
 import { StartingEquipmentEquipmentDto } from "./StartingEquipmentEquipment.dto";
 import { StartingEquipmentOptionsDto } from "./StartingEquipmentOptions.dto";
 

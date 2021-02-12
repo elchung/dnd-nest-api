@@ -1,5 +1,5 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
-import { IsNumber, IsOptional, IsBoolean } from "class-validator";
+import { IsBoolean, IsNumber, IsOptional } from "class-validator";
 
 export class EquipmentArmorClassDto {
   @IsNumber()

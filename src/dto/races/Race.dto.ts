@@ -2,8 +2,8 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import {
   IsArray,
   IsNumber,
-  IsString,
   IsOptional,
+  IsString,
   ValidateNested,
 } from "class-validator";
 import { AbilityScoreBonusDto } from "../general/AbilityScoreBonus.dto";

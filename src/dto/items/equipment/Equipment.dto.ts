@@ -1,10 +1,10 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import {
   IsArray,
+  IsBoolean,
   IsNumber,
   IsOptional,
   IsString,
-  IsBoolean,
   ValidateNested,
 } from "class-validator";
 import { EquipmentArmorClassDto } from "./EquipmentArmorClass.dto";

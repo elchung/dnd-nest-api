@@ -1,9 +1,9 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   JoinColumn,
-  OneToOne,
   OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { CharacterTreasureMoneyEntity } from "./CharacterTreasureMoney.entity";
 import { CharacterTreasureItemEntity } from "./CharacterTreasureItem.entity";

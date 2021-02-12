@@ -1,10 +1,10 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  OneToOne,
+  Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { ClassEntity } from "../classes/Class.entity";
 import { LevelClassSpecificEntity } from "./LevelClassSpecific.entity";

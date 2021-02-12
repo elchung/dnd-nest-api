@@ -1,10 +1,10 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
+  Entity,
   JoinTable,
+  ManyToMany,
   OneToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { OptionsEntity } from "../general/Options.entity";
 import { PrerequisiteEntity } from "./prerequisite.entity";

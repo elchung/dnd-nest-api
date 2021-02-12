@@ -1,34 +1,35 @@
-import { SpellEntity } from "../entity/spells/Spell.entity";
+import { AbilityScoreBonusEntity } from "../entity/general/AbilityScoreBonus.entity";
+import { ClassEntity } from "../entity/classes/Class.entity";
+import { ClassSpellcastingEntity } from "../entity/classes/ClassSpellcasting.entity";
+import { FeatureEntity } from "../entity/features/feature.entity";
+import { InfoEntity } from "../entity/general/Info.entity";
+import { LevelClassCreatingSpellSlotsEntity } from "../entity/levels/LevelClassCreatingSpellSlots.entity";
+import { LevelClassEntity } from "../entity/levels/LevelClass.entity";
+import { LevelClassSpecificEntity } from "../entity/levels/LevelClassSpecific.entity";
+import { LevelOptionsDiceEntity } from "../entity/levels/LevelOptionsDice.entity";
+import { LevelSpellcastingEntity } from "../entity/levels/LevelSpellcasting.entity";
+import { LevelSubclassEntity } from "../entity/levels/LevelSubclass.entity";
+import { OptionsEntity } from "../entity/general/Options.entity";
+import { PrerequisiteEntity } from "../entity/features/prerequisite.entity";
+import { RaceEntity } from "../entity/races/Race.entity";
+import { SpellAreaOfEffectEntity } from "../entity/spells/SpellAreaOfEffect.entity";
 import { SpellDamageAtLevelEntity } from "../entity/spells/SpellDamageAtLevel.entity";
 import { SpellDamageEntity } from "../entity/spells/SpellDamage.entity";
 import { SpellDcEntity } from "../entity/spells/SpellDc.entity";
-import { SpellAreaOfEffectEntity } from "../entity/spells/SpellAreaOfEffect.entity";
-import { FeatureEntity } from "../entity/features/feature.entity";
-import { PrerequisiteEntity } from "../entity/features/prerequisite.entity";
-import { TraitEntity } from "../entity/general/Trait.entity";
-import { OptionsEntity } from "../entity/general/Options.entity";
-import { RaceEntity } from "../entity/races/Race.entity";
-import { ClassEntity } from "../entity/classes/Class.entity";
-import { SubraceEntity } from "../entity/subraces/Subrace.entity";
-import { AbilityScoreBonusEntity } from "src/entity/general/AbilityScoreBonus.entity";
+import { SpellEntity } from "../entity/spells/Spell.entity";
+import { StartingEquipmentEntity } from "../entity/items/startingEquipment/StartingEquipment.entity";
+import { StartingEquipmentEquipmentEntity } from "../entity/items/startingEquipment/StartingEquipmentEquipment.entity";
+import { StartingEquipmentOptionChoicesEntity } from "../entity/items/startingEquipment/StartingEquipmentOptionChoices.entity";
+import { StartingEquipmentOptionsEntity } from "../entity/items/startingEquipment/StartingEquipmentOptions.entity";
 import { SubclassEntity } from "../entity/subclasses/Subclass.entity";
 import { SubclassSpellEntity } from "../entity/subclasses/SubclassSpell.entity";
-import { LevelSubclassEntity } from "src/entity/levels/LevelSubclass.entity";
-import { LevelClassEntity } from "src/entity/levels/LevelClass.entity";
-import { LevelClassSpecificEntity } from "src/entity/levels/LevelClassSpecific.entity";
-import { LevelOptionsDiceEntity } from "src/entity/levels/LevelOptionsDice.entity";
-import { LevelClassCreatingSpellSlotsEntity } from "src/entity/levels/LevelClassCreatingSpellSlots.entity";
-import { LevelSpellcastingEntity } from "src/entity/levels/LevelSpellcasting.entity";
-import { StartingEquipmentEntity } from "src/entity/items/startingEquipment/StartingEquipment.entity";
-import { StartingEquipmentEquipmentEntity } from "src/entity/items/startingEquipment/StartingEquipmentEquipment.entity";
-import { StartingEquipmentOptionChoicesEntity } from "src/entity/items/startingEquipment/StartingEquipmentOptionChoices.entity";
-import { StartingEquipmentOptionsEntity } from "src/entity/items/startingEquipment/StartingEquipmentOptions.entity";
-import { ClassSpellcastingEntity } from "src/entity/classes/ClassSpellcasting.entity";
-import { InfoEntity } from "src/entity/general/Info.entity";
+import { SubraceEntity } from "../entity/subraces/Subrace.entity";
+import { TraitEntity } from "../entity/general/Trait.entity";
 
 export class BackfillMapper {
   featureResponseToEntity(feature: any): FeatureEntity {
     const featureEntity = new FeatureEntity();
+
     featureEntity.name = feature.name;
     featureEntity.class = feature.class;
     featureEntity.subclass = feature.subclass;
@@ -44,14 +45,16 @@ export class BackfillMapper {
         return prerequisite;
       });
     }
+    featureEntity.source = "PHB";
 
     return featureEntity;
   }
 
   spellResponseToEntity(spell: any): SpellEntity {
     const spellEntity = new SpellEntity();
+
     spellEntity.castingTime = spell.castingTime;
-    spellEntity.classes = spell.classes?.map((classObj) => classObj.name);
+    spellEntity.classes = spell.classes?.map(classObj => classObj.name);
     spellEntity.components = spell.components;
     spellEntity.concentration = spell.concentration;
     spellEntity.duration = spell.duration;
@@ -63,8 +66,7 @@ export class BackfillMapper {
     spellEntity.ritual = spell.ritual;
     spellEntity.level = spell.level;
     spellEntity.attackType = spell.attackType;
-    spellEntity.school = spell.school.name;
-
+    spellEntity.school = spell.school?.name;
     if (spell.damage != null) {
       const spellDamageAtLevel = new SpellDamageAtLevelEntity();
       const spellDamageEntity = new SpellDamageEntity();
@@ -77,249 +79,222 @@ export class BackfillMapper {
       spellDamageAtLevel["7"] = spell.damage.damageAtSlotLevel?.["7"];
       spellDamageAtLevel["8"] = spell.damage.damageAtSlotLevel?.["8"];
       spellDamageAtLevel["9"] = spell.damage.damageAtSlotLevel?.["9"];
-      // spellDamageAtLevel.parentSpellDamage = spellDamageEntity;
       spellDamageEntity.type = spell.damage.damageType.name;
       spellDamageEntity.atLevel = spellDamageAtLevel;
-      // spellDamageEntity.parentSpell = spellEntity;
       spellEntity.damage = spellDamageEntity;
     }
-
     if (spell.dc != null) {
       const spellDcEntity = new SpellDcEntity();
       spellDcEntity.dcSuccess = spell.dc.dcSuccess;
       spellDcEntity.dcType = spell.dc.dcType.name;
       spellEntity.dc = spellDcEntity;
-      // spellDcEntity.parentSpell = spellEntity;
     }
-
     if (spell.areaOfEffect != null) {
       const spellAreaOfEffectEntity = new SpellAreaOfEffectEntity();
       spellAreaOfEffectEntity.size = spell.areaOfEffect.size;
       spellAreaOfEffectEntity.type = spell.areaOfEffect.type;
       spellEntity.areaOfEffect = spellAreaOfEffectEntity;
-      // spellAreaOfEffectEntity.parentSpell = spellEntity;
     }
+    spellEntity.source = "PHB";
 
     return spellEntity;
   }
 
   traitResponseToEntity(trait: any): TraitEntity {
     const traitEntity = new TraitEntity();
+
     traitEntity.name = trait.name;
     traitEntity.subraces = trait.subraces?.map((subraceObj) => subraceObj.name);
     traitEntity.races = trait.races?.map((raceObj) => raceObj.name);
     traitEntity.description = trait.desc;
     traitEntity.proficiencies = trait.proficiencies;
-
-    traitEntity.proficiencyChoices = trait.proficiency_choices?.map(
-      (choice) => {
+    traitEntity.proficiencyChoices = trait.proficiency_choices?.map(choice => {
         const optionsEntity = new OptionsEntity();
         optionsEntity.choose = choice.choose;
-        optionsEntity.from = choice.from?.map((choiceFrom) => choiceFrom.name);
+        optionsEntity.from = choice.from?.map(choiceFrom => choiceFrom.name);
         return optionsEntity;
       }
     );
+    traitEntity.source = "PHB";
 
     return traitEntity;
   }
 
   raceResponseToEntity(race: any): RaceEntity {
     const raceEntity = new RaceEntity();
+
     raceEntity.name = race.name;
     raceEntity.speed = race.speed;
     raceEntity.alignment = race.alignment;
     raceEntity.age = race.age;
     raceEntity.size = race.size;
     raceEntity.sizeDescription = race.size_description;
-    raceEntity.startingProficiencies = race.starting_proficiencies?.map((startingProf) => startingProf.name);
+    raceEntity.startingProficiencies = race.starting_proficiencies?.map(startingProf => startingProf.name);
     raceEntity.startingProficiencyOptions = this.optionsDataToEntity(race.starting_proficiency_options);
-    raceEntity.languages = race.languages?.map((language) => language.name);
+    raceEntity.languages = race.languages?.map(language => language.name);
     raceEntity.languageOptions = this.optionsDataToEntity(race.language_options);
     raceEntity.languageDescription = race.language_desc;
-    raceEntity.traits = race.traits?.map((trait) => trait.name);
+    raceEntity.traits = race.traits?.map(trait => trait.name);
     raceEntity.traitOptions = this.optionsDataToEntity(race.trait_options);
-    raceEntity.abilityBonuses = race.ability_bonuses?.map((bonus) => this.abilityBonusDataToEntity(bonus));
-    raceEntity.abilityBonusOptions = this.optionsDataToEntity(
-      race.ability_bonus_options
-    );
-    raceEntity.subraces = race.subraces?.map((subrace) => subrace.name);
+    raceEntity.abilityBonuses = race.ability_bonuses?.map(bonus => this.abilityBonusDataToEntity(bonus));
+    raceEntity.abilityBonusOptions = this.optionsDataToEntity(race.ability_bonus_options);
+    raceEntity.subraces = race.subraces?.map(subrace => subrace.name);
+    raceEntity.source = "PHB";
+
     return raceEntity;
   }
 
   subraceResponseToEntity(subrace: any): SubraceEntity {
     const subraceEntity = new SubraceEntity();
+
     subraceEntity.name = subrace.name;
     subraceEntity.race = subrace.race.name;
     subraceEntity.description = subrace.desc;
-    subraceEntity.abilityScoreBonuses = subrace.ability_bonuses?.map(
-      (bonus) => bonus.name
-    );
-    subraceEntity.startingProficiencies = subrace.starting_proficiencies?.map(
-      (startProf) => startProf.name
-    );
-    subraceEntity.languages = subrace.languages?.map(
-      (language) => language.name
-    );
-    subraceEntity.languageOptions = this.optionsDataToEntity(
-      subrace.language_options
-    );
-    subraceEntity.racialTraits = subrace.racial_traits?.map(
-      (trait) => trait.name
-    );
-    subraceEntity.racialTraitOptions = this.optionsDataToEntity(
-      subrace.racial_trait_options
-    );
+    subraceEntity.abilityScoreBonuses = subrace.ability_bonuses?.map(bonus => bonus.name);
+    subraceEntity.startingProficiencies = subrace.starting_proficiencies?.map(startProf => startProf.name);
+    subraceEntity.languages = subrace.languages?.map(language => language.name);
+    subraceEntity.languageOptions = this.optionsDataToEntity(subrace.language_options);
+    subraceEntity.racialTraits = subrace.racial_traits?.map(trait => trait.name);
+    subraceEntity.racialTraitOptions = this.optionsDataToEntity(subrace.racial_trait_options);
+    subraceEntity.source = "PHB";
+
     return subraceEntity;
   }
 
-  classResponseToEntity(
-    classData: any,
-    classLevelData: any[],
-    startingEquipment: any
-  ): ClassEntity {
+  classResponseToEntity(classData: any, classLevelData: any[], startingEquipment: any): ClassEntity {
     const classEntity = new ClassEntity();
-    classEntity.classLevels = classLevelData.map((data) =>
-      this.classLevelDataToEntity(data)
-    );
+
+    classEntity.classLevels = classLevelData.map(data => this.classLevelDataToEntity(data));
     classEntity.hitDie = classData.hit_die;
     classEntity.name = classData.name;
-    classEntity.proficiencies = classData.proficiencies?.map(
-      (proficiency) => proficiency.name
-    );
-    classEntity.proficiencyChoices = this.optionsDataToEntity(
-      classData.proficiency_choices
-    );
-    classEntity.savingThrows = classData.saving_throws?.map(
-      (throws) => throws.name
-    );
-    classEntity.spellcasting = this.classSpellcastingDataToEntity(
-      classData.spellcasting
-    );
-    classEntity.startingEquipment = this.startingEquipmentDataToEntity(
-      startingEquipment
-    );
-    classEntity.subclasses = classData.subclasses?.map(
-      (subclass) => subclass.name
-    );
+    classEntity.proficiencies = classData.proficiencies?.map(proficiency => proficiency.name);
+    classEntity.proficiencyChoices = this.optionsDataToEntity(classData.proficiency_choices);
+    classEntity.savingThrows = classData.saving_throws?.map(throws => throws.name);
+    classEntity.spellcasting = this.classSpellcastingDataToEntity(classData.spellcasting);
+    classEntity.startingEquipment = this.startingEquipmentDataToEntity(startingEquipment);
+    classEntity.subclasses = classData.subclasses?.map(subclass => subclass.name);
+    classEntity.source = "PHB";
+
     return classEntity;
   }
 
   classSpellcastingDataToEntity(data: any): ClassSpellcastingEntity {
+    if (!data) { return; }
+
     const classSpellcastingEntity = new ClassSpellcastingEntity();
+
     classSpellcastingEntity.level = data.level;
     classSpellcastingEntity.spellcastingAbility = data.spellcasting_ability;
-    classSpellcastingEntity.info = data.info.map?.((info) =>
-      this.infoDataToEntity(info)
-    );
+    classSpellcastingEntity.info = data.info.map?.(info => this.infoDataToEntity(info));
+
     return classSpellcastingEntity;
   }
 
   infoDataToEntity(data: any): InfoEntity {
+    if (!data) { return; }
+
     const infoEntity = new InfoEntity();
+
     infoEntity.description = data.desc;
     infoEntity.name = data.name;
+
     return infoEntity;
   }
 
-  subclassResponseToEntity(
-    subclass: any,
-    subclassLevelData: any
-  ): SubclassEntity {
+  subclassResponseToEntity(subclass: any, subclassLevelData: any): SubclassEntity {
     const subclassEntity = new SubclassEntity();
+
     subclassEntity.class = subclass.class.name;
     subclassEntity.name = subclass.name;
     subclassEntity.subclassFlavor = subclass.subclass_flavor;
     subclassEntity.description = subclass.desc;
-    subclassEntity.spells = subclass.spells?.map((spell) =>
-      this.subclassSpellDataToEntity(spell)
-    );
-    subclassEntity.subclassLevels = this.classLevelDataToEntity(
-      subclassLevelData
-    );
+    subclassEntity.spells = subclass.spells?.map(spell => this.subclassSpellDataToEntity(spell));
+    subclassEntity.subclassLevels = this.classLevelDataToEntity(subclassLevelData);
+    subclassEntity.source = "PHB";
+
     return subclassEntity;
   }
 
   startingEquipmentDataToEntity(data: any): StartingEquipmentEntity {
+    if (!data) { return; }
+
     const startingEqupmentEntity = new StartingEquipmentEntity();
+
     startingEqupmentEntity.class = data.class;
-    startingEqupmentEntity.startingEquipment = data.starting_equipment?.map(
-      (equipment) => this.startingEquipmentEquipmentDataToEntity(equipment)
-    );
-    startingEqupmentEntity.startingEquipmentOptions = data.starting_equipment_options?.map(
-      (option) => this.equipmentOptionsDataToEntity(option)
-    );
+    startingEqupmentEntity.startingEquipment = data.starting_equipment?.map(equipment => this.startingEquipmentEquipmentDataToEntity(equipment));
+    startingEqupmentEntity.startingEquipmentOptions = data.starting_equipment_options?.map(option => this.equipmentOptionsDataToEntity(option));
+
     return startingEqupmentEntity;
   }
 
   equipmentOptionsDataToEntity(data: any): StartingEquipmentOptionsEntity {
+    if (!data) { return; }
+
     const startingEquipmentOptionsEntity = new StartingEquipmentOptionsEntity();
+
     startingEquipmentOptionsEntity.choose = data.choose;
     startingEquipmentOptionsEntity.type = data.type;
-    startingEquipmentOptionsEntity.from = data.from?.map((option) =>
-      this.equipmentOptionChoicesDataToEntity(option)
-    );
+    startingEquipmentOptionsEntity.from = data.from?.map(option => this.equipmentOptionChoicesDataToEntity(option));
+
     return startingEquipmentOptionsEntity;
   }
 
-  equipmentOptionChoicesDataToEntity(
-    data: any
-  ): StartingEquipmentOptionChoicesEntity {
+  equipmentOptionChoicesDataToEntity(data: any): StartingEquipmentOptionChoicesEntity {
+    if (!data) { return; }
+
     const startingEquipmentOptionChoicesEntity = new StartingEquipmentOptionChoicesEntity();
+
     startingEquipmentOptionChoicesEntity.equipment = data.equipment.name;
     startingEquipmentOptionChoicesEntity.quantity = data.quantity;
+
     return startingEquipmentOptionChoicesEntity;
   }
 
-  startingEquipmentEquipmentDataToEntity(
-    data: any
-  ): StartingEquipmentEquipmentEntity {
+  startingEquipmentEquipmentDataToEntity(data: any): StartingEquipmentEquipmentEntity {
+    if (!data) { return; }
+
     const equipmentEquipment = new StartingEquipmentEquipmentEntity();
+
     equipmentEquipment.equipment = data.equipment.name;
     equipmentEquipment.quantity = data.quantity;
+
     return equipmentEquipment;
   }
 
   classLevelDataToEntity(data: any): LevelClassEntity {
-    if (!data) {
-      return;
-    }
+    if (!data) { return; }
+
     const levelEntity = new LevelClassEntity();
+
     levelEntity.level = data.level;
-    levelEntity.featureChoices = data.feature_choices?.map(
-      (choice) => choice.name
-    );
-    levelEntity.features = data.features?.map((feature) => feature.name);
+    levelEntity.featureChoices = data.feature_choices?.map(choice => choice.name);
+    levelEntity.features = data.features?.map(feature => feature.name);
     levelEntity.class = data.class.name;
     levelEntity.subclass = data.subclass.name;
-    levelEntity.classSpecific = this.classSpecificDataToEntity(
-      data.class_specific
-    );
+    levelEntity.classSpecific = this.classSpecificDataToEntity(data.class_specific);
     levelEntity.proficiencyBonus = data.prof_bonus;
-    levelEntity.spellcasting = this.levelSpellcastingDataToEntity(
-      data.spellcasting
-    );
-    levelEntity.subclassSpecific = this.subclassSpecificDataToEntity(
-      data.subclass_specific
-    );
+    levelEntity.spellcasting = this.levelSpellcastingDataToEntity(data.spellcasting);
+    levelEntity.subclassSpecific = this.subclassSpecificDataToEntity(data.subclass_specific);
+
     return levelEntity;
   }
 
   subclassSpecificDataToEntity(data: any): LevelSubclassEntity {
-    if (!data) {
-      return;
-    }
+    if (!data) { return; }
+
     const levelSubclassEntity = new LevelSubclassEntity();
-    levelSubclassEntity.additionalMagicalSecretsMaxLvl =
-      data.additional_magical_secrets_max_lvl;
+
+    levelSubclassEntity.additionalMagicalSecretsMaxLvl = data.additional_magical_secrets_max_lvl;
     levelSubclassEntity.auraRange = data.aura_range;
+
     return levelSubclassEntity;
   }
 
   levelSpellcastingDataToEntity(data: any): LevelSpellcastingEntity {
-    if (!data) {
-      return;
-    }
+    if (!data) { return; }
+
     const levelSpellcastingEntity = new LevelSpellcastingEntity();
+
     levelSpellcastingEntity.cantripsKnown = data.cantripsKnown;
     levelSpellcastingEntity.spellSlotsLevel1 = data.spell_slots_level_1;
     levelSpellcastingEntity.spellSlotsLevel2 = data.spell_slots_level_2;
@@ -331,22 +306,21 @@ export class BackfillMapper {
     levelSpellcastingEntity.spellSlotsLevel8 = data.spell_slots_level_8;
     levelSpellcastingEntity.spellSlotsLevel9 = data.spell_slots_level_9;
     levelSpellcastingEntity.spellsKnown = data.spells_known;
+
     return levelSpellcastingEntity;
   }
 
   classSpecificDataToEntity(data: any): LevelClassSpecificEntity {
-    if (!data) {
-      return;
-    }
+    if (!data) { return; }
+
     const classSpecificEntity = new LevelClassSpecificEntity();
+
     classSpecificEntity.actionSurges = data.action_surges;
     classSpecificEntity.arcaneRecoveryLevels = data.arcane_recovery_levels;
     classSpecificEntity.auraRange = data.aura_range;
     classSpecificEntity.bardicInspirationDie = data.bardic_inspiration_die;
     classSpecificEntity.brutalCriticalDice = data.brutal_critical_dice;
-    classSpecificEntity.creatingSpellSlots = data.creating_spell_slots?.map(
-      (spellSlot) => this.levelClassCreatingSpellSlotDataToEntity(spellSlot)
-    );
+    classSpecificEntity.creatingSpellSlots = data.creating_spell_slots?.map(spellSlot => this.levelClassCreatingSpellSlotDataToEntity(spellSlot));
     classSpecificEntity.destroyUndeadCr = data.destroy_undead_cr;
     classSpecificEntity.extraAttacks = data.extra_attacks;
     classSpecificEntity.favoredEnemies = data.favored_enemies;
@@ -357,9 +331,7 @@ export class BackfillMapper {
     classSpecificEntity.magicalSecretsMax5 = data.magical_secrets_max_5;
     classSpecificEntity.magicalSecretsMax7 = data.magical_secrets_max_7;
     classSpecificEntity.magicalSecretsMax9 = data.magical_secrets_max_9;
-    classSpecificEntity.martialArts = this.optionsDiceDataToEntity(
-      data.martial_arts
-    );
+    classSpecificEntity.martialArts = this.optionsDiceDataToEntity(data.martial_arts);
     classSpecificEntity.metamagicKnown = data.metamagic_known;
     classSpecificEntity.mysticArcanumLevel6 = data.mystic_arcanum_level_6;
     classSpecificEntity.mysticArcanumLevel7 = data.mystic_arcanum_level_7;
@@ -367,9 +339,7 @@ export class BackfillMapper {
     classSpecificEntity.mysticArcanumLevel9 = data.mystic_arcanum_level_9;
     classSpecificEntity.rageCount = data.rage_count;
     classSpecificEntity.rageDamageBonus = data.rage_damage_bonus;
-    classSpecificEntity.sneakAttack = this.optionsDiceDataToEntity(
-      data.sneak_attack
-    );
+    classSpecificEntity.sneakAttack = this.optionsDiceDataToEntity(data.sneak_attack);
     classSpecificEntity.songOfRestDie = data.song_of_rest_die;
     classSpecificEntity.sorceryPoints = data.sorcery_points;
     classSpecificEntity.unarmoredMovement = data.unarmored_movement;
@@ -379,59 +349,59 @@ export class BackfillMapper {
 
     return classSpecificEntity;
   }
-  levelClassCreatingSpellSlotDataToEntity(
-    data: any
-  ): LevelClassCreatingSpellSlotsEntity {
-    if (!data) {
-      return;
-    }
+  levelClassCreatingSpellSlotDataToEntity(data: any): LevelClassCreatingSpellSlotsEntity {
+    if (!data) { return; }
+
     const levelClassCreatingSpellSlotsEntity = new LevelClassCreatingSpellSlotsEntity();
-    levelClassCreatingSpellSlotsEntity.sorceryPointCost =
-      data.sorcery_point_cost;
+
+    levelClassCreatingSpellSlotsEntity.sorceryPointCost = data.sorcery_point_cost;
     levelClassCreatingSpellSlotsEntity.spellSlotLevel = data.spell_slot_level;
+
     return levelClassCreatingSpellSlotsEntity;
   }
 
   subclassSpellDataToEntity(data: any): SubclassSpellEntity {
-    if (!data) {
-      return;
-    }
+    if (!data) { return; }
+
     const spellEntity = new SubclassSpellEntity();
+
     spellEntity.spell = data.spell.name;
-    spellEntity.prerequisites = data.prerequisites?.map(
-      (prerequisite) => prerequisite.name
-    );
+    spellEntity.prerequisites = data.prerequisites?.map(prerequisite => prerequisite.name);
+
     return spellEntity;
   }
 
   abilityBonusDataToEntity(data: any): AbilityScoreBonusEntity {
-    if (!data) {
-      return;
-    }
+    if (!data) { return; }
+
     const bonusEntity = new AbilityScoreBonusEntity();
+
     bonusEntity.bonus = data.bonus;
     bonusEntity.name = data.ability_score.name;
+
     return bonusEntity;
   }
 
   optionsDataToEntity(option: any): OptionsEntity {
-    if (!option) {
-      return;
-    }
+    if (!option) { return; }
+
     const optionsEntity = new OptionsEntity();
+
     optionsEntity.from = option.from?.map((optionFrom) => optionFrom.name);
     optionsEntity.choose = option.choose;
     optionsEntity.type = option.type;
+
     return optionsEntity;
   }
 
   optionsDiceDataToEntity(option: any): LevelOptionsDiceEntity {
-    if (!option) {
-      return;
-    }
+    if (!option) { return; }
+
     const levelDiceEntity = new LevelOptionsDiceEntity();
+
     levelDiceEntity.diceCount = option.dice_count;
     levelDiceEntity.diceValue = option.dice_value;
+
     return levelDiceEntity;
   }
 }

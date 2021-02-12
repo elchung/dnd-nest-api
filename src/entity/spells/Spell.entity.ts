@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { SpellDamageEntity } from "./SpellDamage.entity";
 import { SpellAreaOfEffectEntity } from "./SpellAreaOfEffect.entity";
 import { SpellDcEntity } from "./SpellDc.entity";

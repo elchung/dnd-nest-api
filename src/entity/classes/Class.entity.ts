@@ -1,10 +1,10 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
+  Entity,
+  JoinColumn,
   OneToMany,
   OneToOne,
-  JoinColumn,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { LevelClassEntity } from "../levels/LevelClass.entity";
 import { OptionsEntity } from "../general/Options.entity";

@@ -2,8 +2,8 @@ import { ApiPropertyOptional } from "@nestjs/swagger";
 import {
   IsArray,
   IsNumber,
-  IsString,
   IsOptional,
+  IsString,
   ValidateNested,
 } from "class-validator";
 import { LevelSpellcastingDto } from "./LevelSpellcasting.dto";

@@ -1,15 +1,16 @@
 import * as dotenv from "dotenv";
-import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { CharacterModule } from "./module/character.module";
-import { AppService } from "./service/app.service";
 import { AppController } from "./controllers/app.controller";
-import { SpellsModule } from "./module/spells.module";
+import { AppService } from "./service/app.service";
 import { BackfillModule } from "./module/backfill.module";
-import { SubclassModule } from "./module/subclass.module";
+import { CharacterModule } from "./module/character.module";
 import { ClassModule } from "./module/class.module";
+import { Module } from "@nestjs/common";
 import { RaceModule } from "./module/race.module";
+import { SpellsModule } from "./module/spells.module";
+import { SubclassModule } from "./module/subclass.module";
 import { SubraceModule } from "./module/subrace.module";
+import {TraitModule} from "./module/trait.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
 
 if (process.env.NODE_ENV !== "production") {
   dotenv.config({ path: __dirname + "/../.env" });
@@ -51,6 +52,7 @@ if (
     ClassModule,
     RaceModule,
     SubraceModule,
+    TraitModule,
   ],
   exports: [AppService],
   controllers: [AppController],

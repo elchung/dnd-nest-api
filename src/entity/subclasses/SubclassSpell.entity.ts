@@ -1,9 +1,9 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
+  Entity,
   JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { PrerequisiteEntity } from "../features/prerequisite.entity";
 

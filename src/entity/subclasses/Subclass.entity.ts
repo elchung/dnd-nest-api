@@ -1,11 +1,11 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
-  JoinTable,
-  OneToOne,
+  Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { SubclassSpellEntity } from "./SubclassSpell.entity";
 import { LevelClassEntity } from "../levels/LevelClass.entity";

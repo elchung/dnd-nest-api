@@ -1,9 +1,9 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  OneToOne,
+  Entity,
   JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { EquipmentDamageEntity } from "./EquipmentDamage.entity";
 import { EquipmentCostEntity } from "./EquipmentCost.entity";

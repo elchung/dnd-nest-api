@@ -1,5 +1,5 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
-import { IsArray, IsString, IsOptional } from "class-validator";
+import { IsArray, IsOptional, IsString } from "class-validator";
 
 export class ConditionDto {
   @IsArray()

@@ -1,6 +1,9 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: [
+    "@typescript-eslint",
+    "sort-imports-es6-autofix",
+  ],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -12,19 +15,17 @@ module.exports = {
     es6: true,
     node: true,
   },
-  overrides: [
-    {
-      files: ["*.tsx"],
-      rules: {
-        "react/prop-types": "off",
-        "max-len": [1, 120, 2],
-      },
-    },
-    {
-      files: ["*.js"],
-      rules: {
-        "@typescript-eslint/no-var-requires": "off",
-      },
-    },
-  ],
+  rules: {
+    "react/prop-types": "off",
+    "max-len": [1, 120, 2],
+    "sort-imports": "error",
+    "quotes": ["error", "double"],
+    "no-trailing-spaces": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "sort-imports-es6-autofix/sort-imports-es6": [2, {
+      "ignoreCase": false,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+    }]
+  },
 };

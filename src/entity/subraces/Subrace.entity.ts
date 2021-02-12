@@ -1,11 +1,11 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
-  JoinTable,
-  OneToOne,
+  Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { OptionsEntity } from "../general/Options.entity";
 import { AbilityScoreBonusEntity } from "../general/AbilityScoreBonus.entity";

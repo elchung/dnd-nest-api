@@ -1,9 +1,9 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  OneToOne,
+  Entity,
   OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { CharacterHitDiceEntity } from "./CharacterHitDice.entity";
 import { CharacterSheetSettingsEntity } from "./CharacterSheetSettings.entity";

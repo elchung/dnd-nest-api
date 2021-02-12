@@ -1,11 +1,11 @@
 import {
-  Controller,
-  Get,
-  Put,
-  Post,
-  Delete,
   Body,
+  Controller,
+  Delete,
+  Get,
   Param,
+  Post,
+  Put,
 } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { SpellService } from "../service/spell.service";

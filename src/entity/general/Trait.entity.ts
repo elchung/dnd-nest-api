@@ -1,9 +1,9 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
+  Entity,
   JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { OptionsEntity } from "./Options.entity";
 
@@ -34,4 +34,7 @@ export class TraitEntity {
   })
   @JoinTable()
   proficiencyChoices?: OptionsEntity[];
+
+  @Column({nullable: true})
+  source: string;
 }

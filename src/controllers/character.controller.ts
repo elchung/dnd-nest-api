@@ -1,11 +1,11 @@
 import {
-  Controller,
-  Get,
-  Put,
-  Post,
-  Delete,
   Body,
+  Controller,
+  Delete,
+  Get,
   Param,
+  Post,
+  Put,
 } from "@nestjs/common";
 import { CharacterDataDto } from "../dto/character/CharacterData.dto";
 import { CharacterService } from "../service/character.service";

@@ -3,8 +3,8 @@ import {
   IsArray,
   IsBoolean,
   IsNumber,
-  IsString,
   IsOptional,
+  IsString,
   ValidateNested,
 } from "class-validator";
 import { SpellDamageDto } from "./SpellDamage.dto";

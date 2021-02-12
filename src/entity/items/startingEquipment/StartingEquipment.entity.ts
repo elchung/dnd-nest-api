@@ -1,10 +1,10 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  OneToOne,
-  OneToMany,
+  Entity,
   JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { StartingEquipmentEquipmentEntity } from "./StartingEquipmentEquipment.entity";
 import { StartingEquipmentOptionsEntity } from "./StartingEquipmentOptions.entity";

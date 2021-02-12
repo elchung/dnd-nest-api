@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
+import { Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { CharacterDataEntity } from "./CharacterData.entity";
 import { CharacterSpellSlotsAtLevelEntity } from "./CharacterSpellSlotsAtLevel.entity";
 
