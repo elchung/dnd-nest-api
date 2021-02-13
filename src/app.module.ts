@@ -4,6 +4,9 @@ import { AppService } from "./service/app.service";
 import { BackfillModule } from "./module/backfill.module";
 import { CharacterModule } from "./module/character.module";
 import { ClassModule } from "./module/class.module";
+import {ConditionModule} from "./module/condition.module";
+import {FeatureModule} from "./module/feature.module";
+import {LanguageModule} from "./module/language.module";
 import { Module } from "@nestjs/common";
 import { RaceModule } from "./module/race.module";
 import { SpellsModule } from "./module/spells.module";
@@ -53,6 +56,9 @@ if (
     RaceModule,
     SubraceModule,
     TraitModule,
+    FeatureModule,
+    ConditionModule,
+    LanguageModule,
   ],
   exports: [AppService],
   controllers: [AppController],
