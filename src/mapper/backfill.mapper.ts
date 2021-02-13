@@ -244,7 +244,7 @@ export class BackfillMapper {
 
     const startingEquipmentOptionChoicesEntity = new StartingEquipmentOptionChoicesEntity();
 
-    startingEquipmentOptionChoicesEntity.equipment = data.equipment.name;
+    startingEquipmentOptionChoicesEntity.equipment = data.equipment?.name;
     startingEquipmentOptionChoicesEntity.quantity = data.quantity;
 
     return startingEquipmentOptionChoicesEntity;
@@ -269,8 +269,8 @@ export class BackfillMapper {
     levelEntity.level = data.level;
     levelEntity.featureChoices = data.feature_choices?.map(choice => choice.name);
     levelEntity.features = data.features?.map(feature => feature.name);
-    levelEntity.class = data.class.name;
-    levelEntity.subclass = data.subclass.name;
+    levelEntity.class = data.class?.name;
+    levelEntity.subclass = data.subclass?.name;
     levelEntity.classSpecific = this.classSpecificDataToEntity(data.class_specific);
     levelEntity.proficiencyBonus = data.prof_bonus;
     levelEntity.spellcasting = this.levelSpellcastingDataToEntity(data.spellcasting);
@@ -365,7 +365,7 @@ export class BackfillMapper {
 
     const spellEntity = new SubclassSpellEntity();
 
-    spellEntity.spell = data.spell.name;
+    spellEntity.spell = data.spell?.name;
     spellEntity.prerequisites = data.prerequisites?.map(prerequisite => prerequisite.name);
 
     return spellEntity;

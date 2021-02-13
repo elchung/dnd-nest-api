@@ -44,7 +44,7 @@ if (
       password: process.env.DB_USER_PASSWORD,
       database: process.env.DB_NAME,
       entities: [__dirname + "/**/**/*.entity.{js,ts}"],
-      synchronize: true,
+      synchronize: false,
       logging: true,
       autoLoadEntities: true,
     }),

@@ -106,7 +106,7 @@ export class BackfillService {
       }
       count++;
     }
-    console.info(`Done. Failed ${name}s: ${failed}`);
+    console.info(`Done. Failed ${name}s: ${JSON.stringify(failed)}`);
   }
 
   async save(entity: any, repo: Repository<any>): Promise<void> {
