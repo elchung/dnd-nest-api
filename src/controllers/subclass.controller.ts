@@ -1,3 +1,4 @@
+import { ApiTags } from "@nestjs/swagger";
 import {
   Body,
   Controller,
@@ -7,9 +8,8 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
-import { SubclassService } from "../service/subclass.service";
 import { SubclassDto } from "../dto/subclasses/Subclass.dto";
+import { SubclassService } from "../service/subclass.service";
 
 @ApiTags("subclass")
 @Controller("subclass")
@@ -24,8 +24,10 @@ export class SubclassController {
   }
 
   @Get()
-  async getAllSubclasses(): Promise<SubclassDto[]> {
-    return await this.subclassService.getAllSubclasses();
+  async getSubclasses(
+    @Param("filters") filters: Partial<SubclassDto>  // todo check if partial is correct
+  ): Promise<SubclassDto[]> {
+    return await this.subclassService.getSubclasses(filters);
   }
 
   @Put("/:subclassName")

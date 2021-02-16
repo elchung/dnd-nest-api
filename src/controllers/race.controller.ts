@@ -1,3 +1,4 @@
+import { ApiTags } from "@nestjs/swagger";
 import {
   Body,
   Controller,
@@ -7,7 +8,6 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
 import { RaceDto } from "src/dto/races/Race.dto";
 import { RaceService } from "src/service/race.service";
 
@@ -22,8 +22,10 @@ export class RaceController {
   }
 
   @Get()
-  async getAllRacees(): Promise<RaceDto[]> {
-    return await this.raceService.getAllRaces();
+  async getRaces(
+    @Param("filters") filters: Partial<RaceDto>  // todo check if partial is correct
+  ): Promise<RaceDto[]> {
+    return await this.raceService.getRaces(filters);
   }
 
   @Put("/:raceName")

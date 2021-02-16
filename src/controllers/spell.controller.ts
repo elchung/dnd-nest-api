@@ -1,3 +1,4 @@
+import { ApiTags } from "@nestjs/swagger";
 import {
   Body,
   Controller,
@@ -7,7 +8,6 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
 import { SpellService } from "../service/spell.service";
 import { SpellsDto } from "../dto/spells/Spells.dto";
 
@@ -17,8 +17,10 @@ export class SpellsController {
   constructor(private readonly spellsService: SpellService) {}
 
   @Get()
-  async getAllSpells(): Promise<SpellsDto[]> {
-    return await this.spellsService.getAllSpells();
+  async getSpells(
+    @Param("filters") filters: Partial<SpellsDto>  // todo check if partial is correct
+  ): Promise<SpellsDto[]> {
+    return await this.spellsService.getSpells(filters);
   }
 
   @Get("/names")
@@ -32,8 +34,8 @@ export class SpellsController {
   }
 
   @Get("/bulk")
-  async getSpells(@Body() spellNames: string[]): Promise<SpellsDto[]> {
-    return await this.spellsService.getSpells(spellNames);
+  async getSpellsByName(@Body() spellNames: string[]): Promise<SpellsDto[]> {
+    return await this.spellsService.getSpellsByNames(spellNames);
   }
 
   @Put("/:name")

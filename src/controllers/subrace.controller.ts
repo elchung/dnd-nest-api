@@ -1,3 +1,4 @@
+import { ApiTags } from "@nestjs/swagger";
 import {
   Body,
   Controller,
@@ -7,7 +8,6 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
 import { SubraceDto } from "src/dto/subraces/Subrace.dto";
 import { SubraceService } from "src/service/subrace.service";
 
@@ -24,8 +24,10 @@ export class SubraceController {
   }
 
   @Get()
-  async getAllSubraces(): Promise<SubraceDto[]> {
-    return await this.subraceService.getAllSubraces();
+  async getSubraces(
+    @Param("filters") filters: Partial<SubraceDto>  // todo check if partial is correct
+  ): Promise<SubraceDto[]> {
+    return await this.subraceService.getSubraces(filters);
   }
 
   @Put("/:subraceName")

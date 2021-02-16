@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
 import { ClassEntity } from "src/entity/classes/Class.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
 
 import { ClassDto } from "../dto/class/Class.dto";
@@ -12,8 +12,10 @@ export class ClassService {
     private classRepository: Repository<ClassEntity>
   ) {}
 
-  async getAllClasses(): Promise<any[]> {
-    return await this.classRepository.find();
+  async getClasses(filters: Partial<ClassDto>): Promise<any[]> {
+    return await this.classRepository.find(
+      //todo where: filters?
+    );
   }
 
   async getClassByName(name: string): Promise<any> {

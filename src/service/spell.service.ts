@@ -1,5 +1,5 @@
-import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
 import { SpellEntity } from "../entity/spells/Spell.entity";
 import { SpellsDto } from "../dto/spells/Spells.dto";
@@ -14,11 +14,15 @@ export class SpellService {
 
   private spellMapper = new SpellsMapper();
 
-  async getAllSpells(): Promise<any> {
-    return await this.spellRepository.find();
+  async getSpells(
+    filters: Partial<SpellsDto>  // todo check if partial is correct
+  ): Promise<any> {
+    return await this.spellRepository.find(
+      //todo where filters
+    );
   }
 
-  async getSpells(spellNames: string[]): Promise<any> {
+  async getSpellsByNames(spellNames: string[]): Promise<any> {
     const whereOptions = spellNames.map((spellName) => ({ name: spellName }));
     let builder = await this.spellRepository
       .createQueryBuilder("spells")

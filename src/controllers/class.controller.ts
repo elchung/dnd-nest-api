@@ -1,3 +1,4 @@
+import { ApiTags } from "@nestjs/swagger";
 import {
   Body,
   Controller,
@@ -7,9 +8,8 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
-import { ClassService } from "../service/class.service";
 import { ClassDto } from "../dto/class/Class.dto";
+import { ClassService } from "../service/class.service";
 
 @ApiTags("classes")
 @Controller("classes")
@@ -22,8 +22,10 @@ export class ClassController {
   }
 
   @Get()
-  async getAllClasses(): Promise<ClassDto[]> {
-    return await this.classesService.getAllClasses();
+  async getClasses(
+    @Param("filters") filters: Partial<ClassDto>  // todo check if partial is correct
+  ): Promise<ClassDto[]> {
+    return await this.classesService.getClasses(filters);
   }
 
   @Put("/:className")

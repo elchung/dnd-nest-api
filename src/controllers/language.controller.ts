@@ -24,8 +24,8 @@ export class LanguageController {
   }
 
   @Get()
-  async getAllLanguages(): Promise<LanguageDto[]> {
-    return await this.languageService.getAllLanguages();
+  async getLanguages(): Promise<LanguageDto[]> {
+    return await this.languageService.getLanguages();
   }
 
   @Put("/:languageName")

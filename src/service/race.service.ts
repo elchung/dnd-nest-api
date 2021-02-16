@@ -1,5 +1,5 @@
-import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Injectable } from "@nestjs/common";
 import { RaceDto } from "src/dto/races/Race.dto";
 import { RaceEntity } from "src/entity/races/Race.entity";
 import { Repository } from "typeorm";
@@ -11,8 +11,12 @@ export class RaceService {
     private raceRepository: Repository<RaceEntity>
   ) {}
 
-  async getAllRaces(): Promise<any[]> {
-    return await this.raceRepository.find();
+  async getRaces(
+    filters: Partial<RaceDto>  // todo check if partial is correct
+  ): Promise<any[]> {
+    return await this.raceRepository.find(
+      //todo where filters
+    );
   }
 
   async getRaceByName(name: string): Promise<any> {

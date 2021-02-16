@@ -24,8 +24,10 @@ export class TraitController {
   }
 
   @Get()
-  async getAllTraits(): Promise<TraitDto[]> {
-    return await this.traitService.getAllTraits();
+  async getTraits(
+    @Param("filters") filters: Partial<TraitDto>  // todo check if partial is correct
+  ): Promise<TraitDto[]> {
+    return await this.traitService.getTraits(filters);
   }
 
   @Put("/:traitName")

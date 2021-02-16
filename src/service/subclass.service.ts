@@ -1,7 +1,7 @@
-import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { SubclassEntity } from "src/entity/subclasses/Subclass.entity";
+import { Injectable } from "@nestjs/common";
 import { Repository } from "typeorm";
+import { SubclassEntity } from "src/entity/subclasses/Subclass.entity";
 
 import { SubclassDto } from "../dto/subclasses/Subclass.dto";
 
@@ -12,8 +12,12 @@ export class SubclassService {
     private subclassRepository: Repository<SubclassEntity>
   ) {}
 
-  async getAllSubclasses(): Promise<any[]> {
-    return await this.subclassRepository.find();
+  async getSubclasses(
+    filters: Partial<SubclassDto>  // todo check if partial is correct
+  ): Promise<any[]> {
+    return await this.subclassRepository.find(
+      // todo where filters
+    );
   }
 
   async getSubclassByName(name: string): Promise<any> {

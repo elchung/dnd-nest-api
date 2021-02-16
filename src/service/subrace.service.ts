@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Injectable } from "@nestjs/common";
+import { Repository } from "typeorm";
 import { SubraceDto } from "src/dto/subraces/Subrace.dto";
 import { SubraceEntity } from "src/entity/subraces/Subrace.entity";
-import { Repository } from "typeorm";
 
 @Injectable()
 export class SubraceService {
@@ -11,8 +11,12 @@ export class SubraceService {
     private subraceRepository: Repository<SubraceEntity>
   ) {}
 
-  async getAllSubraces(): Promise<any[]> {
-    return await this.subraceRepository.find();
+  async getSubraces(
+    filters: Partial<SubraceDto>  // todo check if partial is correct
+  ): Promise<any[]> {
+    return await this.subraceRepository.find(
+      // todo where filters
+    );
   }
 
   async getSubraceByName(name: string): Promise<any> {

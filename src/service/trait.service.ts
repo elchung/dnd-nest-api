@@ -11,8 +11,12 @@ export class TraitService {
     private traitRepository: Repository<TraitEntity>
   ) {}
 
-  async getAllTraits(): Promise<any[]> {
-    return await this.traitRepository.find();
+  async getTraits(
+    filters: Partial<TraitDto>  // todo check if partial is correct
+  ): Promise<any[]> {
+    return await this.traitRepository.find(
+      //todo where filters
+    );
   }
 
   async getTraitByName(name: string): Promise<any> {

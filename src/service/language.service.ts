@@ -11,7 +11,7 @@ export class LanguageService {
     private languageRepository: Repository<LanguageEntity>
   ) {}
 
-  async getAllLanguages(): Promise<any[]> {
+  async getLanguages(): Promise<any[]> {
     return await this.languageRepository.find();
   }
 

@@ -11,8 +11,12 @@ export class ConditionService {
     private conditionRepository: Repository<ConditionEntity>
   ) {}
 
-  async getAllConditions(): Promise<any[]> {
-    return await this.conditionRepository.find();
+  async getConditions(
+    filters: Partial<ConditionDto>  // todo check if partial is correct
+  ): Promise<any[]> {
+    return await this.conditionRepository.find(
+      //todo where filters
+    );
   }
 
   async getConditionByName(name: string): Promise<any> {

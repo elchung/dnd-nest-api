@@ -24,8 +24,10 @@ export class FeatureController {
   }
 
   @Get()
-  async getAllFeatures(): Promise<FeatureDto[]> {
-    return await this.featureService.getAllFeatures();
+  async getFeatures(
+    @Param("filters") filters: Partial<FeatureDto>  // todo check if partial is correct
+  ): Promise<FeatureDto[]> {
+    return await this.featureService.getFeatures(filters);
   }
 
   @Put("/:featureName")

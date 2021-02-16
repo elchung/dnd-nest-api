@@ -11,8 +11,12 @@ export class FeatureService {
     private featureRepository: Repository<FeatureEntity>
   ) {}
 
-  async getAllFeatures(): Promise<any[]> {
-    return await this.featureRepository.find();
+  async getFeatures(
+    filters: Partial<FeatureDto>  // todo check if partial is correct
+  ): Promise<any[]> {
+    return await this.featureRepository.find(
+      //todo where filters
+    );
   }
 
   async getFeatureByName(name: string): Promise<any> {

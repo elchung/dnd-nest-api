@@ -24,8 +24,10 @@ export class ConditionController {
   }
 
   @Get()
-  async getAllConditions(): Promise<ConditionDto[]> {
-    return await this.conditionService.getAllConditions();
+  async getConditions(
+    @Param("filters") filters: Partial<ConditionDto>  // todo check if partial is correct
+  ): Promise<ConditionDto[]> {
+    return await this.conditionService.getConditions(filters);
   }
 
   @Put("/:conditionName")
