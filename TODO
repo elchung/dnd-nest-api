@@ -1,8 +1,4 @@
 TODO LIST
-add source to all top level dtos and entities (phb, volos, etc)
-
-finish entities -- verify item mapping is how i want
-
 add backfill scripts for all new generation
 
 add GET calls that can specify source (or anything really with object.add({}, whatever)
